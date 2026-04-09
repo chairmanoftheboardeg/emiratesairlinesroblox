@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emirates Airline, a Emirates Group Roblox Company</title>
+  <title>Home | Emirates Airlines</title></title>
   
   <link rel="icon" href="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" id="favicon" />
   
@@ -20,7 +20,7 @@
     body { font-family: 'Inter', sans-serif; background-color: #f9fafb; scroll-behavior: smooth; overflow-x: hidden; }
     .font-serif { font-family: 'Playfair Display', serif; }
     
-    /* Strict Preloader */
+    /* Security Loader */
     #page-loader {
         position: fixed; inset: 0; z-index: 999999;
         background-color: #111827; 
@@ -154,27 +154,37 @@
                           <i class="fa-solid fa-plane-departure mr-3 text-lg"></i> Search flights
                       </button>
                       <button onclick="switchTab('manage')" id="tab-manage" class="widget-tab flex-1 py-5 text-sm font-bold flex items-center justify-center border-l border-gray-200 border-t-4 border-t-transparent hover:border-t-gray-300">
-                          <i class="fa-solid fa-tag mr-3 transform -rotate-45 text-lg"></i> Manage booking
+                          <i class="fa-solid fa-tag mr-3 transform -rotate-45 text-lg"></i> Manage booking / Check in
                       </button>
                       <button onclick="switchTab('status')" id="tab-status" class="widget-tab flex-1 py-5 text-sm font-bold flex items-center justify-center border-l border-gray-200 border-t-4 border-t-transparent hover:border-t-gray-300">
                           <i class="fa-solid fa-clock mr-3 text-lg"></i> Flight status
                       </button>
                   </div>
 
+                  <datalist id="ptfs-airports">
+                      <option value="Greater Rockford International (IRFD)">
+                      <option value="Tokyo International (ITKO)">
+                      <option value="Perth International (IPPH)">
+                      <option value="Izolirani International (IZOL)">
+                      <option value="Larnaca International (ILAR)">
+                      <option value="Paphos Regional (IPAP)">
+                      <option value="Grindavik International (IGRV)">
+                      <option value="Keflavik International">
+                      <option value="Sauthemptona International (ISAU)">
+                      <option value="Mellor Regional (IMLR)">
+                  </datalist>
+
                   <div id="content-book" class="p-6 md:p-8">
-                      <div class="flex justify-end mb-2">
-                          <a href="/book/" class="text-[11px] text-[#D71A21] hover:underline font-medium">Advanced search: multi-city, custom airlines <i class="fa-solid fa-chevron-right text-[9px] ml-1"></i></a>
-                      </div>
                       <form action="/book/" method="GET" class="flex flex-col lg:flex-row gap-4">
                           <div class="relative flex-1">
                               <i class="fa-solid fa-location-dot input-icon"></i>
                               <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Departure airport</label>
-                              <input type="text" name="dep" class="ek-input" placeholder="e.g. Greater Rockford (IRFD)" required>
+                              <input type="text" name="dep" list="ptfs-airports" class="ek-input" placeholder="e.g. Greater Rockford (IRFD)" required autocomplete="off">
                           </div>
                           <div class="relative flex-1">
                               <i class="fa-solid fa-plane-arrival input-icon"></i>
                               <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Arrival airport</label>
-                              <input type="text" name="arr" class="ek-input" placeholder="e.g. Perth (IPPH)" required>
+                              <input type="text" name="arr" list="ptfs-airports" class="ek-input" placeholder="e.g. Perth (IPPH)" required autocomplete="off">
                           </div>
                           <button type="submit" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold px-12 py-4 rounded-sm transition-colors text-sm w-full lg:w-auto">
                               Continue
@@ -183,21 +193,23 @@
                   </div>
 
                   <div id="content-manage" class="p-6 md:p-8 hidden">
-                      <form action="/manage/" method="GET" class="flex flex-col lg:flex-row gap-4">
+                      <form id="manage-booking-form" class="flex flex-col lg:flex-row gap-4 mb-4">
                           <div class="relative flex-1">
                               <i class="fa-solid fa-user input-icon"></i>
                               <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Last name</label>
-                              <input type="text" name="lname" class="ek-input" placeholder="Passenger Last Name" required>
+                              <input type="text" id="manage-lname" class="ek-input" placeholder="Passenger Last Name" required>
                           </div>
                           <div class="relative flex-1">
                               <i class="fa-solid fa-hashtag input-icon"></i>
                               <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Booking reference</label>
-                              <input type="text" name="pnr" class="ek-input" placeholder="e.g. X7B9WQ" required>
+                              <input type="text" id="manage-pnr" class="ek-input" placeholder="e.g. X7B9WQ" required>
                           </div>
-                          <button type="submit" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold px-12 py-4 rounded-sm transition-colors text-sm w-full lg:w-auto">
+                          <button type="submit" id="manage-search-btn" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold px-12 py-4 rounded-sm transition-colors text-sm w-full lg:w-auto">
                               Retrieve
                           </button>
                       </form>
+                      <div id="inline-manage-result" class="hidden border border-gray-200 rounded p-6 bg-gray-50 mt-4 shadow-inner">
+                          </div>
                   </div>
 
                   <div id="content-status" class="p-6 md:p-8 hidden">
@@ -216,7 +228,6 @@
                               Search
                           </button>
                       </form>
-                      
                       <div id="inline-status-result" class="hidden border border-gray-200 rounded p-4 bg-gray-50 mt-4">
                           </div>
                   </div>
@@ -297,13 +308,13 @@
           <section class="py-16 px-6">
               <div class="max-w-[1200px] mx-auto">
                   <div class="rounded-lg overflow-hidden relative shadow-lg group h-[300px] md:h-[400px] flex items-center justify-center text-center text-white">
-                      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://i.ibb.co/Xrjzy436/xcljf6btfz531.png');"></div>
+                      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://i.ibb.co/8g2nTWVt/Screenshot-2026-03-08-222323.png');"></div>
                       <div class="absolute inset-0 bg-black/50 z-10"></div>
                       
                       <div class="relative z-20 px-6 max-w-3xl flex flex-col items-center">
                           <img src="https://www.flydubai.com/System/img/EK_en.png" class="h-10 mb-4 object-contain" alt="Skywards">
-                          <h2 class="text-3xl md:text-5xl font-serif font-bold mb-4">About Emirates Skywards</h2>
-                          <p class="text-sm md:text-base font-medium mb-8 text-gray-200 leading-relaxed">Enhance your virtual travel experience. Choose from multiple tiers loaded with what you love, from exclusive airport lounge access and priority boarding to permanent class upgrades across the network.</p>
+                          <h2 class="text-3xl md:text-5xl font-serif font-bold mb-4">About Emirates Skywards+</h2>
+                          <p class="text-sm md:text-base font-medium mb-8 text-gray-200 leading-relaxed">Enhance your virtual travel experience. Choose from exclusive packages loaded with what you love, from exclusive airport lounge access and priority boarding to permanent class upgrades across the network.</p>
                           <a href="https://emiratesgrouproblox.link/network/skywards" class="inline-block bg-white text-[#111827] font-bold px-8 py-3 rounded text-sm hover:bg-gray-200 transition-colors shadow-lg">Learn more about Skywards</a>
                       </div>
                   </div>
@@ -317,14 +328,12 @@
 
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-12">
                       <div class="bg-gray-50 p-8 rounded-xl border border-gray-100 hover:shadow-xl transition-all group">
-                          <div class="w-12 h-12 bg-[#111827] text-white rounded-full flex items-center justify-center text-xl mb-6 shadow-md"><i class="fa-solid fa-seat-airline"></i></div>
                           <h3 class="text-2xl font-serif font-bold text-[#111827] mb-3">Economy Class</h3>
                           <p class="text-sm text-gray-600 leading-relaxed mb-6 font-medium">Experience our standard-setting Economy cabin. Enjoy unmatched legroom, thousands of immersive entertainment channels, regionally inspired dining, and superior comfort on every flight.</p>
                           <a href="/experience/" class="text-[#D71A21] text-xs font-bold uppercase tracking-widest group-hover:underline">Explore Economy &rarr;</a>
                       </div>
 
                       <div class="bg-gray-50 p-8 rounded-xl border border-gray-100 hover:shadow-xl transition-all group">
-                          <div class="w-12 h-12 bg-[#111827] text-white rounded-full flex items-center justify-center text-xl mb-6 shadow-md"><i class="fa-solid fa-champagne-glasses"></i></div>
                           <h3 class="text-2xl font-serif font-bold text-[#111827] mb-3">Business Class</h3>
                           <p class="text-sm text-gray-600 leading-relaxed mb-6 font-medium">Unwind in absolute luxury. With seamless lie-flat seats, access to the legendary A380 Onboard Lounge, and priority ground services, Business Class redefines your virtual journey.</p>
                           <a href="/experience/" class="text-[#D71A21] text-xs font-bold uppercase tracking-widest group-hover:underline">Explore Business &rarr;</a>
@@ -332,7 +341,6 @@
 
                       <div class="bg-white p-8 rounded-xl border-2 border-[#D71A21]/20 hover:border-[#D71A21] transition-all relative overflow-hidden shadow-md group">
                           <div class="absolute top-0 right-0 w-24 h-24 bg-[#D71A21]/10 rounded-full blur-xl"></div>
-                          <div class="w-12 h-12 bg-[#D71A21] text-white rounded-full flex items-center justify-center text-xl mb-6 shadow-md relative z-10"><i class="fa-solid fa-crown"></i></div>
                           <h3 class="text-2xl font-serif font-bold text-[#111827] mb-3 relative z-10">First Class</h3>
                           <p class="text-sm text-gray-600 leading-relaxed mb-6 font-medium relative z-10">Close the privacy doors to your own hotel room in the sky. Featuring the iconic Shower Spa, personalized multi-course dining, and absolute exclusivity throughout your flight.</p>
                           <a href="/experience/" class="text-[#D71A21] text-xs font-bold uppercase tracking-widest group-hover:underline relative z-10">Explore First Class &rarr;</a>
@@ -451,26 +459,47 @@
 
   </div>
 
+  <div id="modal-chauffeur" class="fixed inset-0 z-[100000] hidden flex items-center justify-center modal-backdrop">
+      <div class="modal-content bg-white w-full max-w-sm mx-4 rounded shadow-xl overflow-hidden relative border-t-4 border-[#D71A21]">
+          <div class="p-6">
+              <h3 class="text-lg font-bold text-[#111827] mb-3"><i class="fa-solid fa-taxi mr-2 text-[#D71A21]"></i> Chauffeur Drive</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">Chauffeur drive services may be available for your journey depending on your booked cabin class, Emirates Holidays package, or active Investor/Skywards Tier.</p>
+              <button onclick="closeModal('chauffeur')" class="mt-6 w-full border border-gray-300 hover:bg-gray-100 text-gray-800 px-4 py-2 rounded text-sm font-bold transition-colors">Close</button>
+          </div>
+      </div>
+  </div>
+
+  <div id="modal-meet" class="fixed inset-0 z-[100000] hidden flex items-center justify-center modal-backdrop">
+      <div class="modal-content bg-white w-full max-w-sm mx-4 rounded shadow-xl overflow-hidden relative border-t-4 border-[#D71A21]">
+          <div class="p-6">
+              <h3 class="text-lg font-bold text-[#111827] mb-3"><i class="fa-solid fa-handshake-angle mr-2 text-[#D71A21]"></i> Meet & Greet</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">Our staff are the best trained in the industry. We offer the highest level of professionalism in Roblox Aviation, ensuring the best VIP meet & greet experience.</p>
+              <button onclick="closeModal('meet')" class="mt-6 w-full border border-gray-300 hover:bg-gray-100 text-gray-800 px-4 py-2 rounded text-sm font-bold transition-colors">Close</button>
+          </div>
+      </div>
+  </div>
+
+  <div id="modal-transfers" class="fixed inset-0 z-[100000] hidden flex items-center justify-center modal-backdrop">
+      <div class="modal-content bg-white w-full max-w-sm mx-4 rounded shadow-xl overflow-hidden relative border-t-4 border-[#D71A21]">
+          <div class="p-6">
+              <h3 class="text-lg font-bold text-[#111827] mb-3"><i class="fa-solid fa-van-shuttle mr-2 text-[#D71A21]"></i> Transfers</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">Airport transfers are available at select destination airports across both our networks. Please check your booking itinerary for operational information.</p>
+              <button onclick="closeModal('transfers')" class="mt-6 w-full border border-gray-300 hover:bg-gray-100 text-gray-800 px-4 py-2 rounded text-sm font-bold transition-colors">Close</button>
+          </div>
+      </div>
+  </div>
+
   <script>
     // --- 1. STRICT ASSET PRELOADER ---
-    // Wait until entire window (including heavy background images) is fully loaded
     window.addEventListener('load', () => {
         const pageLoader = document.getElementById('page-loader');
-        
-        // Ensure minimum display time so it doesn't flash abruptly
         setTimeout(() => {
             pageLoader.style.opacity = '0';
             pageLoader.style.visibility = 'hidden';
-            
-            // Allow scrolling on body
             document.body.style.overflow = 'auto';
-            
-            // Initialize main logic after loader hides
             initApplication();
         }, 1500); 
     });
-
-    // Block scrolling while loading
     document.body.style.overflow = 'hidden';
 
     // --- 2. MAIN APPLICATION LOGIC ---
@@ -481,7 +510,8 @@
             return;
         }
 
-        const supabase = window.supabase.createClient(
+        // MAKE SUPABASE GLOBAL SO ALL FUNCTIONS CAN ACCESS IT
+        window.supabaseClient = window.supabase.createClient(
             'https://zboyabxzhptnxnmofvcz.supabase.co', 
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpib3lhYnh6aHB0bnhubW9mdmN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3NjU3MTgsImV4cCI6MjA4NTM0MTcxOH0.2et1T3bQqr-ZzZgx-VWaq3kR0FJDprcAbbWBby6oRys'
         );
@@ -503,10 +533,10 @@
             }
         }
 
-        const { data: { session } } = await supabase.auth.getSession();
+        const { data: { session } } = await window.supabaseClient.auth.getSession();
         handleSessionState(session);
 
-        supabase.auth.onAuthStateChange((_event, session) => {
+        window.supabaseClient.auth.onAuthStateChange((_event, session) => {
             handleSessionState(session);
         });
 
@@ -525,7 +555,7 @@
                 btn.disabled = true;
                 alertBox.style.display = 'none';
 
-                const { error } = await supabase.auth.signInWithPassword({ email, password });
+                const { error } = await window.supabaseClient.auth.signInWithPassword({ email, password });
 
                 if (error) {
                     alertBox.style.display = 'block';
@@ -546,7 +576,7 @@
 
         if (statusForm) {
             statusForm.addEventListener('submit', async (e) => {
-                e.preventDefault(); // STOP PAGE REDIRECT
+                e.preventDefault(); 
                 
                 const btn = document.getElementById('status-search-btn');
                 const flightNumInput = document.getElementById('status-flight-num').value.trim();
@@ -558,8 +588,7 @@
                 statusResultBox.innerHTML = '<p class="text-sm text-gray-500 text-center py-4">Locating flight details...</p>';
 
                 try {
-                    // Query the original egr_flights table
-                    const { data, error } = await supabase
+                    const { data, error } = await window.supabaseClient
                         .from('egr_flights')
                         .select('*')
                         .eq('flight_number', flightNumInput)
@@ -570,7 +599,6 @@
 
                     if (data && data.length > 0) {
                         const f = data[0];
-                        
                         let statusClass = 'status-scheduled';
                         if (f.status === 'Boarding') statusClass = 'status-boarding';
                         else if (f.status === 'Departed') statusClass = 'status-departed';
@@ -609,21 +637,91 @@
                         statusResultBox.innerHTML = '<p class="text-sm text-red-600 font-bold text-center py-4"><i class="fa-solid fa-circle-xmark mr-2"></i> No flight found matching those details.</p>';
                     }
                 } catch (err) {
-                    console.error("Status fetch error:", err);
+                    console.error(err);
                     statusResultBox.innerHTML = '<p class="text-sm text-red-600 font-bold text-center py-4">Database connection error.</p>';
                 }
-
                 btn.innerHTML = 'Search';
                 btn.disabled = false;
             });
         }
 
-        // --- LIVE FLIGHT BOARD FETCHING (Using original egr_flights table) ---
+        // --- INLINE MANAGE BOOKING FETCH ---
+        const manageForm = document.getElementById('manage-booking-form');
+        const manageResultBox = document.getElementById('inline-manage-result');
+
+        if (manageForm) {
+            manageForm.addEventListener('submit', async (e) => {
+                e.preventDefault(); 
+                
+                const btn = document.getElementById('manage-search-btn');
+                const lnameInput = document.getElementById('manage-lname').value.trim();
+                const pnrInput = document.getElementById('manage-pnr').value.trim().toUpperCase();
+
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+                btn.disabled = true;
+                manageResultBox.classList.remove('hidden');
+                manageResultBox.innerHTML = '<p class="text-sm text-gray-500 text-center py-4">Retrieving itinerary...</p>';
+
+                try {
+                    // Requires join with flight table if you want flight details, 
+                    // but for a quick check we just query egr_bookings
+                    const { data, error } = await window.supabaseClient
+                        .from('egr_bookings')
+                        .select('*, egr_flights(*)') // assuming foreign key exists
+                        .eq('pnr_reference', pnrInput)
+                        .eq('last_name', lnameInput)
+                        .limit(1);
+
+                    if (error) throw error;
+
+                    if (data && data.length > 0) {
+                        const b = data[0];
+                        const f = b.egr_flights || {};
+                        const depTime = f.departure_time ? f.departure_time.substring(0, 5) : '--:--';
+                        
+                        manageResultBox.innerHTML = `
+                            <div class="border-b border-gray-200 pb-4 mb-4 flex justify-between items-center">
+                                <div>
+                                    <p class="text-[10px] text-[#D71A21] font-bold uppercase tracking-widest mb-1">Confirmed</p>
+                                    <h3 class="text-lg font-bold text-[#111827]">Passenger: ${b.first_name} ${b.last_name}</h3>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">E-Ticket Number</p>
+                                    <p class="font-mono text-sm text-[#111827]">${b.e_ticket_number || 'PENDING'}</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="font-bold text-[#111827]">${f.flight_number || 'EK ---'}</p>
+                                    <p class="text-xs text-gray-500">${f.departure_airport || 'Unknown'} to ${f.arrival_airport || 'Unknown'}</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-[#111827]">${f.flight_date || '--/--/----'} at ${depTime}</p>
+                                    <p class="text-xs text-[#D71A21] font-bold uppercase">${b.seat_class || 'Economy'}</p>
+                                </div>
+                            </div>
+                            <div class="mt-6 text-center">
+                                <a href="/manage/" class="text-xs font-bold text-[#D71A21] hover:underline uppercase tracking-widest">Go to Full Dashboard &rarr;</a>
+                            </div>
+                        `;
+                    } else {
+                        manageResultBox.innerHTML = '<p class="text-sm text-red-600 font-bold text-center py-4"><i class="fa-solid fa-circle-xmark mr-2"></i> Booking not found. Check PNR and Last Name.</p>';
+                    }
+                } catch (err) {
+                    console.error(err);
+                    manageResultBox.innerHTML = '<p class="text-sm text-red-600 font-bold text-center py-4">Database connection error.</p>';
+                }
+                btn.innerHTML = 'Retrieve';
+                btn.disabled = false;
+            });
+        }
+
+        // --- LIVE FLIGHT BOARD FETCHING ---
         async function fetchLiveFlights() {
             const tbody = document.getElementById('flight-board-body');
             
             try {
-                const { data, error } = await supabase
+                const { data, error } = await window.supabaseClient
                     .from('egr_flights')
                     .select('*')
                     .eq('platform', 'PTFS')
@@ -647,7 +745,7 @@
                         return `
                             <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                                 <td class="p-4 font-bold whitespace-nowrap text-[#111827]"><img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-3 inline mr-2 opacity-80 mix-blend-multiply"> ${f.flight_number}</td>
-                                <td class="p-4 text-gray-600 font-medium">${f.departure_airport} <i class="fa-solid fa-arrow-right mx-2 text-gray-300 text-[10px]"></i> ${f.arrival_airport}</td>
+                                <td class="p-4 text-gray-600 font-medium">${f.departure_airport.split('(')[0]} <i class="fa-solid fa-arrow-right mx-2 text-gray-300 text-[10px]"></i> ${f.arrival_airport.split('(')[0]}</td>
                                 <td class="p-4">${depTime}</td>
                                 <td class="p-4">${arrTime}</td>
                                 <td class="p-4"><span class="status-badge ${statusClass}">${f.status || 'Scheduled'}</span></td>
