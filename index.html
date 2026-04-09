@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emirates Airline, A Emirates Group Roblox Company</title>
+  <title>Emirates Airline, a Emirates Group Roblox Company</title>
   
   <link rel="icon" href="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" id="favicon" />
   
@@ -29,16 +29,15 @@
     }
     
     /* Authentic Emirates Navbar */
-    .ek-nav-bg { background-color: #2c2d31; border-bottom: 1px solid #4b4c50; }
-    .ek-logo-box { background-color: #d71a21; height: 90px; width: 120px; display: flex; align-items: center; justify-content: center; position: absolute; top: 0; left: 0; z-index: 60; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-    .ek-nav-link { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; transition: color 0.2s; padding: 1.5rem 0; display: inline-block; }
-    .ek-nav-link:hover { color: #d1d5db; }
+    .ek-nav-bg { background-color: #333333; height: 60px; }
+    .ek-nav-link { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; transition: color 0.2s; padding: 1.25rem 0; display: inline-block; }
+    .ek-nav-link:hover { color: #c8c8c8; }
     
     /* Widget Styles */
     .widget-tab { border-bottom: 3px solid transparent; transition: all 0.2s; color: #555; }
     .widget-tab:hover { color: #111827; }
     .widget-tab.active { border-bottom-color: #D71A21; color: #111827; font-weight: 700; }
-    .ek-input { width: 100%; border: 1px solid #a3a3a3; padding: 1.25rem 1rem 0.5rem 2.5rem; border-radius: 2px; font-size: 1rem; color: #111827; transition: border-color 0.2s; background-color: #ffffff; }
+    .ek-input { width: 100%; border: 1px solid #767676; padding: 1.25rem 1rem 0.5rem 2.5rem; border-radius: 2px; font-size: 1rem; color: #111827; transition: border-color 0.2s; background-color: #ffffff; }
     .ek-input:focus { outline: none; border-color: #D71A21; box-shadow: inset 0 0 0 1px #D71A21; }
     .input-icon { position: absolute; left: 1rem; top: 1.1rem; color: #555; font-size: 1rem; }
 
@@ -47,9 +46,17 @@
     .modal-content { transform: scale(0.95); opacity: 0; transition: all 0.3s ease; }
     .modal-open .modal-content { transform: scale(1); opacity: 1; }
 
-    /* Flight Board */
-    .flight-board-row { transition: background-color 0.2s; }
-    .flight-board-row:hover { background-color: #f3f4f6; }
+    /* Flight Board Badges */
+    .status-badge { padding: 4px 10px; border-radius: 3px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .status-scheduled { background-color: #e0e7ff; color: #3730a3; }
+    .status-boarding { background-color: #dcfce7; color: #166534; }
+    .status-departed { background-color: #fef08a; color: #166534; }
+    .status-arrived { background-color: #f3f4f6; color: #4b5563; }
+    .status-cancelled { background-color: #fee2e2; color: #991b1b; }
+    
+    /* Authentic Footer Links */
+    .footer-link { color: #c8c8c8; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-link:hover { color: #ffffff; text-decoration: underline; }
   </style>
 </head>
 <body class="flex flex-col min-h-screen relative">
@@ -64,7 +71,7 @@
   <div id="airline-login-gate" style="display: none;" class="fixed inset-0 z-[50000] bg-[#111827] flex flex-col items-center justify-center px-4 overflow-y-auto">
       <div class="max-w-md w-full bg-white rounded-xl shadow-2xl overflow-hidden mt-10 mb-10">
           <div class="bg-[#D71A21] p-8 text-center border-b-4 border-red-900">
-              <img src="https://i.ibb.co/jPPzN1rz/LOGO-EMIRATES-ROBLOX-compressed.png" class="h-12 mx-auto filter brightness-0 invert" alt="Emirates Logo">
+              <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-12 mx-auto" alt="Emirates Logo">
               <h2 class="text-white font-serif font-bold text-2xl mt-4">Corporate Login</h2>
               <p class="text-red-100 text-[10px] font-bold uppercase tracking-widest mt-1">PTFS Booking Terminal</p>
           </div>
@@ -76,7 +83,7 @@
                   <span id="login-alert-text"></span>
               </div>
 
-              <form id="airline-login-form" class="space-y-5" onsubmit="handleAirlineLogin(event)">
+              <form id="airline-login-form" class="space-y-5">
                   <div>
                       <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Corporate Email</label>
                       <input type="email" id="login-email" class="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-[#D71A21]" placeholder="Enter your email" required>
@@ -98,17 +105,13 @@
   <div id="main-content-wrapper" style="display: none;" class="flex flex-col min-h-screen relative z-10 w-full">
 
       <div class="ek-nav-bg w-full relative z-40">
-          <div class="max-w-[1400px] mx-auto flex items-center relative pl-[140px] pr-6">
+          <div class="max-w-[1200px] mx-auto flex items-center h-full px-4 md:px-0">
               
-              <a href="/" class="ek-logo-box hidden md:flex">
-                  <img src="https://i.ibb.co/jPPzN1rz/LOGO-EMIRATES-ROBLOX-compressed.png" class="h-12 filter brightness-0 invert" alt="Emirates Logo">
-              </a>
-              
-              <a href="/" class="md:hidden py-4 mr-6">
-                  <img src="https://i.ibb.co/jPPzN1rz/LOGO-EMIRATES-ROBLOX-compressed.png" class="h-8 filter brightness-0 invert" alt="Emirates Logo">
+              <a href="/" class="absolute top-0 left-4 md:left-0 z-50">
+                  <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-[90px] shadow-md" alt="Emirates Logo">
               </a>
 
-              <div class="hidden lg:flex items-center space-x-6 w-full">
+              <div class="hidden lg:flex items-center space-x-6 pl-[180px] w-full">
                   <a href="/book/" class="ek-nav-link">Book</a>
                   <a href="/manage/" class="ek-nav-link">Manage</a>
                   <a href="/experience/" class="ek-nav-link">Experience</a>
@@ -117,8 +120,9 @@
                   <a href="https://emiratesgrouproblox.link/help" class="ek-nav-link">Help</a>
                   
                   <div class="ml-auto flex items-center space-x-6 text-white text-xs font-bold">
-                      <a href="https://careers.emiratesgrouproblox.link" class="hover:text-[#D71A21] transition-colors"><i class="fa-solid fa-briefcase mr-1"></i> Careers</a>
-                      <a href="https://emiratesgrouproblox.link/myportal/" class="hover:text-[#D71A21] transition-colors"><i class="fa-solid fa-user mr-1"></i> Log In</a>
+                      <a href="#" class="hover:text-[#D71A21] transition-colors"><i class="fa-solid fa-globe mr-1"></i> GLOBAL</a>
+                      <button class="hover:text-[#D71A21] transition-colors text-lg"><i class="fa-solid fa-magnifying-glass"></i></button>
+                      <a href="https://emiratesgrouproblox.link/myportal/" class="hover:text-[#D71A21] transition-colors"><i class="fa-regular fa-user mr-1"></i> LOG IN</a>
                   </div>
               </div>
           </div>
@@ -128,45 +132,46 @@
 
           <section class="relative bg-[#111827] pt-24 pb-48 lg:pb-56 px-6">
               <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://i.ibb.co/YBrzVC2B/A350-New-Pics.png');"></div>
-              <div class="absolute inset-0 bg-black/30 z-10"></div>
+              <div class="absolute inset-0 bg-black/20 z-10"></div>
               
-              <div class="max-w-[1400px] mx-auto relative z-20 text-center lg:text-left pt-10">
-                  <h2 class="text-3xl md:text-5xl font-serif text-white italic mb-2 drop-shadow-md">Check our current</h2>
-                  <h1 class="text-5xl md:text-7xl font-extrabold text-white uppercase tracking-tighter drop-shadow-lg">
+              <div class="max-w-[1200px] mx-auto relative z-20 text-center lg:text-left pt-10">
+                  <h2 class="text-3xl md:text-4xl font-serif text-white italic mb-2 drop-shadow-md">Check our current</h2>
+                  <h1 class="text-5xl md:text-7xl font-extrabold text-white uppercase tracking-tighter drop-shadow-lg mb-4">
                       FLIGHT SCHEDULES
                   </h1>
+                  <a href="/book/" class="inline-block bg-[#D71A21] hover:bg-red-800 text-white font-bold px-8 py-3 text-sm transition-colors">Learn more</a>
               </div>
           </section>
 
-          <div class="max-w-[1200px] mx-auto relative z-30 -mt-32 lg:-mt-40 px-4 mb-10">
-              <div class="bg-white rounded shadow-[0_10px_40px_rgba(0,0,0,0.15)] overflow-hidden border border-gray-200">
+          <div class="max-w-[1200px] mx-auto relative z-30 -mt-32 lg:-mt-24 px-4 mb-6">
+              <div class="bg-white rounded-t shadow-[0_10px_40px_rgba(0,0,0,0.15)] overflow-hidden">
                   
-                  <div class="flex border-b border-gray-200 bg-[#f9fafb]">
-                      <button onclick="switchTab('book')" id="tab-book" class="widget-tab active flex-1 py-5 text-sm font-bold flex items-center justify-center">
-                          <i class="fa-solid fa-plane-departure mr-3 text-lg"></i> Search flights
+                  <div class="flex border-b border-gray-200">
+                      <button onclick="switchTab('book')" id="tab-book" class="widget-tab active flex-1 py-4 text-sm font-bold flex items-center justify-center">
+                          <i class="fa-solid fa-plane-departure mr-2"></i> Search flights
                       </button>
-                      <button onclick="switchTab('manage')" id="tab-manage" class="widget-tab flex-1 py-5 text-sm font-bold flex items-center justify-center border-l border-gray-200">
-                          <i class="fa-solid fa-ticket mr-3 text-lg"></i> Manage booking / Check in
+                      <button onclick="switchTab('manage')" id="tab-manage" class="widget-tab flex-1 py-4 text-sm font-bold flex items-center justify-center border-l border-gray-200">
+                          <i class="fa-solid fa-tag mr-2 transform -rotate-45"></i> Manage booking / Check in
                       </button>
-                      <button onclick="switchTab('status')" id="tab-status" class="widget-tab flex-1 py-5 text-sm font-bold flex items-center justify-center border-l border-gray-200">
-                          <i class="fa-solid fa-clock mr-3 text-lg"></i> Flight status
+                      <button onclick="switchTab('status')" id="tab-status" class="widget-tab flex-1 py-4 text-sm font-bold flex items-center justify-center border-l border-gray-200">
+                          <i class="fa-solid fa-clock mr-2"></i> Flight status
                       </button>
                   </div>
 
                   <div id="content-book" class="p-6 md:p-8">
-                      <div class="flex justify-end mb-4">
+                      <div class="flex justify-end mb-2">
                           <a href="/book/" class="text-[11px] text-[#D71A21] hover:underline font-medium">Advanced search: multi-city, custom airlines <i class="fa-solid fa-chevron-right text-[9px] ml-1"></i></a>
                       </div>
-                      <form action="/book/" class="flex flex-col lg:flex-row gap-4">
+                      <form action="/book/" method="GET" class="flex flex-col lg:flex-row gap-4">
                           <div class="relative flex-1">
                               <i class="fa-solid fa-location-dot input-icon"></i>
                               <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Departure airport</label>
-                              <input type="text" class="ek-input" placeholder="Mahe (SEZ)">
+                              <input type="text" name="dep" class="ek-input" placeholder="Mahe (SEZ)" required>
                           </div>
                           <div class="relative flex-1">
                               <i class="fa-solid fa-plane-arrival input-icon"></i>
                               <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Arrival airport</label>
-                              <input type="text" class="ek-input" placeholder="Destination">
+                              <input type="text" name="arr" class="ek-input" placeholder="Destination" required>
                           </div>
                           <button type="submit" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold px-12 py-4 rounded-sm transition-colors text-sm w-full lg:w-auto">
                               Continue
@@ -175,16 +180,16 @@
                   </div>
 
                   <div id="content-manage" class="p-6 md:p-8 hidden">
-                      <form action="/manage/" class="flex flex-col lg:flex-row gap-4">
+                      <form action="/manage/" method="GET" class="flex flex-col lg:flex-row gap-4">
                           <div class="relative flex-1">
                               <i class="fa-solid fa-user input-icon"></i>
-                              <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Last Name</label>
-                              <input type="text" class="ek-input" placeholder="Passenger Last Name">
+                              <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Last name</label>
+                              <input type="text" name="lname" class="ek-input" placeholder="Passenger Last Name" required>
                           </div>
                           <div class="relative flex-1">
                               <i class="fa-solid fa-hashtag input-icon"></i>
-                              <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">PNR / Booking Reference</label>
-                              <input type="text" class="ek-input" placeholder="e.g. X7B9WQ">
+                              <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Booking reference</label>
+                              <input type="text" name="pnr" class="ek-input" placeholder="e.g. X7B9WQ" required>
                           </div>
                           <button type="submit" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold px-12 py-4 rounded-sm transition-colors text-sm w-full lg:w-auto">
                               Retrieve
@@ -193,81 +198,81 @@
                   </div>
 
                   <div id="content-status" class="p-6 md:p-8 hidden">
-                      <form class="flex flex-col lg:flex-row gap-4">
+                      <form action="/status/" method="GET" class="flex flex-col lg:flex-row gap-4">
                           <div class="relative flex-1">
                               <i class="fa-solid fa-plane input-icon"></i>
-                              <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Flight Number</label>
-                              <input type="text" class="ek-input" placeholder="e.g. EK 408">
+                              <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Flight number</label>
+                              <input type="text" name="flight" class="ek-input" placeholder="e.g. EK 408" required>
                           </div>
                           <div class="relative flex-1">
                               <i class="fa-solid fa-calendar input-icon"></i>
                               <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Date</label>
-                              <input type="date" class="ek-input">
+                              <input type="date" name="date" class="ek-input" required>
                           </div>
-                          <button type="button" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold px-12 py-4 rounded-sm transition-colors text-sm w-full lg:w-auto">
+                          <button type="submit" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold px-12 py-4 rounded-sm transition-colors text-sm w-full lg:w-auto">
                               Search
                           </button>
                       </form>
                   </div>
 
-                  <div class="border-t border-gray-200 grid grid-cols-3 md:grid-cols-6 text-center divide-x divide-y md:divide-y-0 divide-gray-200 bg-white">
-                      <a href="https://emiratesgrouproblox.link/network/holidays" class="py-5 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
-                          <i class="fa-regular fa-building text-2xl mb-2"></i><p class="text-[11px] font-medium">Hotels</p>
+                  <div class="border-t border-gray-200 grid grid-cols-3 md:grid-cols-6 text-center divide-x divide-y md:divide-y-0 divide-gray-200 bg-white pb-2 pt-2">
+                      <a href="https://emiratesgrouproblox.link/network/holidays" class="py-4 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
+                          <i class="fa-regular fa-building text-2xl mb-1"></i><p class="text-[11px] font-medium">Hotels</p>
                       </a>
-                      <a href="https://emiratesgrouproblox.link/network/holidays" class="py-5 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
-                          <i class="fa-solid fa-car text-2xl mb-2"></i><p class="text-[11px] font-medium">Car rentals</p>
+                      <a href="https://emiratesgrouproblox.link/network/holidays" class="py-4 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
+                          <i class="fa-solid fa-car text-2xl mb-1"></i><p class="text-[11px] font-medium">Car rentals</p>
                       </a>
-                      <a href="https://emiratesgrouproblox.link/network/holidays" class="py-5 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
-                          <i class="fa-solid fa-map-location-dot text-2xl mb-2"></i><p class="text-[11px] font-medium">Tours</p>
+                      <a href="https://emiratesgrouproblox.link/network/holidays" class="py-4 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
+                          <i class="fa-solid fa-map-location-dot text-2xl mb-1"></i><p class="text-[11px] font-medium">Tours</p>
                       </a>
-                      <button onclick="openModal('chauffeur')" class="py-5 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
-                          <i class="fa-solid fa-taxi text-2xl mb-2"></i><p class="text-[11px] font-medium">Chauffeur</p>
+                      <button onclick="openModal('chauffeur')" class="py-4 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
+                          <i class="fa-solid fa-taxi text-2xl mb-1"></i><p class="text-[11px] font-medium">Chauffeur</p>
                       </button>
-                      <button onclick="openModal('meet')" class="py-5 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
-                          <i class="fa-regular fa-handshake text-2xl mb-2"></i><p class="text-[11px] font-medium">Meet & greet</p>
+                      <button onclick="openModal('meet')" class="py-4 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
+                          <i class="fa-regular fa-handshake text-2xl mb-1"></i><p class="text-[11px] font-medium">Meet & greet</p>
                       </button>
-                      <button onclick="openModal('transfers')" class="py-5 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
-                          <i class="fa-solid fa-van-shuttle text-2xl mb-2"></i><p class="text-[11px] font-medium">Transfers</p>
+                      <button onclick="openModal('transfers')" class="py-4 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
+                          <i class="fa-solid fa-van-shuttle text-2xl mb-1"></i><p class="text-[11px] font-medium">Transfers</p>
                       </button>
                   </div>
               </div>
-              
-              <div class="bg-white border-l-4 border-[#D71A21] shadow-md rounded p-6 flex flex-col md:flex-row items-center justify-between gap-6 max-w-[1200px] mx-auto mt-6">
-                  <div>
-                      <h4 class="text-[#D71A21] font-bold text-sm mb-1"><i class="fa-solid fa-circle-exclamation mr-2"></i> Operational Advisory</h4>
-                      <p class="text-sm text-gray-700 leading-relaxed">
-                          Emirates Group Roblox (EGR) operates both ROAV and PTFS divisions. This website integrates actively with our PTFS network. <strong>ROAV Operations are currently in development.</strong>
+          </div>
+          
+          <div class="max-w-[1200px] mx-auto px-4 mb-16">
+              <div class="bg-[#fdf8f8] border border-red-200 shadow-sm rounded flex flex-col md:flex-row items-center justify-between gap-4 p-4">
+                  <div class="flex items-start">
+                      <i class="fa-solid fa-circle-exclamation mt-1 mr-3 text-[#D71A21]"></i>
+                      <p class="text-sm text-gray-800 leading-relaxed">
+                          <strong>Operational Notice:</strong> Emirates Group Roblox operates both ROAV and PTFS divisions. This booking portal is dedicated to our active <strong>PTFS network</strong>. ROAV operations are currently in development.
                       </p>
                   </div>
-                  <div class="shrink-0 flex items-center bg-gray-50 px-4 py-3 rounded border border-gray-100">
-                      <img src="https://media.istockphoto.com/id/521573873/vector/unknown-person-silhouette-whith-blue-tie.jpg?s=612x612&w=0&k=20&c=5Ax4LbSxC0swuxzNmRarYD5R0bxE5u7p31AHfy9Iqd8=" class="w-10 h-10 rounded-full object-cover mr-3 shadow-sm border border-gray-300">
+                  <div class="shrink-0 flex items-center bg-white px-4 py-2 rounded border border-gray-200">
+                      <img src="https://media.istockphoto.com/id/521573873/vector/unknown-person-silhouette-whith-blue-tie.jpg?s=612x612&w=0&k=20&c=5Ax4LbSxC0swuxzNmRarYD5R0bxE5u7p31AHfy9Iqd8=" class="w-8 h-8 rounded-full object-cover mr-3 border border-gray-300">
                       <div>
                           <p class="text-[10px] font-bold uppercase tracking-widest text-[#111827]">Kareem Malhas</p>
-                          <p class="text-[10px] text-gray-500 mb-0.5">ROAV Dev Inquiries</p>
-                          <a href="mailto:kareem.malhas2019@gmail.com" class="text-xs font-bold text-[#D71A21] hover:underline">kareem.malhas2019@gmail.com</a>
+                          <a href="mailto:kareem.malhas2019@gmail.com" class="text-[10px] font-bold text-[#D71A21] hover:underline">ROAV Inquiries</a>
                       </div>
                   </div>
               </div>
-
           </div>
 
-          <section class="py-16 px-6">
+          <section class="py-10 px-6">
               <div class="max-w-[1200px] mx-auto">
-                  <div class="flex items-center justify-between mb-6">
-                      <h2 class="text-2xl font-serif font-bold text-[#111827]">Live Flight Board</h2>
-                      <div class="flex items-center text-sm font-bold text-[#D71A21]">
-                          <span class="relative flex h-3 w-3 mr-2">
+                  <div class="flex flex-col sm:flex-row items-center justify-between mb-6">
+                      <h2 class="text-3xl font-serif font-bold text-[#111827]">Live Flight Board</h2>
+                      <div class="flex items-center text-sm font-bold text-[#D71A21] mt-2 sm:mt-0 bg-red-50 px-3 py-1 rounded">
+                          <span class="relative flex h-2.5 w-2.5 mr-2">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D71A21] opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-3 w-3 bg-[#D71A21]"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#D71A21]"></span>
                           </span>
-                          PTFS NETWORK
+                          PTFS NETWORK LIVE
                       </div>
                   </div>
                   
                   <div class="bg-white shadow-md rounded border border-gray-200 overflow-x-auto">
                       <table class="w-full text-left border-collapse min-w-[800px]">
                           <thead>
-                              <tr class="bg-gray-100 border-b border-gray-200 text-xs uppercase tracking-widest text-gray-500">
+                              <tr class="bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-widest text-gray-500">
                                   <th class="p-4 font-bold">Flight</th>
                                   <th class="p-4 font-bold">Route</th>
                                   <th class="p-4 font-bold">Departure</th>
@@ -275,57 +280,49 @@
                                   <th class="p-4 font-bold">Status</th>
                               </tr>
                           </thead>
-                          <tbody class="text-sm font-medium text-[#111827]">
-                              <tr class="flight-board-row border-b border-gray-100">
-                                  <td class="p-4 flex items-center"><img src="https://i.ibb.co/jPPzN1rz/LOGO-EMIRATES-ROBLOX-compressed.png" class="h-4 mr-3"> EK 408</td>
-                                  <td class="p-4 text-gray-600">Greater Rockford (IRFD) <i class="fa-solid fa-arrow-right mx-2 text-gray-300"></i> Perth (IPPH)</td>
-                                  <td class="p-4">14:30 GMT</td>
-                                  <td class="p-4">16:45 GMT</td>
-                                  <td class="p-4"><span class="bg-green-100 text-green-700 px-3 py-1 rounded font-bold text-[10px] uppercase tracking-widest">Boarding</span></td>
-                              </tr>
-                              <tr class="flight-board-row border-b border-gray-100">
-                                  <td class="p-4 flex items-center"><img src="https://i.ibb.co/jPPzN1rz/LOGO-EMIRATES-ROBLOX-compressed.png" class="h-4 mr-3"> EK 215</td>
-                                  <td class="p-4 text-gray-600">Larnaca (ILAR) <i class="fa-solid fa-arrow-right mx-2 text-gray-300"></i> Tokyo (ITKO)</td>
-                                  <td class="p-4">15:00 GMT</td>
-                                  <td class="p-4">19:30 GMT</td>
-                                  <td class="p-4"><span class="bg-blue-100 text-blue-700 px-3 py-1 rounded font-bold text-[10px] uppercase tracking-widest">Scheduled</span></td>
-                              </tr>
-                              <tr class="flight-board-row">
-                                  <td class="p-4 flex items-center"><img src="https://i.ibb.co/jPPzN1rz/LOGO-EMIRATES-ROBLOX-compressed.png" class="h-4 mr-3"> EK 092</td>
-                                  <td class="p-4 text-gray-600">Grindavik (IGRV) <i class="fa-solid fa-arrow-right mx-2 text-gray-300"></i> Greater Rockford (IRFD)</td>
-                                  <td class="p-4">12:15 GMT</td>
-                                  <td class="p-4">13:40 GMT</td>
-                                  <td class="p-4"><span class="bg-gray-100 text-gray-600 px-3 py-1 rounded font-bold text-[10px] uppercase tracking-widest">Arrived</span></td>
-                              </tr>
+                          <tbody id="flight-board-body" class="text-sm font-medium text-[#111827]">
+                              <tr><td colspan="5" class="p-8 text-center text-gray-500"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Syncing with Dispatch...</td></tr>
                           </tbody>
                       </table>
                   </div>
               </div>
           </section>
 
-          <section class="py-10 px-6">
-              <div class="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <div class="bg-[#111827] rounded shadow-lg overflow-hidden flex items-center">
-                      <img src="https://c.ekstatic.net/ecl/skywards/skywards-tier-signup.png" class="w-1/3 h-full object-cover hidden sm:block" alt="Skywards">
-                      <div class="p-6 text-white w-full">
-                          <h3 class="text-xl font-serif font-bold mb-2">Join Emirates Skywards</h3>
-                          <p class="text-xs text-gray-400 mb-4">Earn miles, unlock tiers, and gain exclusive upgrades.</p>
-                          <a href="https://emiratesgrouproblox.link/network/skywards" class="inline-block bg-white text-[#111827] hover:bg-gray-200 px-5 py-2 rounded text-[10px] font-bold uppercase tracking-widest transition-colors">Register Now</a>
+          <section class="py-8 px-6">
+              <div class="max-w-[1200px] mx-auto">
+                  <div class="bg-black text-white rounded overflow-hidden flex flex-col md:flex-row items-center justify-between relative shadow-lg" style="background-image: url('https://c.ekstatic.net/ecl/skywards/skywards-tier-signup-bg.png'); background-size: cover;">
+                      <div class="flex items-center p-4 z-10 w-full">
+                          <div class="hidden sm:flex relative w-48 h-20 mr-6">
+                              <div class="w-16 h-16 bg-blue-900 rounded-full border-2 border-white absolute left-0 z-40 shadow-lg"></div>
+                              <div class="w-16 h-16 bg-gray-400 rounded-full border-2 border-white absolute left-8 z-30 shadow-lg"></div>
+                              <div class="w-16 h-16 bg-yellow-600 rounded-full border-2 border-white absolute left-16 z-20 shadow-lg"></div>
+                              <div class="w-16 h-16 bg-gray-800 rounded-full border-2 border-white absolute left-24 z-10 shadow-lg"></div>
+                          </div>
+                          <div>
+                              <h3 class="text-lg font-bold">Join Emirates Skywards</h3>
+                              <p class="text-sm text-gray-300">Become an Emirates Skywards member and start enjoying flight rewards, upgrades and more</p>
+                          </div>
                       </div>
-                  </div>
-                  <div class="bg-gray-900 rounded shadow-lg overflow-hidden relative group">
-                      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-60" style="background-image: url('https://i.ibb.co/Xrjzy436/xcljf6btfz531.png');"></div>
-                      <div class="relative z-10 p-6 flex flex-col justify-center h-full text-white">
-                          <h3 class="text-xl font-serif font-bold mb-2">Enhance with Skywards+</h3>
-                          <p class="text-xs text-gray-300 mb-4 max-w-sm">Access bonus miles, lounge passes, and exclusive assets.</p>
-                          <a href="https://emiratesgrouproblox.link/network/skywards" class="inline-block bg-[#D71A21] hover:bg-red-800 px-5 py-2 rounded text-[10px] font-bold uppercase tracking-widest transition-colors w-max">Learn More</a>
+                      <div class="p-4 md:pr-8 z-10 w-full md:w-auto text-right">
+                          <a href="https://emiratesgrouproblox.link/network/skywards" class="inline-block bg-white text-black font-bold px-8 py-2 rounded text-sm w-full md:w-auto text-center hover:bg-gray-200 transition-colors">Join now</a>
                       </div>
                   </div>
               </div>
           </section>
 
-          <section id="destinations" class="py-20 px-6 bg-white border-y border-gray-200">
-              <div class="max-w-[1400px] mx-auto">
+          <section class="mt-4 mb-20 relative h-[400px] flex items-center justify-center text-center text-white shadow-inner">
+              <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: url('https://i.ibb.co/Xrjzy436/xcljf6btfz531.png');"></div>
+              <div class="absolute inset-0 bg-black/40 z-10"></div>
+              <div class="relative z-20 max-w-4xl px-6">
+                  <p class="text-sm font-bold uppercase tracking-[0.3em] mb-4 text-gray-200">Skywards+</p>
+                  <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">Enhance your benefits with Skywards+</h2>
+                  <p class="text-sm md:text-base font-medium mb-8">Choose from 3 packages loaded with what you love, from airport lounge access and extra baggage allowance, to exclusive Cash+Miles rates and discounts.</p>
+                  <a href="https://emiratesgrouproblox.link/network/skywards" class="inline-block bg-white text-black font-bold px-8 py-3 rounded text-sm hover:bg-gray-200 transition-colors shadow-lg">Learn more</a>
+              </div>
+          </section>
+
+          <section id="destinations" class="py-20 px-6 bg-white border-t border-gray-200">
+              <div class="max-w-[1200px] mx-auto">
                   <div class="text-center mb-12">
                       <h2 class="text-3xl md:text-4xl font-serif font-bold text-[#111827] mb-3">Featured Destinations</h2>
                       <p class="text-gray-500 font-medium">Explore our primary PTFS network hubs.</p>
@@ -384,9 +381,8 @@
           </section>
 
           <section class="py-24 px-6 md:px-12 bg-[#111827] text-white">
-              <div class="max-w-[1400px] mx-auto text-center">
-                  <span class="text-[#D71A21] font-bold tracking-[0.2em] uppercase text-[10px] mb-4 block">Cabin Experience</span>
-                  <h2 class="text-3xl md:text-5xl font-serif font-bold mb-12">Make it an incredible journey</h2>
+              <div class="max-w-[1200px] mx-auto text-center">
+                  <h2 class="text-3xl md:text-5xl font-serif font-bold mb-12">Flying with Emirates</h2>
 
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-12">
                       <div class="bg-gray-900 p-8 rounded border border-gray-800 hover:border-gray-600 transition-colors">
@@ -402,7 +398,6 @@
                       </div>
 
                       <div class="bg-gray-900 p-8 rounded border border-[#D71A21]/30 hover:border-[#D71A21] transition-colors relative overflow-hidden">
-                          <div class="absolute top-0 right-0 bg-[#D71A21] text-[9px] font-bold uppercase px-3 py-1 rounded-bl text-white">Ultimate</div>
                           <h3 class="text-2xl font-serif font-bold mb-3">First Class</h3>
                           <p class="text-sm text-gray-400 leading-relaxed mb-6">Close the privacy doors to your own hotel room in the sky. Featuring the A380 Shower Spa, personalized dining, and absolute exclusivity.</p>
                           <a href="/experience/" class="text-[#D71A21] text-xs font-bold uppercase tracking-widest hover:underline">Explore First Class &rarr;</a>
@@ -418,30 +413,33 @@
               <div class="max-w-[1000px] mx-auto flex flex-col md:flex-row items-center gap-12">
                   <div class="w-full md:w-1/3 flex justify-center md:justify-end">
                       <div class="relative">
-                          <div class="absolute inset-0 border-4 border-[#D71A21] translate-x-3 translate-y-3 rounded-lg z-0"></div>
-                          <img src="https://media.istockphoto.com/id/521573873/vector/unknown-person-silhouette-whith-blue-tie.jpg?s=612x612&w=0&k=20&c=5Ax4LbSxC0swuxzNmRarYD5R0bxE5u7p31AHfy9Iqd8=" class="relative z-10 w-48 h-48 object-cover rounded-lg shadow-xl" alt="Daniel Thompson">
+                          <div class="absolute inset-0 border-2 border-gray-300 translate-x-3 translate-y-3 rounded z-0"></div>
+                          <img src="https://media.istockphoto.com/id/521573873/vector/unknown-person-silhouette-whith-blue-tie.jpg?s=612x612&w=0&k=20&c=5Ax4LbSxC0swuxzNmRarYD5R0bxE5u7p31AHfy9Iqd8=" class="relative z-10 w-56 h-56 object-cover rounded shadow-md grayscale" alt="Daniel Thompson">
                       </div>
                   </div>
                   <div class="w-full md:w-2/3 text-center md:text-left">
-                      <span class="text-[#D71A21] font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block">Corporate Leadership</span>
-                      <h3 class="text-3xl font-serif font-bold text-[#111827] mb-6">Message from the CEO</h3>
-                      <p class="text-gray-600 font-medium leading-relaxed italic border-l-4 border-gray-200 pl-6 mb-6">"At Emirates Group Roblox, we aren't just simulating flights; we are setting the definitive standard for realism, professionalism, and structural perfection in virtual aviation. Whether you fly Economy or command the Executive suite, our dedication to your experience is absolute."</p>
-                      <h4 class="font-bold text-[#111827]">Daniel Thompson</h4>
-                      <p class="text-xs text-gray-500 font-bold uppercase tracking-widest mt-1">Chief Executive Officer | Emirates Airline</p>
+                      <h3 class="text-3xl font-serif font-bold text-[#111827] mb-6">Message from our Chief Executive Officer</h3>
+                      <div class="space-y-4 text-gray-600 font-medium leading-relaxed">
+                          <p>"Welcome to the Emirates Group Roblox. We aren't just simulating flights; we are setting the definitive standard for realism, professionalism, and structural perfection in virtual aviation.</p>
+                          <p>Whether you are flying Economy across the PTFS network, awaiting the highly anticipated launch of our ROAV operations, or commanding the Executive suite, our dedication to your experience is absolute. Safety, luxury, and community are the pillars of our airline."</p>
+                      </div>
+                      <div class="mt-8 pt-6 border-t border-gray-100">
+                          <h4 class="font-bold text-[#111827] text-lg">Daniel Thompson</h4>
+                          <p class="text-xs text-gray-500 font-bold uppercase tracking-widest mt-1">Chief Executive Officer | Emirates Airline</p>
+                      </div>
                   </div>
               </div>
           </section>
 
-          <section class="bg-gray-50 py-16 px-6 text-center">
+          <section class="bg-white py-20 px-6 text-center border-t-4 border-[#D71A21]">
               <div class="max-w-3xl mx-auto">
-                  <img src="https://i.ibb.co/FLbTQZnf/Capture-removebg-preview.png" class="h-16 mx-auto mb-6 object-contain mix-blend-multiply opacity-80" alt="Emirates Foundation">
-                  <h3 class="text-xl font-serif font-bold text-[#111827] mb-3">A Better World.</h3>
-                  <p class="text-gray-600 text-sm font-medium leading-relaxed mb-8">We proudly support the real-world Emirates Airline Foundation and align with the humanitarian efforts of the Tyler Nicholas Group to aid global crisis relief.</p>
+                  <img src="https://i.ibb.co/FLbTQZnf/Capture-removebg-preview.png" class="h-20 mx-auto mb-6 object-contain" alt="Emirates Foundation">
+                  <h3 class="text-2xl font-serif font-bold text-[#111827] mb-4">A Better World.</h3>
+                  <p class="text-gray-600 text-base font-medium leading-relaxed mb-10">We proudly support the real-world Emirates Airline Foundation and align with the humanitarian efforts of the Tyler Nicholas Group to aid global crisis relief.</p>
                   
-                  <div class="inline-block bg-white border border-gray-200 px-8 py-4 rounded shadow-sm">
-                      <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#111827] flex items-center justify-center">
-                          <i class="fa-solid fa-globe text-[#D71A21] mr-3 text-lg"></i>
-                          We stand with the United Arab Emirates. <br>No wars. World Peace.
+                  <div class="inline-block bg-gray-50 border border-gray-200 px-8 py-4 rounded-full shadow-sm">
+                      <p class="text-sm font-bold uppercase tracking-[0.2em] text-[#111827]">
+                          We stand with the United Arab Emirates.<br><span class="text-[#D71A21]">NO WARS. WORLD PEACE.</span>
                       </p>
                   </div>
               </div>
@@ -449,90 +447,107 @@
 
       </main>
 
-      <footer class="bg-[#111827] text-white py-16 px-6 md:px-12 relative z-20 border-t-4 border-[#D71A21]">
-        <div class="max-w-[1400px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <footer class="bg-[#2c2d31] text-white py-16 px-6 md:px-12 relative z-20 font-sans">
+        <div class="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-gray-600 pb-12 mb-8">
           
           <div>
-            <img src="https://i.ibb.co/jPPzN1rz/LOGO-EMIRATES-ROBLOX-compressed.png" class="h-10 mb-6 filter brightness-0 invert opacity-80" alt="Emirates">
-            <p class="text-xs text-gray-400 leading-relaxed mb-6">Setting the standard for structural perfection and digital realism in PTFS and ROAV operations.</p>
-            <div class="flex gap-4 text-xl text-gray-400">
-              <a href="https://discord.gg/nDAZ3p475V7" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-discord"></i></a>
-              <a href="https://www.roblox.com/communities/34795673/Emirates-Group-Roblox" target="_blank" class="hover:text-white transition-colors"><i class="fa-solid fa-gamepad"></i></a>
-              <a href="https://www.youtube.com/channel/UC-ec2thID4Fl5ZrXqvoJMog" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-youtube"></i></a>
-            </div>
+            <h4 class="font-bold text-white mb-4 text-base">About us</h4>
+            <ul class="space-y-3">
+              <li><a href="https://careers.emiratesgrouproblox.link" class="footer-link">Careers <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i></a></li>
+              <li><a href="https://emiratesgrouproblox.link/network/foundation" class="footer-link">Emirates Airline Foundation</a></li>
+              <li><a href="https://emiratesgrouproblox.link/network/executive" class="footer-link">Emirates Executive</a></li>
+              <li><a href="https://tylernicholasgroup.com" target="_blank" class="footer-link">Tyler Nicholas Group <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i></a></li>
+            </ul>
           </div>
           
           <div>
-            <h4 class="font-bold text-white mb-4 uppercase tracking-widest text-xs border-b border-gray-800 pb-2">Book & Manage</h4>
-            <ul class="space-y-3 text-xs text-gray-400 font-medium">
-              <li><a href="/book/" class="hover:text-[#D71A21] transition-colors">Search Flights</a></li>
-              <li><a href="/manage/" class="hover:text-[#D71A21] transition-colors">Manage Booking</a></li>
-              <li><a href="/status/" class="hover:text-[#D71A21] transition-colors">Flight Status</a></li>
-              <li><a href="#destinations" class="hover:text-[#D71A21] transition-colors">Route Map</a></li>
+            <h4 class="font-bold text-white mb-4 text-base">Help</h4>
+            <ul class="space-y-3">
+              <li><a href="https://emiratesgrouproblox.link/help" class="footer-link">Help and Contact</a></li>
+              <li><a href="https://emiratesgrouproblox.link/help" class="footer-link">Travel Updates</a></li>
+            </ul>
+            <h4 class="font-bold text-white mb-4 text-base mt-8">Book</h4>
+            <ul class="space-y-3">
+              <li><a href="/book/" class="footer-link">Book flights</a></li>
+              <li><a href="https://emiratesgrouproblox.link/network/holidays" class="footer-link">Travel services (Holidays)</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 class="font-bold text-white mb-4 uppercase tracking-widest text-xs border-b border-gray-800 pb-2">The Experience</h4>
-            <ul class="space-y-3 text-xs text-gray-400 font-medium">
-              <li><a href="/experience/" class="hover:text-[#D71A21] transition-colors">First Class</a></li>
-              <li><a href="/experience/" class="hover:text-[#D71A21] transition-colors">Business Class</a></li>
-              <li><a href="/experience/" class="hover:text-[#D71A21] transition-colors">Economy Class</a></li>
-              <li><a href="https://emiratesgrouproblox.link/network/holidays" class="hover:text-[#D71A21] transition-colors">Emirates Holidays</a></li>
+            <h4 class="font-bold text-white mb-4 text-base">Manage</h4>
+            <ul class="space-y-3">
+              <li><a href="/manage/" class="footer-link">Check-in</a></li>
+              <li><a href="/manage/" class="footer-link">Manage your booking</a></li>
+              <li><a href="/status/" class="footer-link">Flight status</a></li>
+            </ul>
+            <h4 class="font-bold text-white mb-4 text-base mt-8">Where we fly</h4>
+            <ul class="space-y-3">
+              <li><a href="#destinations" class="footer-link">Route map</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 class="font-bold text-white mb-4 uppercase tracking-widest text-xs border-b border-gray-800 pb-2">About Emirates</h4>
-            <ul class="space-y-3 text-xs text-gray-400 font-medium">
-              <li><a href="https://careers.emiratesgrouproblox.link" class="hover:text-[#D71A21] transition-colors">Careers</a></li>
-              <li><a href="https://emiratesgrouproblox.link/network/foundation" class="hover:text-[#D71A21] transition-colors">Emirates Airline Foundation</a></li>
-              <li><a href="https://emiratesgrouproblox.link/network/executive" class="hover:text-[#D71A21] transition-colors">Emirates Executive</a></li>
-              <li><a href="https://tylernicholasgroup.com" target="_blank" class="hover:text-gray-200 transition-colors border-l-2 border-[#D71A21] pl-2">Tyler Nicholas Group</a></li>
+            <h4 class="font-bold text-white mb-4 text-base">Experience</h4>
+            <ul class="space-y-3">
+              <li><a href="/experience/" class="footer-link">Cabin features</a></li>
+              <li><a href="/experience/" class="footer-link">Dining</a></li>
+            </ul>
+            <h4 class="font-bold text-white mb-4 text-base mt-8">Loyalty</h4>
+            <ul class="space-y-3">
+              <li><a href="https://emiratesgrouproblox.link/myportal/login/" class="footer-link">Log in to Emirates Skywards</a></li>
+              <li><a href="https://emiratesgrouproblox.link/network/skywards" class="footer-link">Join Emirates Skywards</a></li>
             </ul>
           </div>
         </div>
         
-        <div class="max-w-[1400px] mx-auto border-t border-gray-800 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-500 font-bold uppercase tracking-widest">
-          <p>&copy; 2026 Emirates Group Roblox. All rights reserved.</p>
-          <p class="mt-2 md:mt-0">A <a href="https://tylernicholasgroup.com" class="text-white hover:text-[#D71A21]">Tyler Nicholas Group</a> Company</p>
+        <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-[#c8c8c8]">
+          <div class="flex flex-wrap gap-4 mb-4 md:mb-0">
+              <a href="#" class="hover:text-white">Accessibility statement</a>
+              <a href="https://emiratesgrouproblox.link/help" class="hover:text-white">Contact us</a>
+              <a href="#" class="hover:text-white">Terms and conditions</a>
+          </div>
+          <div class="flex items-center gap-4">
+              <p>&copy; 2026 The Emirates Group. All Rights Reserved.</p>
+              <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-8 hidden md:block" alt="Emirates">
+          </div>
         </div>
       </footer>
 
   </div>
 
   <div id="modal-chauffeur" class="fixed inset-0 z-[100000] hidden flex items-center justify-center modal-backdrop">
-      <div class="modal-content bg-white w-full max-w-sm mx-4 rounded shadow-2xl overflow-hidden relative border-t-4 border-[#D71A21]">
+      <div class="modal-content bg-white w-full max-w-sm mx-4 rounded shadow-xl overflow-hidden relative border-t-4 border-[#D71A21]">
           <div class="p-6">
-              <h3 class="text-lg font-bold uppercase tracking-widest text-[#111827] mb-4"><i class="fa-solid fa-taxi mr-2 text-[#D71A21]"></i> Chauffeur Drive</h3>
-              <p class="text-gray-600 text-sm font-medium leading-relaxed">Chauffeur drive services may be available for your journey depending on your booked cabin class, Emirates Holidays package, or active Investor/Skywards Tier.</p>
-              <button onclick="closeModal('chauffeur')" class="mt-6 w-full bg-[#111827] hover:bg-gray-800 text-white px-4 py-3 rounded text-xs font-bold uppercase tracking-widest">Close</button>
+              <h3 class="text-lg font-bold text-[#111827] mb-3"><i class="fa-solid fa-taxi mr-2 text-[#D71A21]"></i> Chauffeur Drive</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">Chauffeur drive services may be available for your journey depending on your booked cabin class, Emirates Holidays package, or active Investor/Skywards Tier.</p>
+              <button onclick="closeModal('chauffeur')" class="mt-6 w-full border border-gray-300 hover:bg-gray-100 text-gray-800 px-4 py-2 rounded text-sm font-bold transition-colors">Close</button>
           </div>
       </div>
   </div>
 
   <div id="modal-meet" class="fixed inset-0 z-[100000] hidden flex items-center justify-center modal-backdrop">
-      <div class="modal-content bg-white w-full max-w-sm mx-4 rounded shadow-2xl overflow-hidden relative border-t-4 border-[#D71A21]">
+      <div class="modal-content bg-white w-full max-w-sm mx-4 rounded shadow-xl overflow-hidden relative border-t-4 border-[#D71A21]">
           <div class="p-6">
-              <h3 class="text-lg font-bold uppercase tracking-widest text-[#111827] mb-4"><i class="fa-solid fa-handshake-angle mr-2 text-[#D71A21]"></i> Meet & Greet</h3>
-              <p class="text-gray-600 text-sm font-medium leading-relaxed">Our staff are the best trained in the industry. We offer the highest level of professionalism in Roblox Aviation, ensuring the best VIP meet & greet experience.</p>
-              <button onclick="closeModal('meet')" class="mt-6 w-full bg-[#111827] hover:bg-gray-800 text-white px-4 py-3 rounded text-xs font-bold uppercase tracking-widest">Close</button>
+              <h3 class="text-lg font-bold text-[#111827] mb-3"><i class="fa-solid fa-handshake-angle mr-2 text-[#D71A21]"></i> Meet & Greet</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">Our staff are the best trained in the industry. We offer the highest level of professionalism in Roblox Aviation, ensuring the best VIP meet & greet experience.</p>
+              <button onclick="closeModal('meet')" class="mt-6 w-full border border-gray-300 hover:bg-gray-100 text-gray-800 px-4 py-2 rounded text-sm font-bold transition-colors">Close</button>
           </div>
       </div>
   </div>
 
   <div id="modal-transfers" class="fixed inset-0 z-[100000] hidden flex items-center justify-center modal-backdrop">
-      <div class="modal-content bg-white w-full max-w-sm mx-4 rounded shadow-2xl overflow-hidden relative border-t-4 border-[#D71A21]">
+      <div class="modal-content bg-white w-full max-w-sm mx-4 rounded shadow-xl overflow-hidden relative border-t-4 border-[#D71A21]">
           <div class="p-6">
-              <h3 class="text-lg font-bold uppercase tracking-widest text-[#111827] mb-4"><i class="fa-solid fa-van-shuttle mr-2 text-[#D71A21]"></i> Transfers</h3>
-              <p class="text-gray-600 text-sm font-medium leading-relaxed">Airport transfers are available at select destination airports across both our networks. Please check your booking itinerary for operational information.</p>
-              <button onclick="closeModal('transfers')" class="mt-6 w-full bg-[#111827] hover:bg-gray-800 text-white px-4 py-3 rounded text-xs font-bold uppercase tracking-widest">Close</button>
+              <h3 class="text-lg font-bold text-[#111827] mb-3"><i class="fa-solid fa-van-shuttle mr-2 text-[#D71A21]"></i> Transfers</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">Airport transfers are available at select destination airports across both our networks. Please check your booking itinerary for operational information.</p>
+              <button onclick="closeModal('transfers')" class="mt-6 w-full border border-gray-300 hover:bg-gray-100 text-gray-800 px-4 py-2 rounded text-sm font-bold transition-colors">Close</button>
           </div>
       </div>
   </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
+        // 1. SUPABASE INIT
         if (!window.supabase) {
             console.error("Supabase CDN failed to load.");
             window.location.href = 'https://emiratesgrouproblox.link/myportal/login/';
@@ -548,6 +563,7 @@
         const loginGate = document.getElementById('airline-login-gate');
         const mainContent = document.getElementById('main-content-wrapper');
 
+        // 2. AUTH LOGIC
         function handleSessionState(session) {
             authLoader.style.opacity = '0';
             setTimeout(() => {
@@ -555,6 +571,7 @@
                 if (session) {
                     loginGate.style.display = 'none';
                     mainContent.style.display = 'flex';
+                    fetchLiveFlights(); // Only fetch flights if logged in
                 } else {
                     mainContent.style.display = 'none';
                     loginGate.style.display = 'flex';
@@ -569,33 +586,84 @@
             handleSessionState(session);
         });
 
-        window.handleAirlineLogin = async function(event) {
-            event.preventDefault(); 
-            const email = document.getElementById('login-email').value.trim();
-            const password = document.getElementById('login-password').value;
-            const btn = document.getElementById('login-btn');
-            const alertBox = document.getElementById('login-alert');
-            const alertText = document.getElementById('login-alert-text');
+        // 3. LOGIN SUBMISSION
+        const loginForm = document.getElementById('airline-login-form');
+        if (loginForm) {
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault(); 
+                const email = document.getElementById('login-email').value.trim();
+                const password = document.getElementById('login-password').value;
+                const btn = document.getElementById('login-btn');
+                const alertBox = document.getElementById('login-alert');
+                const alertText = document.getElementById('login-alert-text');
 
-            btn.innerHTML = 'VERIFYING...';
-            btn.disabled = true;
-            alertBox.style.display = 'none';
+                btn.innerHTML = 'VERIFYING...';
+                btn.disabled = true;
+                alertBox.style.display = 'none';
 
-            const { error } = await supabase.auth.signInWithPassword({ email, password });
+                const { error } = await supabase.auth.signInWithPassword({ email, password });
 
-            if (error) {
-                alertBox.style.display = 'block';
-                alertText.innerText = error.message;
-                btn.innerHTML = 'Verify Identity &rarr;';
-                btn.disabled = false;
-            } else {
-                document.getElementById('airline-login-form').reset();
-                btn.innerHTML = 'Verify Identity &rarr;';
-                btn.disabled = false;
+                if (error) {
+                    alertBox.style.display = 'block';
+                    alertText.innerText = error.message;
+                    btn.innerHTML = 'Verify Identity &rarr;';
+                    btn.disabled = false;
+                } else {
+                    loginForm.reset();
+                    btn.innerHTML = 'Verify Identity &rarr;';
+                    btn.disabled = false;
+                }
+            });
+        }
+
+        // 4. LIVE FLIGHT BOARD FETCHING
+        async function fetchLiveFlights() {
+            const tbody = document.getElementById('flight-board-body');
+            
+            try {
+                const { data, error } = await supabase
+                    .from('egr_airline_flights')
+                    .select('*')
+                    .eq('platform', 'PTFS')
+                    .eq('airline', 'Emirates')
+                    .order('departure_time', { ascending: true })
+                    .limit(5);
+
+                if (error) throw error;
+
+                if (data && data.length > 0) {
+                    tbody.innerHTML = data.map(f => {
+                        let statusClass = 'status-scheduled';
+                        if (f.status === 'Boarding') statusClass = 'status-boarding';
+                        else if (f.status === 'Departed') statusClass = 'status-departed';
+                        else if (f.status === 'Arrived') statusClass = 'status-arrived';
+                        else if (f.status === 'Cancelled') statusClass = 'status-cancelled';
+
+                        // Format times (remove seconds if they exist in SQL time format)
+                        const depTime = f.departure_time ? f.departure_time.substring(0, 5) : '--:--';
+                        const arrTime = f.arrival_time ? f.arrival_time.substring(0, 5) : '--:--';
+
+                        return `
+                            <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                <td class="p-4 font-bold whitespace-nowrap text-[#111827]"><img src="https://i.ibb.co/jPPzN1rz/LOGO-EMIRATES-ROBLOX-compressed.png" class="h-3 inline mr-2 opacity-80 filter brightness-0"> ${f.flight_number}</td>
+                                <td class="p-4 text-gray-600 font-medium">${f.departure_airport} <i class="fa-solid fa-arrow-right mx-2 text-gray-300 text-[10px]"></i> ${f.arrival_airport}</td>
+                                <td class="p-4">${depTime}</td>
+                                <td class="p-4">${arrTime}</td>
+                                <td class="p-4"><span class="status-badge ${statusClass}">${f.status}</span></td>
+                            </tr>
+                        `;
+                    }).join('');
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="5" class="p-8 text-center text-gray-500 font-medium bg-gray-50">No active PTFS flights scheduled at this time.</td></tr>';
+                }
+            } catch (err) {
+                console.error("Flight fetch error:", err);
+                tbody.innerHTML = '<tr><td colspan="5" class="p-8 text-center text-red-500 font-medium bg-red-50">Unable to sync with Dispatch. Please check your connection.</td></tr>';
             }
-        };
+        }
     });
 
+    // --- WIDGET TAB SWITCHER ---
     function switchTab(tabId) {
         ['book', 'manage', 'status'].forEach(id => {
             document.getElementById('tab-' + id).classList.remove('active', 'border-b-[#D71A21]', 'text-[#111827]');
@@ -607,6 +675,7 @@
         document.getElementById('content-' + tabId).classList.remove('hidden');
     }
 
+    // --- MODAL CONTROLLERS ---
     function openModal(id) {
         const modal = document.getElementById('modal-' + id);
         modal.classList.remove('hidden');
