@@ -163,6 +163,30 @@
                   </div>
               </div>
 
+              <datalist id="ptfs-airports">
+                  <option value="Greater Rockford International (IRFD)">
+                  <option value="Tokyo International (ITKO)">
+                  <option value="Perth International (IPPH)">
+                  <option value="Izolirani International (IZOL)">
+                  <option value="Larnaca International (ILAR)">
+                  <option value="Paphos Regional (IPAP)">
+                  <option value="Grindavik International (IGRV)">
+                  <option value="Keflavik International">
+                  <option value="Sauthemptona International (ISAU)">
+                  <option value="Mellor Regional (IMLR)">
+              </datalist>
+
+              <div class="bg-white border border-gray-200 rounded p-6 mb-8 flex flex-col md:flex-row gap-4 shadow-sm">
+                  <div class="flex-1">
+                      <label class="ek-label">Filter Departure</label>
+                      <input type="text" id="filter-dep" list="ptfs-airports" class="ek-input" placeholder="e.g. Greater Rockford International (IRFD)" oninput="filterFlights()">
+                  </div>
+                  <div class="flex-1">
+                      <label class="ek-label">Filter Arrival</label>
+                      <input type="text" id="filter-arr" list="ptfs-airports" class="ek-input" placeholder="e.g. Perth International (IPPH)" oninput="filterFlights()">
+                  </div>
+              </div>
+
               <div id="flight-list-container" class="space-y-4">
                   <div class="p-12 text-center text-gray-500 bg-white border border-gray-200 rounded shadow-sm">
                       <i class="fa-solid fa-spinner fa-spin text-2xl mb-3 text-[#D71A21]"></i>
@@ -192,7 +216,7 @@
                       <div class="w-full md:w-1/3 flex flex-col items-center justify-center text-gray-400">
                           <p class="text-xs font-bold mb-2"><i class="fa-regular fa-clock mr-1"></i> <span id="rev-duration">--h --m</span></p>
                           <div class="w-full h-px bg-gray-300 relative flex justify-center items-center">
-                              <i class="fa-solid fa-plane text-gray-400 bg-white px-2 absolute"></i>
+                              <i class="fa-solid fa-plane text-[#D71A21] bg-white px-2 absolute"></i>
                           </div>
                           <p class="text-[10px] uppercase tracking-widest font-bold mt-2">Direct Flight</p>
                       </div>
@@ -481,11 +505,12 @@
   <script>
     // --- GLOBAL STATE ---
     let currentUser = null;
+    let allFetchedFlights = [];
     let selectedFlight = null;
     let selectedClass = 'Economy';
     let calculatedTotal = 0;
 
-    // Wait until entire window is loaded for preloader
+    // Load Waiter
     window.addEventListener('load', () => {
         const pageLoader = document.getElementById('page-loader');
         setTimeout(() => {
@@ -505,11 +530,10 @@
             return;
         }
 
-        const supabase = window.supabase.createClient(
+        window.sb = window.supabase.createClient(
             'https://zboyabxzhptnxnmofvcz.supabase.co', 
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpib3lhYnh6aHB0bnhubW9mdmN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3NjU3MTgsImV4cCI6MjA4NTM0MTcxOH0.2et1T3bQqr-ZzZgx-VWaq3kR0FJDprcAbbWBby6oRys'
         );
-        window.sb = supabase; // global access
 
         const loginGate = document.getElementById('airline-login-gate');
         const mainContent = document.getElementById('main-content-wrapper');
@@ -521,42 +545,40 @@
                 loginGate.style.display = 'none';
                 mainContent.style.visibility = 'visible';
                 mainContent.style.opacity = '1';
-                loadFlights(); // Start fetching flights
+                loadFlights(); 
             } else {
                 mainContent.style.visibility = 'hidden';
                 loginGate.style.display = 'flex';
             }
         }
 
-        const { data: { session } } = await supabase.auth.getSession();
+        const { data: { session } } = await window.sb.auth.getSession();
         handleSession(session);
+        window.sb.auth.onAuthStateChange((_e, s) => handleSession(s));
 
-        supabase.auth.onAuthStateChange((_e, s) => handleSession(s));
-
-        // Secure Login Form inside Gate
+        // Gate Login
         document.getElementById('airline-login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('login-btn');
             const alertBox = document.getElementById('login-alert');
-            const alertText = document.getElementById('login-alert-text');
             
             btn.innerHTML = 'VERIFYING...';
             btn.disabled = true;
             
-            const { error } = await supabase.auth.signInWithPassword({
+            const { error } = await window.sb.auth.signInWithPassword({
                 email: document.getElementById('login-email').value,
                 password: document.getElementById('login-password').value
             });
 
             if(error) {
                 alertBox.style.display = 'block';
-                alertText.innerText = error.message;
+                document.getElementById('login-alert-text').innerText = error.message;
                 btn.innerHTML = 'Verify Identity &rarr;';
                 btn.disabled = false;
             }
         });
 
-        // Passenger Form Submission (Triggers Step 4)
+        // Passenger Form Link
         document.getElementById('passenger-form').addEventListener('submit', (e) => {
             e.preventDefault();
             goToStep(4);
@@ -567,64 +589,90 @@
     async function loadFlights() {
         const container = document.getElementById('flight-list-container');
         try {
-            // Fetch PTFS Emirates flights
             const { data, error } = await window.sb
                 .from('egr_flights')
                 .select('*')
                 .eq('platform', 'PTFS')
                 .eq('airline', 'Emirates')
                 .order('flight_date', { ascending: true })
-                .limit(20);
+                .limit(50);
 
             if (error) throw error;
-
-            if (data && data.length > 0) {
-                container.innerHTML = data.map(f => {
-                    const fJson = encodeURIComponent(JSON.stringify(f));
-                    const depTime = f.departure_time ? f.departure_time.substring(0, 5) : '--:--';
-                    const arrTime = f.arrival_time ? f.arrival_time.substring(0, 5) : '--:--';
-                    const firstBadge = f.first_class_available ? `<span class="bg-yellow-100 text-yellow-800 text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded ml-2">First Class Config</span>` : '';
-
-                    return `
-                        <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow flex flex-col md:flex-row justify-between items-center gap-6">
-                            <div class="flex-grow w-full">
-                                <div class="flex items-center mb-4">
-                                    <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-4 mr-3 opacity-80 mix-blend-multiply">
-                                    <span class="font-bold text-[#111827] mr-4">${f.flight_number}</span>
-                                    <span class="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded">${f.flight_date || '--/--/----'}</span>
-                                    ${firstBadge}
-                                </div>
-                                <div class="flex items-center justify-between max-w-md">
-                                    <div class="text-center">
-                                        <p class="text-xl font-bold text-[#111827]">${depTime}</p>
-                                        <p class="text-[10px] text-gray-500 font-bold uppercase">${f.departure_airport.split('(')[0].trim()}</p>
-                                    </div>
-                                    <div class="flex-grow px-4 flex flex-col items-center">
-                                        <p class="text-[10px] text-gray-400 font-bold mb-1">${f.flight_duration || '--h --m'}</p>
-                                        <div class="w-full h-px bg-gray-300 relative flex justify-center items-center">
-                                            <i class="fa-solid fa-plane text-[#D71A21] bg-white px-2"></i>
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <p class="text-xl font-bold text-[#111827]">${arrTime}</p>
-                                        <p class="text-[10px] text-gray-500 font-bold uppercase">${f.arrival_airport.split('(')[0].trim()}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-full md:w-auto text-right border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center">
-                                <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">From</p>
-                                <p class="text-2xl font-bold text-[#111827] mb-4">${f.base_price_usd || 0} <span class="text-sm">USD</span></p>
-                                <button onclick="selectFlight('${fJson}')" class="bg-[#111827] hover:bg-[#D71A21] text-white font-bold px-8 py-3 rounded transition-colors text-xs uppercase tracking-widest w-full">Select</button>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            } else {
-                container.innerHTML = '<div class="p-12 text-center text-gray-500 bg-white border border-gray-200 rounded">No PTFS flights scheduled.</div>';
-            }
+            
+            allFetchedFlights = data || [];
+            renderFlightList(allFetchedFlights);
+            
         } catch (err) {
             console.error(err);
-            container.innerHTML = '<div class="p-12 text-center text-red-500 bg-white border border-red-200 rounded">Error loading dispatch schedules.</div>';
+            container.innerHTML = '<div class="p-12 text-center text-red-500 bg-white border border-red-200 rounded font-bold">Error connecting to Dispatch. Check console.</div>';
+        }
+    }
+
+    // Filter Logic
+    window.filterFlights = function() {
+        const depFilter = document.getElementById('filter-dep').value.toLowerCase();
+        const arrFilter = document.getElementById('filter-arr').value.toLowerCase();
+        
+        const filtered = allFetchedFlights.filter(f => {
+            const depMatch = f.departure_airport && f.departure_airport.toLowerCase().includes(depFilter);
+            const arrMatch = f.arrival_airport && f.arrival_airport.toLowerCase().includes(arrFilter);
+            return depMatch && arrMatch;
+        });
+        
+        renderFlightList(filtered);
+    }
+
+    function renderFlightList(flights) {
+        const container = document.getElementById('flight-list-container');
+        if (flights.length > 0) {
+            container.innerHTML = flights.map(f => {
+                const fJson = encodeURIComponent(JSON.stringify(f));
+                const depTime = f.departure_time ? f.departure_time.substring(0, 5) : '--:--';
+                const arrTime = f.arrival_time ? f.arrival_time.substring(0, 5) : '--:--';
+                const firstBadge = f.first_class_available ? `<span class="bg-yellow-100 text-yellow-800 text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded ml-2">First Class</span>` : '';
+
+                // Try to extract codes like (IRFD)
+                const depCodeMatch = f.departure_airport.match(/\((.*?)\)/);
+                const arrCodeMatch = f.arrival_airport.match(/\((.*?)\)/);
+                const depCode = depCodeMatch ? depCodeMatch[1] : f.departure_airport.substring(0,4).toUpperCase();
+                const arrCode = arrCodeMatch ? arrCodeMatch[1] : f.arrival_airport.substring(0,4).toUpperCase();
+
+                return `
+                    <div class="bg-white border border-gray-200 rounded shadow-sm hover:border-[#D71A21] transition-all flex flex-col md:flex-row justify-between items-center gap-6 group">
+                        <div class="flex-grow w-full p-6">
+                            <div class="flex items-center mb-4 border-b border-gray-100 pb-4">
+                                <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-4 mr-3 opacity-80 mix-blend-multiply">
+                                <span class="font-bold text-[#111827] mr-4">${f.flight_number}</span>
+                                <span class="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded">${f.flight_date || '--/--/----'}</span>
+                                ${firstBadge}
+                            </div>
+                            <div class="flex items-center justify-between max-w-md">
+                                <div class="text-center">
+                                    <p class="text-2xl font-bold text-[#111827]">${depTime}</p>
+                                    <p class="text-[10px] text-gray-500 font-bold uppercase">${depCode}</p>
+                                </div>
+                                <div class="flex-grow px-4 flex flex-col items-center">
+                                    <p class="text-[10px] text-gray-400 font-bold mb-1">${f.flight_duration || '--h --m'}</p>
+                                    <div class="w-full h-px bg-gray-300 relative flex justify-center items-center">
+                                        <i class="fa-solid fa-plane text-[#D71A21] bg-white px-2"></i>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-2xl font-bold text-[#111827]">${arrTime}</p>
+                                    <p class="text-[10px] text-gray-500 font-bold uppercase">${arrCode}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-auto text-center md:text-right border-t md:border-t-0 md:border-l border-gray-100 p-6 flex flex-col justify-center bg-gray-50">
+                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">From</p>
+                            <p class="text-3xl font-bold text-[#111827] mb-4">${f.base_price_usd || 0} <span class="text-sm">USD</span></p>
+                            <button onclick="selectFlight('${fJson}')" class="bg-[#111827] hover:bg-[#D71A21] text-white font-bold px-10 py-3 rounded transition-colors text-xs uppercase tracking-widest w-full">Select</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        } else {
+            container.innerHTML = '<div class="p-12 text-center text-gray-500 bg-white border border-gray-200 rounded">No flights match this route criteria.</div>';
         }
     }
 
@@ -632,11 +680,9 @@
     window.selectFlight = function(flightJsonEncoded) {
         selectedFlight = JSON.parse(decodeURIComponent(flightJsonEncoded));
         
-        // Populate Review Header
         document.getElementById('rev-flight-num').innerText = selectedFlight.flight_number;
         document.getElementById('rev-date').innerText = selectedFlight.flight_date || '--/--/----';
         
-        // Extract Codes via Regex if formatted like "Rockford (IRFD)"
         const depMatch = selectedFlight.departure_airport.match(/\((.*?)\)/);
         const arrMatch = selectedFlight.arrival_airport.match(/\((.*?)\)/);
         document.getElementById('rev-dep-code').innerText = depMatch ? depMatch[1] : 'DEP';
@@ -652,24 +698,20 @@
         // Render Classes
         const classGrid = document.getElementById('class-selection-grid');
         let classHtml = '';
-        
         const base = selectedFlight.base_price_usd || 0;
         
-        if(selectedFlight.economy_available !== false) {
-            classHtml += createClassCard('Economy', base, 'Standard seating, meals included.');
-        }
-        if(selectedFlight.business_available !== false) {
-            classHtml += createClassCard('Business', base * 2, 'Lie-flat seats, Lounge access.');
-        }
+        if(selectedFlight.economy_available !== false) classHtml += createClassCard('Economy', base, 'Standard seating, meals included.');
+        if(selectedFlight.business_available !== false) classHtml += createClassCard('Business', base * 2, 'Lie-flat seats, Lounge access.');
+        
         if(selectedFlight.first_class_available) {
             classHtml += createClassCard('First', base * 3, 'Private suite, Shower Spa.', true);
         } else {
-            classHtml += `<div class="p-4 border border-gray-200 bg-gray-50 rounded opacity-50 flex items-center justify-center text-xs font-bold text-gray-400 uppercase">First Class Unavailable on this aircraft</div>`;
+            classHtml += `<div class="p-4 border border-gray-200 bg-gray-50 rounded flex items-center justify-center text-xs font-bold text-gray-400 uppercase text-center">First Class Unavailable on this aircraft</div>`;
         }
         
         classGrid.innerHTML = classHtml;
         
-        // Auto-select Economy
+        // Auto-select Default
         if(selectedFlight.economy_available !== false) setClass('Economy', base);
         else if(selectedFlight.business_available !== false) setClass('Business', base * 2);
 
@@ -677,12 +719,11 @@
     };
 
     function createClassCard(className, price, desc, isFirst = false) {
-        const id = `class-${className}`;
         const borderCol = isFirst ? 'border-[#D71A21]' : 'border-gray-200';
         return `
             <label class="cursor-pointer relative">
                 <input type="radio" name="cabin_class" value="${className}" class="peer sr-only" onchange="setClass('${className}', ${price})">
-                <div class="p-5 border-2 ${borderCol} rounded-lg hover:bg-gray-50 transition-all peer-checked:border-[#D71A21] peer-checked:bg-red-50">
+                <div class="p-5 border-2 ${borderCol} rounded hover:bg-gray-50 transition-all peer-checked:border-[#D71A21] peer-checked:bg-red-50">
                     <h4 class="font-bold text-[#111827] mb-1 text-lg">${className}</h4>
                     <p class="text-[10px] text-gray-500 font-medium mb-4">${desc}</p>
                     <p class="text-xl font-bold text-[#111827]">${price} <span class="text-xs text-gray-500">USD</span></p>
@@ -698,7 +739,6 @@
         selectedClass = cName;
         calculatedTotal = price;
         
-        // Handle Experience Box toggle
         const expBox = document.getElementById('experience-box');
         if(cName === 'Business' || cName === 'First') {
             expBox.classList.remove('hidden');
@@ -711,26 +751,21 @@
     // --- STEP 3: SYNC PROFILE ---
     window.syncProfileData = async function() {
         if(!currentUser) return;
-        
         try {
-            // Attempt to pull from existing profile tables if they exist in your DB schema.
-            // If not, we just use the session email.
             const { data } = await window.sb.from('egr_users').select('*').eq('id', currentUser.id).single();
             if(data) {
                 if(data.roblox_username) document.getElementById('pax-roblox').value = data.roblox_username;
                 if(data.discord_username) document.getElementById('pax-discord').value = data.discord_username;
                 if(data.discord_id) document.getElementById('pax-discord').value = data.discord_id;
-                
-                // Try to parse First/Last from full_name
                 if(data.full_name) {
                     const parts = data.full_name.split(' ');
                     document.getElementById('pax-first').value = parts[0] || '';
                     if(parts.length > 1) document.getElementById('pax-last').value = parts.slice(1).join(' ');
                 }
             }
-            alert("Profile sync attempted with available portal data.");
+            alert("Profile synced successfully.");
         } catch(e) {
-            console.log("No extended profile found, using auth email only.");
+            console.log("No extended profile found.");
         }
     }
 
@@ -749,16 +784,15 @@
         document.getElementById('sum-total-price').innerText = calculatedTotal;
     }
 
-    // --- STEP 5: PROCESS & INSERT INTO DB ---
+    // --- STEP 5: PROCESS & DB INSERT ---
     window.processBooking = async function() {
         const btn = document.getElementById('btn-confirm-pay');
         const errBox = document.getElementById('booking-error');
         
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Transmitting to Dispatch...';
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Transmitting...';
         btn.disabled = true;
         errBox.classList.add('hidden');
 
-        // Generate PNR & Ticket
         const pnr = generateString(6).toUpperCase();
         const tkt = '176-' + Math.floor(1000000000 + Math.random() * 9000000000);
 
@@ -772,11 +806,11 @@
             last_name: document.getElementById('pax-last').value.trim(),
             email: currentUser.email,
             discord_username: document.getElementById('pax-discord').value.trim(),
-            discord_id: document.getElementById('pax-discord').value.trim(), // Re-using field for ease
+            discord_id: document.getElementById('pax-discord').value.trim(), 
             roblox_username: document.getElementById('pax-roblox').value.trim(),
             skywards_id: document.getElementById('pax-skywards').value.trim(),
             emirates_account_id: document.getElementById('pax-ekid').value.trim(),
-            seat_class: selectedClass, // Assumes your DB uses 'seat_class' based on earlier structure
+            seat_class: selectedClass, 
             total_paid_usd: calculatedTotal,
             experience_requests: document.getElementById('pax-experience').value.trim(),
             status: 'Confirmed'
@@ -786,7 +820,6 @@
             const { error } = await window.sb.from('egr_bookings').insert([payload]);
             if (error) throw error;
 
-            // Success: Render Ticket
             document.getElementById('tkt-number').innerText = tkt;
             document.getElementById('tkt-pnr').innerText = pnr;
             document.getElementById('tkt-name').innerText = `${payload.title} ${payload.first_name} ${payload.last_name}`;
@@ -814,16 +847,12 @@
     // --- NAVIGATION UTILS ---
     window.goToStep = function(step) {
         if(step === 4) prepPaymentPage();
-
-        // Hide all
         for(let i=1; i<=5; i++) {
             const el = document.getElementById('step-'+i+'-container');
             if(el) el.classList.add('hidden');
         }
-        // Show target
         document.getElementById('step-'+step+'-container').classList.remove('hidden');
         
-        // Update Progress Bar
         for(let i=1; i<=4; i++) {
             const ind = document.getElementById('ind-'+i);
             const line = document.getElementById('line-'+(i-1));
@@ -850,7 +879,6 @@
         }
         window.scrollTo(0,0);
     }
-
     window.goBackTo = function(step) { goToStep(step); }
 
     function generateString(length) {
