@@ -784,21 +784,10 @@
         document.getElementById('sum-total-price').innerText = calculatedTotal;
     }
 
-    // --- STEP 5: PROCESS & DB INSERT ---
-    window.processBooking = async function() {
-        const btn = document.getElementById('btn-confirm-pay');
-        const errBox = document.getElementById('booking-error');
-        
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Transmitting...';
-        btn.disabled = true;
-        errBox.classList.add('hidden');
-
-        const pnr = generateString(6).toUpperCase();
-        const tkt = '176-' + Math.floor(1000000000 + Math.random() * 9000000000);
-
-        const payload = {
+const payload = {
             user_id: currentUser.id,
             flight_id: selectedFlight.id,
+            ticket_reference: pnr, // <--- ADD THIS LINE RIGHT HERE
             pnr_reference: pnr,
             e_ticket_number: tkt,
             title: document.getElementById('pax-title').value,
@@ -815,34 +804,6 @@
             experience_requests: document.getElementById('pax-experience').value.trim(),
             status: 'Confirmed'
         };
-
-        try {
-            const { error } = await window.sb.from('egr_bookings').insert([payload]);
-            if (error) throw error;
-
-            document.getElementById('tkt-number').innerText = tkt;
-            document.getElementById('tkt-pnr').innerText = pnr;
-            document.getElementById('tkt-name').innerText = `${payload.title} ${payload.first_name} ${payload.last_name}`;
-            
-            document.getElementById('tkt-dep-code').innerText = document.getElementById('rev-dep-code').innerText;
-            document.getElementById('tkt-dep-time').innerText = document.getElementById('rev-dep-time').innerText;
-            document.getElementById('tkt-arr-code').innerText = document.getElementById('rev-arr-code').innerText;
-            document.getElementById('tkt-arr-time').innerText = document.getElementById('rev-arr-time').innerText;
-            
-            document.getElementById('tkt-flight').innerText = selectedFlight.flight_number;
-            document.getElementById('tkt-date').innerText = selectedFlight.flight_date;
-            document.getElementById('tkt-class').innerText = selectedClass;
-
-            goToStep(5);
-
-        } catch (err) {
-            console.error(err);
-            errBox.innerText = "Error securing booking: " + err.message;
-            errBox.classList.remove('hidden');
-            btn.innerHTML = '<i class="fa-solid fa-lock mr-2"></i> Confirm Virtual Payment';
-            btn.disabled = false;
-        }
-    }
 
     // --- NAVIGATION UTILS ---
     window.goToStep = function(step) {
