@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Booking & Check-in | Emirates Airline Roblox</title>
+  
+  <link rel="icon" href="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" id="favicon" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; overflow-x: hidden; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .ek-nav-bg { background-color: #333333; height: 60px; }
+    .ek-logo-box { background-color: #d71a21; height: 90px; width: 120px; display: flex; align-items: center; justify-content: center; position: absolute; top: 0; left: 0; z-index: 60; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;}
+    .ek-nav-link { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; transition: color 0.2s; padding: 1.25rem 0; display: inline-block; }
+    .ek-nav-link:hover { color: #c8c8c8; }
+    .ek-input { width: 100%; border: 1px solid #d1d5db; padding: 0.85rem 1rem; border-radius: 3px; font-size: 0.9rem; color: #111827; transition: border-color 0.2s; }
+    .ek-input:focus { outline: none; border-color: #D71A21; box-shadow: inset 0 0 0 1px #D71A21; }
+    .ek-label { display: block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #6b7280; margin-bottom: 0.25rem; }
+    
+    /* Barcode Font */
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+39&display=swap');
+    .barcode { font-family: 'Libre Barcode 39', cursive; font-size: 3rem; line-height: 1; }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+  <div class="ek-nav-bg w-full relative z-40">
+      <div class="max-w-[1200px] mx-auto flex items-center h-full px-4 md:px-0">
+          <a href="/" class="ek-logo-box hidden md:flex"><img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-10 object-contain" alt="Emirates"></a>
+          <a href="/" class="md:hidden py-4 mr-6"><img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-8 object-contain" alt="Emirates"></a>
+          <div class="hidden lg:flex items-center space-x-6 pl-[150px] w-full">
+              <a href="/book/" class="ek-nav-link">Book</a>
+              <a href="/manage/" class="ek-nav-link text-white">Manage</a>
+              <a href="/experience/" class="ek-nav-link">Experience</a>
+              <a href="https://emiratesgrouproblox.link/network/skywards" class="ek-nav-link">Loyalty</a>
+              <a href="https://emiratesgrouproblox.link/help" class="ek-nav-link">Help</a>
+              <div class="ml-auto flex items-center space-x-6 text-white text-xs font-bold">
+                  <a href="#" class="hover:text-[#D71A21] transition-colors"><i class="fa-solid fa-globe mr-1"></i> GLOBAL</a>
+                  <a href="https://emiratesgrouproblox.link/myportal/" class="hover:text-[#D71A21] transition-colors"><i class="fa-regular fa-user mr-1"></i> PORTAL</a>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <main class="flex-grow relative z-10 w-full pt-10 pb-20 px-6 max-w-[1000px] mx-auto">
+      
+      <div id="gate-view" class="max-w-md mx-auto mt-10">
+          <h1 class="text-3xl font-serif font-bold text-[#111827] mb-2 text-center">Manage your booking</h1>
+          <p class="text-gray-600 text-sm text-center mb-8">Enter your details to retrieve your itinerary, change your class, or check in online.</p>
+          
+          <div class="bg-white p-8 rounded shadow border border-gray-200">
+              <div id="login-error" class="hidden mb-4 p-3 bg-red-50 text-red-700 text-xs font-bold rounded border border-red-200 text-center"></div>
+              <form id="manage-login-form" class="space-y-5">
+                  <div>
+                      <label class="ek-label">Last Name</label>
+                      <input type="text" id="login-lname" class="ek-input" placeholder="e.g. Doe" required>
+                  </div>
+                  <div>
+                      <label class="ek-label">Booking Reference (PNR)</label>
+                      <input type="text" id="login-pnr" class="ek-input uppercase" placeholder="e.g. X7B9WQ" required>
+                  </div>
+                  <button type="submit" id="btn-login" class="w-full bg-[#D71A21] hover:bg-red-800 text-white font-bold py-3 rounded text-sm uppercase tracking-widest transition-colors shadow">
+                      Retrieve Booking &rarr;
+                  </button>
+              </form>
+          </div>
+      </div>
+
+      <div id="dashboard-view" class="hidden">
+          <div class="flex justify-between items-end mb-6 border-b border-gray-200 pb-4">
+              <div>
+                  <h1 class="text-3xl font-serif font-bold text-[#111827]">Your Itinerary</h1>
+                  <p class="text-sm font-bold text-gray-500 mt-1">PNR: <span id="dash-pnr" class="text-[#D71A21]">XXXXXX</span></p>
+              </div>
+              <button onclick="logout()" class="text-xs font-bold text-gray-500 hover:text-[#111827]"><i class="fa-solid fa-right-from-bracket mr-1"></i> Exit</button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="md:col-span-2 bg-white rounded shadow-sm border border-gray-200 overflow-hidden">
+                  <div class="bg-[#111827] p-4 text-white flex justify-between items-center">
+                      <div class="font-bold text-lg"><img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-4 inline mr-2 opacity-80 mix-blend-multiply"> <span id="dash-flight">EK 000</span></div>
+                      <div class="text-xs font-bold bg-[#D71A21] px-2 py-1 rounded" id="dash-date">--/--/----</div>
+                  </div>
+                  <div class="p-6">
+                      <div class="flex justify-between items-center mb-6">
+                          <div class="text-center w-1/3">
+                              <h3 class="text-3xl font-bold text-[#111827]" id="dash-dep-time">--:--</h3>
+                              <p class="text-xs text-gray-500 font-bold uppercase mt-1" id="dash-dep-code">DEP</p>
+                          </div>
+                          <div class="w-1/3 flex flex-col items-center">
+                              <i class="fa-solid fa-plane text-gray-300 text-xl"></i>
+                              <div class="w-full h-px bg-gray-200 mt-2"></div>
+                          </div>
+                          <div class="text-center w-1/3">
+                              <h3 class="text-3xl font-bold text-[#111827]" id="dash-arr-time">--:--</h3>
+                              <p class="text-xs text-gray-500 font-bold uppercase mt-1" id="dash-arr-code">ARR</p>
+                          </div>
+                      </div>
+                      <div class="bg-gray-50 p-4 rounded flex justify-between text-sm">
+                          <div><span class="text-[10px] font-bold text-gray-500 uppercase block">Passenger</span><strong id="dash-pax-name">Name</strong></div>
+                          <div class="text-right"><span class="text-[10px] font-bold text-gray-500 uppercase block">Class</span><strong id="dash-class" class="text-[#D71A21]">Economy</strong></div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="bg-white rounded shadow-sm border border-gray-200 p-6 flex flex-col">
+                  <h3 class="font-bold text-[#111827] text-lg border-b border-gray-100 pb-3 mb-4">Flight Actions</h3>
+                  
+                  <div id="checkin-status-box" class="flex-grow flex flex-col justify-center text-center py-4">
+                      </div>
+
+                  <button id="dev-override-btn" onclick="startCheckIn()" class="mt-auto text-[9px] text-gray-400 hover:text-red-500 underline text-center">Dev Override: Force Check-In</button>
+              </div>
+          </div>
+      </div>
+
+      <div id="checkin-view" class="hidden max-w-2xl mx-auto">
+          <h2 class="text-2xl font-serif font-bold text-[#111827] mb-6 text-center">Online Check-in</h2>
+          
+          <form id="checkin-form" class="space-y-6">
+              <div class="bg-white p-6 rounded shadow border border-gray-200">
+                  <h3 class="font-bold text-[#111827] mb-4 border-b border-gray-100 pb-2"><i class="fa-solid fa-passport text-[#D71A21] mr-2"></i> Identity Verification</h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div><label class="ek-label">Last Name</label><input type="text" id="ci-lname" class="ek-input bg-gray-50" readonly></div>
+                      <div><label class="ek-label">PNR</label><input type="text" id="ci-pnr" class="ek-input bg-gray-50" readonly></div>
+                      <div><label class="ek-label">E-Ticket Number</label><input type="text" id="ci-tkt" class="ek-input bg-gray-50" readonly></div>
+                      <div><label class="ek-label">Discord ID (Verify) <span class="text-[#D71A21]">*</span></label><input type="text" id="ci-discord" class="ek-input border-[#5865F2]/50" required></div>
+                  </div>
+                  <div class="mt-4 pt-4 border-t border-gray-100">
+                      <label class="ek-label">Cabin Class Configuration</label>
+                      <select id="ci-class" class="ek-input">
+                          <option value="Economy">Economy Class</option>
+                          <option value="Business">Business Class</option>
+                          <option value="First">First Class</option>
+                      </select>
+                      <p class="text-[10px] text-gray-500 mt-1">Select an upgrade if authorized by Customer Support.</p>
+                  </div>
+              </div>
+
+              <div class="bg-white p-6 rounded shadow border border-gray-200">
+                  <h3 class="font-bold text-[#111827] mb-4 border-b border-gray-100 pb-2"><i class="fa-solid fa-suitcase-rolling text-[#D71A21] mr-2"></i> Baggage & Declarations</h3>
+                  <div class="mb-4">
+                      <label class="ek-label">Bags to Check-in (Drop at desk) <span class="text-[#D71A21]">*</span></label>
+                      <input type="number" id="ci-bags" min="0" max="3" value="0" class="ek-input" required>
+                  </div>
+                  <div>
+                      <label class="ek-label">Declared Goods (Optional)</label>
+                      <textarea id="ci-goods" class="ek-input h-16 resize-none" placeholder="e.g. Pets, oversized sports equipment, firearms..."></textarea>
+                  </div>
+              </div>
+
+              <div class="bg-red-50 p-6 rounded shadow border border-red-200">
+                  <h3 class="font-bold text-[#991b1b] mb-4 border-b border-red-200 pb-2"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Mandatory Aviation Declarations</h3>
+                  <label class="flex items-start gap-3 cursor-pointer mb-4">
+                      <input type="checkbox" id="ci-dg" class="mt-1 w-4 h-4 text-[#D71A21] focus:ring-[#D71A21]" required>
+                      <span class="text-sm text-red-900 font-medium">I declare that my baggage does NOT contain any dangerous goods, including but not limited to explosives, uninstalled lithium batteries, flammable liquids, or toxic substances.</span>
+                  </label>
+                  <label class="flex items-start gap-3 cursor-pointer">
+                      <input type="checkbox" id="ci-tos" class="mt-1 w-4 h-4 text-[#D71A21] focus:ring-[#D71A21]" required>
+                      <span class="text-sm text-red-900 font-medium">I accept the Terms of Service for Emirates Group Roblox operations and agree to comply with all cabin crew and pilot instructions during this PTFS flight.</span>
+                  </label>
+              </div>
+
+              <button type="submit" id="btn-submit-ci" class="w-full bg-[#111827] hover:bg-[#D71A21] text-white font-bold py-4 rounded text-sm uppercase tracking-widest transition-colors shadow-lg">
+                  Complete Check-in & Generate Pass
+              </button>
+          </form>
+      </div>
+
+      <div id="bp-view" class="hidden">
+          <div class="text-center mb-8">
+              <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 border border-green-200"><i class="fa-solid fa-check"></i></div>
+              <h2 class="text-2xl font-serif font-bold text-[#111827]">You are checked in.</h2>
+              <p class="text-sm text-gray-500 mt-1">Please screenshot this boarding pass and present it at bag drop or the gate.</p>
+          </div>
+
+          <div class="max-w-sm mx-auto bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200 relative">
+              <div class="bg-[#D71A21] h-3 w-full"></div>
+              
+              <div class="p-6">
+                  <div class="flex justify-between items-center mb-6">
+                      <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-6 opacity-90 mix-blend-multiply">
+                      <p class="text-[10px] font-bold uppercase tracking-widest text-[#D71A21]">Boarding Pass</p>
+                  </div>
+                  
+                  <h3 class="text-xl font-bold text-[#111827] mb-1" id="bp-name">JOHN DOE</h3>
+                  <div class="flex gap-4 text-xs font-bold text-gray-500 uppercase tracking-widest mb-6">
+                      <p>PNR: <span id="bp-pnr" class="text-[#111827]">XXXXXX</span></p>
+                      <p>EK: <span id="bp-flight" class="text-[#111827]">EK000</span></p>
+                  </div>
+
+                  <div class="flex justify-between items-center mb-6 bg-gray-50 p-4 rounded border border-gray-100">
+                      <div class="text-center">
+                          <p class="text-3xl font-black text-[#111827]" id="bp-dep">DXB</p>
+                          <p class="text-[10px] font-bold text-gray-400 mt-1" id="bp-dep-time">00:00</p>
+                      </div>
+                      <i class="fa-solid fa-plane text-[#D71A21]"></i>
+                      <div class="text-center">
+                          <p class="text-3xl font-black text-[#111827]" id="bp-arr">LHR</p>
+                          <p class="text-[10px] font-bold text-gray-400 mt-1" id="bp-arr-time">00:00</p>
+                      </div>
+                  </div>
+
+                  <div class="grid grid-cols-3 gap-2 text-center mb-6">
+                      <div class="bg-[#111827] text-white p-2 rounded">
+                          <p class="text-[8px] uppercase tracking-widest opacity-80 mb-1">Gate</p>
+                          <p class="font-bold text-lg" id="bp-gate">TBD</p>
+                      </div>
+                      <div class="bg-gray-100 p-2 rounded border border-gray-200">
+                          <p class="text-[8px] uppercase tracking-widest text-gray-500 mb-1">Zone</p>
+                          <p class="font-bold text-lg text-[#D71A21]" id="bp-zone">C</p>
+                      </div>
+                      <div class="bg-gray-100 p-2 rounded border border-gray-200">
+                          <p class="text-[8px] uppercase tracking-widest text-gray-500 mb-1">Seat</p>
+                          <p class="font-bold text-lg text-[#111827]" id="bp-seat">42K</p>
+                      </div>
+                  </div>
+                  
+                  <div class="text-center text-xs font-bold text-[#D71A21] uppercase tracking-widest mb-6" id="bp-class">ECONOMY</div>
+
+                  <div class="border-t border-dashed border-gray-300 pt-6 text-center">
+                      <p class="barcode text-[#111827] mb-2" id="bp-barcode">1234567890</p>
+                      <p class="text-[8px] text-gray-400 font-mono" id="bp-tkt">176-0000000000</p>
+                  </div>
+              </div>
+          </div>
+          <div class="mt-8 text-center">
+              <button onclick="window.location.href='/status/'" class="text-sm font-bold text-gray-500 hover:text-[#D71A21] uppercase tracking-widest">Check Flight Status</button>
+          </div>
+      </div>
+
+  </main>
+
+  <script>
+    let activeBooking = null;
+    let activeFlight = null;
+
+    window.addEventListener('load', () => {
+        const pageLoader = document.getElementById('page-loader');
+        setTimeout(() => {
+            pageLoader.style.opacity = '0';
+            pageLoader.style.visibility = 'hidden';
+            initApp();
+        }, 800); 
+    });
+
+    async function initApp() {
+        if (!window.supabase) {
+            alert("Database connection failed.");
+            return;
+        }
+        window.sb = window.supabase.createClient(
+            'https://zboyabxzhptnxnmofvcz.supabase.co', 
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpib3lhYnh6aHB0bnhubW9mdmN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3NjU3MTgsImV4cCI6MjA4NTM0MTcxOH0.2et1T3bQqr-ZzZgx-VWaq3kR0FJDprcAbbWBby6oRys'
+        );
+
+        // Login Logic
+        document.getElementById('manage-login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-login');
+            const errBox = document.getElementById('login-error');
+            const lname = document.getElementById('login-lname').value.trim();
+            const pnr = document.getElementById('login-pnr').value.trim().toUpperCase();
+
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Locating...';
+            btn.disabled = true;
+            errBox.classList.add('hidden');
+
+            try {
+                const { data, error } = await window.sb
+                    .from('egr_bookings')
+                    .select('*, egr_flights(*)')
+                    .eq('pnr_reference', pnr)
+                    .ilike('last_name', lname)
+                    .limit(1);
+
+                if (error) throw error;
+
+                if (data && data.length > 0) {
+                    activeBooking = data[0];
+                    activeFlight = activeBooking.egr_flights;
+                    renderDashboard();
+                } else {
+                    errBox.innerText = "No itinerary found. Please check your Last Name and PNR.";
+                    errBox.classList.remove('hidden');
+                }
+            } catch (err) {
+                console.error(err);
+                errBox.innerText = "Connection error. Try again.";
+                errBox.classList.remove('hidden');
+            }
+            btn.innerHTML = 'Retrieve Booking &rarr;';
+            btn.disabled = false;
+        });
+
+        // Check-in Submit Logic
+        document.getElementById('checkin-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-submit-ci');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating Pass...';
+            btn.disabled = true;
+
+            const selectedClass = document.getElementById('ci-class').value;
+            const bags = parseInt(document.getElementById('ci-bags').value);
+            const goods = document.getElementById('ci-goods').value.trim();
+            const verifiedDiscord = document.getElementById('ci-discord').value.trim();
+
+            // Generate Seat & Zone
+            let zone = 'C';
+            let seat = Math.floor(Math.random() * 30 + 16) + ['A','B','C','H','J','K'][Math.floor(Math.random()*6)];
+            if(selectedClass === 'First') { zone = 'A'; seat = Math.floor(Math.random() * 2 + 1) + ['A','K'][Math.floor(Math.random()*2)]; }
+            if(selectedClass === 'Business') { zone = 'B'; seat = Math.floor(Math.random() * 10 + 5) + ['A','E','F','K'][Math.floor(Math.random()*4)]; }
+
+            try {
+                const { error } = await window.sb.from('egr_bookings')
+                    .update({
+                        is_checked_in: true,
+                        seat_class: selectedClass,
+                        checked_bags_count: bags,
+                        declared_goods: goods,
+                        dangerous_goods_acknowledged: true,
+                        tos_accepted: true,
+                        boarding_group: zone,
+                        discord_id: verifiedDiscord,
+                        check_in_time: new Date().toISOString()
+                    })
+                    .eq('id', activeBooking.id);
+
+                if (error) throw error;
+                
+                // Update local memory and render pass
+                activeBooking.is_checked_in = true;
+                activeBooking.seat_class = selectedClass;
+                activeBooking.boarding_group = zone;
+                activeBooking.seat_number = seat; // Local only for render
+                
+                renderBoardingPass();
+
+            } catch(err) {
+                console.error(err);
+                alert("Database error generating boarding pass.");
+                btn.innerHTML = 'Complete Check-in & Generate Pass';
+                btn.disabled = false;
+            }
+        });
+    }
+
+    function parseTime(timeStr) {
+        if (!timeStr) return '--:--';
+        if (timeStr.includes('T') || timeStr.includes(' ')) return timeStr.split(/[T ]/).pop().substring(0, 5);
+        return timeStr.substring(0, 5);
+    }
+
+    function renderDashboard() {
+        document.getElementById('gate-view').classList.add('hidden');
+        document.getElementById('dashboard-view').classList.remove('hidden');
+
+        document.getElementById('dash-pnr').innerText = activeBooking.pnr_reference;
+        document.getElementById('dash-flight').innerText = activeFlight.flight_number;
+        document.getElementById('dash-date').innerText = activeFlight.flight_date;
+        document.getElementById('dash-pax-name').innerText = `${activeBooking.first_name} ${activeBooking.last_name}`;
+        document.getElementById('dash-class').innerText = activeBooking.seat_class;
+
+        document.getElementById('dash-dep-time').innerText = parseTime(activeFlight.scheduled_departure_time);
+        document.getElementById('dash-dep-code').innerText = (activeFlight.departure_airport || '').split('(')[0].trim();
+        document.getElementById('dash-arr-time').innerText = parseTime(activeFlight.scheduled_arrival_time);
+        document.getElementById('dash-arr-code').innerText = (activeFlight.arrival_airport || '').split('(')[0].trim();
+
+        evaluateCheckInWindow();
+    }
+
+    function evaluateCheckInWindow() {
+        const box = document.getElementById('checkin-status-box');
+        
+        if(activeBooking.is_checked_in) {
+            box.innerHTML = `
+                <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xl mx-auto mb-3"><i class="fa-solid fa-check"></i></div>
+                <p class="font-bold text-[#111827] mb-4">You are checked in.</p>
+                <button onclick="renderBoardingPass()" class="bg-[#111827] text-white font-bold py-3 px-6 rounded text-xs uppercase tracking-widest">View Boarding Pass</button>
+            `;
+            return;
+        }
+
+        // Time Math (Dubai UTC+4 Basis roughly)
+        // Combine date and time
+        const flightDateTimeStr = `${activeFlight.flight_date}T${activeFlight.scheduled_departure_time || '00:00:00'}+04:00`;
+        const flightTime = new Date(flightDateTimeStr).getTime();
+        const now = new Date().getTime();
+        
+        const hoursUntil = (flightTime - now) / (1000 * 60 * 60);
+
+        if (hoursUntil > 24) {
+            box.innerHTML = `
+                <i class="fa-solid fa-lock text-gray-300 text-3xl mb-3"></i>
+                <p class="font-bold text-gray-500 text-sm mb-1">Check-in locked.</p>
+                <p class="text-xs text-gray-400">Opens 24 hours before departure.</p>
+            `;
+        } else if (hoursUntil < 0.5 && hoursUntil > -12) {
+            box.innerHTML = `
+                <i class="fa-solid fa-circle-xmark text-red-300 text-3xl mb-3"></i>
+                <p class="font-bold text-red-600 text-sm mb-1">Check-in closed.</p>
+                <p class="text-xs text-red-400">The 30-minute window has passed. See gate agent.</p>
+            `;
+        } else {
+            box.innerHTML = `
+                <i class="fa-regular fa-circle-check text-[#D71A21] text-3xl mb-3"></i>
+                <p class="font-bold text-[#111827] text-sm mb-4">Online check-in is open.</p>
+                <button onclick="startCheckIn()" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold py-3 px-6 rounded text-xs uppercase tracking-widest shadow">Check-In Now</button>
+            `;
+        }
+    }
+
+    window.startCheckIn = function() {
+        document.getElementById('dashboard-view').classList.add('hidden');
+        document.getElementById('checkin-view').classList.remove('hidden');
+
+        document.getElementById('ci-lname').value = activeBooking.last_name;
+        document.getElementById('ci-pnr').value = activeBooking.pnr_reference;
+        document.getElementById('ci-tkt').value = activeBooking.e_ticket_number || 'PENDING';
+        document.getElementById('ci-discord').value = activeBooking.discord_id || '';
+        document.getElementById('ci-class').value = activeBooking.seat_class || 'Economy';
+    }
+
+    window.renderBoardingPass = function() {
+        document.getElementById('dashboard-view').classList.add('hidden');
+        document.getElementById('checkin-view').classList.add('hidden');
+        document.getElementById('bp-view').classList.remove('hidden');
+
+        document.getElementById('bp-name').innerText = `${activeBooking.first_name} ${activeBooking.last_name}`.toUpperCase();
+        document.getElementById('bp-pnr').innerText = activeBooking.pnr_reference;
+        document.getElementById('bp-flight').innerText = activeFlight.flight_number;
+        document.getElementById('bp-tkt').innerText = activeBooking.e_ticket_number;
+        document.getElementById('bp-class').innerText = activeBooking.seat_class;
+
+        // Code extraction
+        const depCode = activeFlight.departure_airport ? activeFlight.departure_airport.match(/\((.*?)\)/) : null;
+        const arrCode = activeFlight.arrival_airport ? activeFlight.arrival_airport.match(/\((.*?)\)/) : null;
+        document.getElementById('bp-dep').innerText = depCode ? depCode[1] : activeFlight.departure_airport.substring(0,3).toUpperCase();
+        document.getElementById('bp-arr').innerText = arrCode ? arrCode[1] : activeFlight.arrival_airport.substring(0,3).toUpperCase();
+
+        document.getElementById('bp-dep-time').innerText = parseTime(activeFlight.scheduled_departure_time);
+        document.getElementById('bp-arr-time').innerText = parseTime(activeFlight.scheduled_arrival_time);
+
+        document.getElementById('bp-gate').innerText = activeBooking.gate || 'TBD';
+        document.getElementById('bp-zone').innerText = activeBooking.boarding_group || 'C';
+        document.getElementById('bp-seat').innerText = activeBooking.seat_number || 'TBD';
+        
+        // Random barcode string
+        document.getElementById('bp-barcode').innerText = activeBooking.pnr_reference + Math.floor(Math.random() * 9000);
+    }
+
+    window.logout = function() {
+        activeBooking = null;
+        activeFlight = null;
+        document.getElementById('dashboard-view').classList.add('hidden');
+        document.getElementById('bp-view').classList.add('hidden');
+        document.getElementById('checkin-view').classList.add('hidden');
+        document.getElementById('gate-view').classList.remove('hidden');
+        document.getElementById('manage-login-form').reset();
+    }
+  </script>
+</body>
+</html>
