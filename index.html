@@ -37,10 +37,13 @@
     .ek-input:focus { outline: none; border-color: #D71A21; box-shadow: inset 0 0 0 1px #D71A21; }
     .input-icon { position: absolute; left: 1rem; top: 1.1rem; color: #555; font-size: 1rem; }
 
-    /* Modal Styles */
-    .modal-backdrop { background-color: rgba(17, 24, 39, 0.8); backdrop-filter: blur(4px); }
-    .modal-content { transform: scale(0.95); opacity: 0; transition: all 0.3s ease; }
-    .modal-open .modal-content { transform: scale(1); opacity: 1; }
+    /* Flight Board Badges */
+    .status-badge { padding: 4px 10px; border-radius: 3px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .status-scheduled { background-color: #e0e7ff; color: #3730a3; }
+    .status-boarding { background-color: #dcfce7; color: #166534; }
+    .status-departed { background-color: #fef08a; color: #a16207; }
+    .status-arrived { background-color: #f3f4f6; color: #4b5563; }
+    .status-cancelled { background-color: #fee2e2; color: #991b1b; }
     
     /* Authentic Footer Links */
     .footer-link { color: #c8c8c8; font-size: 0.85rem; transition: color 0.2s; }
@@ -313,13 +316,11 @@
                           <p class="text-sm text-gray-600 leading-relaxed mb-6 font-medium">Experience our standard-setting Economy cabin. Enjoy unmatched legroom, thousands of immersive entertainment channels, regionally inspired dining, and superior comfort on every flight.</p>
                           <a href="/experience/" class="text-[#D71A21] text-xs font-bold uppercase tracking-widest group-hover:underline">Explore Economy &rarr;</a>
                       </div>
-
                       <div class="bg-gray-50 p-8 rounded-xl border border-gray-100 hover:shadow-xl transition-all group">
                           <h3 class="text-2xl font-serif font-bold text-[#111827] mb-3">Business Class</h3>
                           <p class="text-sm text-gray-600 leading-relaxed mb-6 font-medium">Unwind in absolute luxury. With seamless lie-flat seats, access to the legendary A380 Onboard Lounge, and priority ground services, Business Class redefines your virtual journey.</p>
                           <a href="/experience/" class="text-[#D71A21] text-xs font-bold uppercase tracking-widest group-hover:underline">Explore Business &rarr;</a>
                       </div>
-
                       <div class="bg-white p-8 rounded-xl border-2 border-[#D71A21]/20 hover:border-[#D71A21] transition-all relative overflow-hidden shadow-md group">
                           <div class="absolute top-0 right-0 w-24 h-24 bg-[#D71A21]/10 rounded-full blur-xl"></div>
                           <h3 class="text-2xl font-serif font-bold text-[#111827] mb-3 relative z-10">First Class</h3>
@@ -426,8 +427,7 @@
   </div>
 
   <script>
-    // --- 1. GLOBAL STATE & PRELOADER ---
-    let activeLiveFlights = []; // Store flights globally for timezone calculations
+    let activeLiveFlights = []; 
     
     window.addEventListener('load', () => {
         const pageLoader = document.getElementById('page-loader');
@@ -440,10 +440,9 @@
     });
     document.body.style.overflow = 'hidden';
 
-    // --- 2. TIMEZONE ENGINE HELPER ---
+    // --- TIMEZONE ENGINE ---
     function parseSafeTime(timeStr) {
         if (!timeStr) return '--:--';
-        // Extract just the time if a full timestamp was saved in the DB
         if (timeStr.includes('T') || timeStr.includes(' ')) {
             return timeStr.split(/[T ]/).pop().substring(0, 5);
         }
@@ -455,18 +454,16 @@
         let [hours, minutes] = timeStr.split(':').map(Number);
         if (isNaN(hours)) return timeStr;
         
-        // Base is Dubai (UTC +4)
         let diff = targetOffset - 4; 
         hours += diff;
         
-        // Wrap around midnight
         if (hours < 0) hours += 24;
         if (hours >= 24) hours -= 24;
         
         return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
     }
 
-    // --- 3. MAIN APPLICATION LOGIC ---
+    // --- MAIN LOGIC ---
     async function initApplication() {
         if (!window.supabase) {
             console.error("Supabase CDN failed to load.");
@@ -474,7 +471,6 @@
             return;
         }
 
-        // Global Client
         window.supabaseClient = window.supabase.createClient(
             'https://zboyabxzhptnxnmofvcz.supabase.co', 
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpib3lhYnh6aHB0bnhubW9mdmN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3NjU3MTgsImV4cCI6MjA4NTM0MTcxOH0.2et1T3bQqr-ZzZgx-VWaq3kR0FJDprcAbbWBby6oRys'
@@ -503,7 +499,6 @@
             handleSessionState(session);
         });
 
-        // Secure Login Submission
         const loginForm = document.getElementById('airline-login-form');
         if (loginForm) {
             loginForm.addEventListener('submit', async (e) => {
@@ -529,7 +524,7 @@
             });
         }
 
-        // --- BULLETPROOF FLIGHT STATUS WIDGET ---
+        // --- FLIGHT STATUS WIDGET ---
         const statusForm = document.getElementById('status-search-form');
         const statusResultBox = document.getElementById('inline-status-result');
 
@@ -538,7 +533,9 @@
                 e.preventDefault(); 
                 
                 const btn = document.getElementById('status-search-btn');
-                // Clean the input: Remove spaces, make uppercase, strip "EK"
+                const tzSelect = document.getElementById('tz-selector');
+                const tzOffset = tzSelect ? parseInt(tzSelect.value) : 4;
+
                 const flightNumInput = document.getElementById('status-flight-num').value.replace(/\s+/g, '').toUpperCase();
                 const flightSearchCode = flightNumInput.replace('EK', '');
                 const flightDateInput = document.getElementById('status-flight-date').value;
@@ -549,7 +546,6 @@
                 statusResultBox.innerHTML = '<p class="text-sm text-gray-500 text-center py-4">Locating flight details...</p>';
 
                 try {
-                    // Safe ILIKE search handles missing spaces in user input
                     const { data, error } = await window.supabaseClient
                         .from('egr_flights')
                         .select('*')
@@ -569,9 +565,29 @@
                         else if (statusText === 'ARRIVED') statusClass = 'bg-gray-100 text-gray-600';
                         else if (statusText === 'CANCELLED') statusClass = 'bg-red-100 text-red-700';
 
-                        // Apply clean parsing
-                        const cleanDepTime = parseSafeTime(f.departure_time);
-                        const cleanArrTime = parseSafeTime(f.arrival_time);
+                        const rawDep = parseSafeTime(f.scheduled_departure_time);
+                        const rawArr = parseSafeTime(f.scheduled_arrival_time);
+                        const adjDep = adjustTimezone(rawDep, tzOffset);
+                        const adjArr = adjustTimezone(rawArr, tzOffset);
+
+                        let arrHtml = `<p class="font-bold text-[#111827] text-lg">${adjArr}</p>`;
+                        
+                        if (f.actual_arrival_time) {
+                            const rawAct = parseSafeTime(f.actual_arrival_time);
+                            const adjAct = adjustTimezone(rawAct, tzOffset);
+                            arrHtml = `
+                                <p class="font-bold text-gray-400 line-through text-xs">${adjArr}</p>
+                                <p class="font-bold text-green-700 text-lg"><span class="text-[9px] uppercase tracking-widest mr-1 text-green-600">Act</span>${adjAct}</p>
+                            `;
+                        } else if (f.estimated_arrival_time) {
+                            const rawEst = parseSafeTime(f.estimated_arrival_time);
+                            const adjEst = adjustTimezone(rawEst, tzOffset);
+                            arrHtml = `
+                                <p class="font-bold text-gray-400 line-through text-xs">${adjArr}</p>
+                                <p class="font-bold text-[#D71A21] text-lg"><span class="text-[9px] uppercase tracking-widest mr-1 text-[#D71A21]">Est</span>${adjEst}</p>
+                            `;
+                        }
+
                         const depName = f.departure_airport ? f.departure_airport.split('(')[0].trim() : 'Unknown';
                         const arrName = f.arrival_airport ? f.arrival_airport.split('(')[0].trim() : 'Unknown';
 
@@ -585,12 +601,12 @@
                                 <div class="text-center flex-grow px-4 border-l border-r border-gray-100 py-2 md:py-0">
                                     <div class="flex items-center justify-center gap-6">
                                         <div class="text-right">
-                                            <p class="font-bold text-[#111827] text-lg">${cleanDepTime}</p>
+                                            <p class="font-bold text-[#111827] text-lg">${adjDep}</p>
                                             <p class="text-xs text-gray-500">${depName}</p>
                                         </div>
                                         <i class="fa-solid fa-plane text-gray-300"></i>
                                         <div class="text-left">
-                                            <p class="font-bold text-[#111827] text-lg">${cleanArrTime}</p>
+                                            ${arrHtml}
                                             <p class="text-xs text-gray-500">${arrName}</p>
                                         </div>
                                     </div>
@@ -613,7 +629,7 @@
             });
         }
 
-        // --- INLINE MANAGE BOOKING FETCH ---
+        // --- MANAGE BOOKING WIDGET ---
         const manageForm = document.getElementById('manage-booking-form');
         const manageResultBox = document.getElementById('inline-manage-result');
 
@@ -642,7 +658,7 @@
                     if (data && data.length > 0) {
                         const b = data[0];
                         const f = b.egr_flights || {};
-                        const cleanDepTime = parseSafeTime(f.departure_time);
+                        const cleanDepTime = parseSafeTime(f.scheduled_departure_time);
                         
                         manageResultBox.innerHTML = `
                             <div class="border-b border-gray-200 pb-4 mb-4 flex justify-between items-center">
@@ -682,7 +698,7 @@
         }
     }
 
-    // --- 4. LIVE FLIGHT BOARD & TIMEZONE RENDERING ---
+    // --- LIVE FLIGHT BOARD RENDERING ---
     async function fetchLiveFlights() {
         try {
             const { data, error } = await window.supabaseClient
@@ -690,12 +706,12 @@
                 .select('*')
                 .eq('platform', 'PTFS')
                 .eq('airline', 'Emirates')
-                .order('flight_date', { ascending: true })
+                .order('scheduled_departure_time', { ascending: true })
                 .limit(10);
 
             if (error) throw error;
             activeLiveFlights = data || [];
-            renderLiveBoard(); // Triggers dynamic render
+            renderLiveBoard(); 
         } catch (err) {
             console.error("Flight fetch error:", err);
             document.getElementById('flight-board-body').innerHTML = '<tr><td colspan="6" class="p-8 text-center text-red-500 font-medium bg-red-50">Unable to sync with Dispatch. Please check your connection.</td></tr>';
@@ -708,13 +724,11 @@
         const tzOffset = parseInt(tzSelect.value);
         const tzName = tzSelect.options[tzSelect.selectedIndex].text;
         
-        // Update Disclaimer Text
         document.getElementById('current-tz-display').innerText = tzName;
 
         if (activeLiveFlights.length > 0) {
             tbody.innerHTML = activeLiveFlights.map(f => {
                 
-                // EXACT UI MATCH: Badges
                 let statusClass = 'bg-blue-100 text-blue-700'; 
                 let statusText = (f.status || 'SCHEDULED').toUpperCase();
                 if (statusText === 'BOARDING') statusClass = 'bg-green-100 text-green-700';
@@ -722,15 +736,30 @@
                 else if (statusText === 'ARRIVED') statusClass = 'bg-gray-100 text-gray-600';
                 else if (statusText === 'CANCELLED') statusClass = 'bg-red-100 text-red-700';
 
-                // CLEAN PARSE (Removes '2026-' glitch)
-                const rawDep = parseSafeTime(f.departure_time);
-                const rawArr = parseSafeTime(f.arrival_time);
-
-                // APPLY TIMEZONE MATH
+                const rawDep = parseSafeTime(f.scheduled_departure_time);
+                const rawArr = parseSafeTime(f.scheduled_arrival_time);
                 const adjDep = adjustTimezone(rawDep, tzOffset);
                 const adjArr = adjustTimezone(rawArr, tzOffset);
 
-                // CLEAN AIRPORT NAMES
+                // DYNAMIC ARRIVAL COLUMN HTML
+                let arrHtml = `<div class="font-bold text-[#111827]">${adjArr}</div>`;
+                
+                if (f.actual_arrival_time) {
+                    const rawAct = parseSafeTime(f.actual_arrival_time);
+                    const adjAct = adjustTimezone(rawAct, tzOffset);
+                    arrHtml = `
+                        <div class="font-bold text-gray-400 line-through text-xs">${adjArr}</div>
+                        <div class="font-bold text-green-700 text-sm"><span class="text-[9px] uppercase tracking-widest mr-1 text-green-600">Act</span>${adjAct}</div>
+                    `;
+                } else if (f.estimated_arrival_time) {
+                    const rawEst = parseSafeTime(f.estimated_arrival_time);
+                    const adjEst = adjustTimezone(rawEst, tzOffset);
+                    arrHtml = `
+                        <div class="font-bold text-gray-400 line-through text-xs">${adjArr}</div>
+                        <div class="font-bold text-[#D71A21] text-sm"><span class="text-[9px] uppercase tracking-widest mr-1 text-[#D71A21]">Est</span>${adjEst}</div>
+                    `;
+                }
+
                 const depName = f.departure_airport ? f.departure_airport.split('(')[0].trim() : 'Unknown';
                 const arrName = f.arrival_airport ? f.arrival_airport.split('(')[0].trim() : 'Unknown';
 
@@ -740,7 +769,7 @@
                         <td class="py-5 px-6 text-gray-600 font-medium">${depName} <i class="fa-solid fa-arrow-right mx-2 text-gray-300 text-[10px]"></i> ${arrName}</td>
                         <td class="py-5 px-6 text-[#111827] font-medium">${f.flight_date || '--/--/----'}</td>
                         <td class="py-5 px-6 font-bold text-[#111827]">${adjDep}</td>
-                        <td class="py-5 px-6 font-bold text-[#111827]">${adjArr}</td>
+                        <td class="py-5 px-6">${arrHtml}</td>
                         <td class="py-5 px-6"><span class="${statusClass} px-3 py-1 rounded text-[10px] font-bold tracking-widest">${statusText}</span></td>
                     </tr>
                 `;
