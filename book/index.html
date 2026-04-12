@@ -47,7 +47,7 @@
     .footer-link:hover { color: #ffffff; text-decoration: underline; }
   </style>
 </head>
-<body class="flex flex-col min-h-screen relative">
+<body class="flex flex-col min-h-screen">
 
   <div id="page-loader">
       <img src="https://i.ibb.co/jPPzN1rz/LOGO-EMIRATES-ROBLOX-compressed.png" class="h-16 mb-6 animate-pulse" alt="Loading">
@@ -118,11 +118,11 @@
           </div>
       </div>
 
-      <div class="bg-white border-b border-gray-200 pt-8 pb-6 px-6 relative z-10 shadow-sm">
+      <div id="booking-header" class="bg-white border-b border-gray-200 pt-8 pb-6 px-6 relative z-10 shadow-sm">
           <div class="max-w-[1000px] mx-auto">
               <h1 class="text-3xl font-serif font-bold text-[#111827] mb-6">Book your flight</h1>
               
-              <div class="flex items-center justify-between max-w-2xl mx-auto">
+              <div id="progress-bar-container" class="flex items-center justify-between max-w-2xl mx-auto">
                   <div class="flex flex-col items-center">
                       <div id="ind-1" class="step-indicator step-active">1</div>
                       <p class="text-[9px] font-bold uppercase mt-2 text-[#111827]">Flights</p>
@@ -133,7 +133,7 @@
                       <div id="ind-2" class="step-indicator step-pending">2</div>
                       <p class="text-[9px] font-bold uppercase mt-2 text-gray-400" id="text-ind-2">Review</p>
                   </div>
-                  <div id="line-1" class="step-line"></div>
+                  <div id="line-2" class="step-line"></div>
                   
                   <div class="flex flex-col items-center">
                       <div id="ind-3" class="step-indicator step-pending">3</div>
@@ -149,8 +149,22 @@
           </div>
       </div>
 
-      <main class="flex-grow w-full max-w-[1000px] mx-auto px-6 py-12">
+      <main class="flex-grow w-full max-w-[1000px] mx-auto px-6 py-12 relative">
           
+          <div id="already-booked-container" class="hidden">
+              <div class="bg-white border border-gray-200 shadow-sm rounded-lg p-10 text-center max-w-2xl mx-auto mt-10">
+                  <div class="w-20 h-20 bg-red-50 text-[#D71A21] rounded-full flex items-center justify-center text-4xl mx-auto mb-6 border border-red-100">
+                      <i class="fa-solid fa-plane-circle-exclamation"></i>
+                  </div>
+                  <h2 class="text-2xl font-serif font-bold text-[#111827] mb-4">Active Reservation Detected</h2>
+                  <p class="text-gray-600 mb-8 leading-relaxed font-medium">Our records indicate that you currently hold an active, confirmed flight reservation. To ensure fair access and server availability for all members of our community, you may only hold one active booking at a time.</p>
+                  <div class="flex flex-col sm:flex-row justify-center gap-4">
+                      <a href="/manage/" class="bg-[#111827] hover:bg-gray-800 text-white font-bold px-8 py-4 rounded text-sm uppercase tracking-widest transition-colors shadow">Manage Your Booking &rarr;</a>
+                      <a href="/" class="bg-gray-100 hover:bg-gray-200 text-[#111827] font-bold px-8 py-4 rounded text-sm uppercase tracking-widest transition-colors">Return to Home</a>
+                  </div>
+              </div>
+          </div>
+
           <div id="step-1-container">
               <div class="flex justify-between items-end mb-6">
                   <div>
@@ -553,7 +567,17 @@
                 loginGate.style.display = 'none';
                 mainContent.style.visibility = 'visible';
                 mainContent.style.opacity = '1';
-                loadFlights(); 
+                
+                // CHECK FOR EXISTING BOOKINGS
+                const hasBooking = await checkExistingBooking();
+                if (hasBooking) {
+                    // Trigger the Gatekeeper
+                    document.getElementById('step-1-container').classList.add('hidden');
+                    document.getElementById('progress-bar-container').classList.add('hidden');
+                    document.getElementById('already-booked-container').classList.remove('hidden');
+                } else {
+                    loadFlights(); 
+                }
             } else {
                 mainContent.style.visibility = 'hidden';
                 loginGate.style.display = 'flex';
@@ -591,6 +615,24 @@
             e.preventDefault();
             goToStep(4);
         });
+    }
+
+    // --- CHECK FOR MULTIPLE BOOKINGS ---
+    async function checkExistingBooking() {
+        try {
+            const { data, error } = await window.sb
+                .from('egr_bookings')
+                .select('id')
+                .eq('user_id', currentUser.id)
+                .eq('status', 'Confirmed') // Only checks for active bookings
+                .limit(1);
+
+            if (error) throw error;
+            return data && data.length > 0;
+        } catch (err) {
+            console.error("Error checking existing bookings:", err);
+            return false;
+        }
     }
 
     // --- STEP 1: FETCH & RENDER FLIGHTS (Using NEW db columns) ---
