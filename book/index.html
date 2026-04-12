@@ -260,22 +260,23 @@
                   <i class="fa-solid fa-shield-halved text-[#D71A21] text-xl mr-4 mt-1"></i>
                   <div>
                       <h4 class="font-bold text-[#991b1b] mb-1">Privacy & Roleplay Notice</h4>
-                      <p class="text-sm text-red-800 leading-relaxed">We respect your privacy. When filling out personal information, you <strong>may use realistic roleplay names</strong> (e.g., John Doe, Tyler Nicholas). <strong>Do not</strong> input real-world sensitive personal information, real passports, or actual financial data into this virtual system.</p>
+                      <p class="text-sm text-red-800 leading-relaxed">We respect your privacy. When filling out personal information, you <strong>may use realistic roleplay names</strong> (e.g., John Doe, Tyler Nicholas). <strong>Do not</strong> input real-world sensitive personal information, real passports, or actual financial data into this virtual system. <span class="font-bold underline block mt-2">All identity fields below are strictly required to proceed.</span></p>
                   </div>
               </div>
 
               <div class="bg-white border border-gray-200 shadow-sm rounded-lg p-6 md:p-8">
                   <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-6 border-b border-gray-100">
                       <h3 class="font-bold text-[#111827] text-lg">Adult Passenger</h3>
-                      <button type="button" onclick="syncProfileData()" class="mt-4 sm:mt-0 text-sm font-bold text-[#111827] hover:text-[#D71A21] flex items-center transition-colors">
+                      <button type="button" onclick="syncProfileData()" class="mt-4 sm:mt-0 bg-[#111827] text-white px-4 py-2 rounded text-xs font-bold uppercase tracking-widest hover:bg-[#D71A21] flex items-center transition-colors shadow">
                           <i class="fa-solid fa-rotate mr-2"></i> Sync with Emirates Account
                       </button>
                   </div>
 
                   <form id="passenger-form" class="space-y-6">
+                      
                       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                           <div>
-                              <label class="ek-label">Title</label>
+                              <label class="ek-label">Title <span class="text-[#D71A21]">*</span></label>
                               <select id="pax-title" class="ek-input" required>
                                   <option value="" disabled selected>Select</option>
                                   <option value="Mr">Mr</option>
@@ -286,39 +287,42 @@
                               </select>
                           </div>
                           <div>
-                              <label class="ek-label">First Name</label>
+                              <label class="ek-label">First Name <span class="text-[#D71A21]">*</span></label>
                               <input type="text" id="pax-first" class="ek-input" placeholder="e.g. John" required>
                           </div>
                           <div>
-                              <label class="ek-label">Last Name</label>
+                              <label class="ek-label">Last Name <span class="text-[#D71A21]">*</span></label>
                               <input type="text" id="pax-last" class="ek-input" placeholder="e.g. Doe" required>
-                          </div>
-                      </div>
-
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div>
-                              <label class="ek-label">Email Address</label>
-                              <input type="email" id="pax-email" class="ek-input" required readonly>
-                              <p class="text-[10px] text-gray-400 mt-1">Locked to active portal session.</p>
-                          </div>
-                          <div>
-                              <label class="ek-label text-[#5865F2]">Discord Username (Optional)</label>
-                              <input type="text" id="pax-discord" class="ek-input" placeholder="e.g. johndoe">
                           </div>
                       </div>
 
                       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                           <div>
-                              <label class="ek-label">Roblox Username</label>
-                              <input type="text" id="pax-roblox" class="ek-input" required>
+                              <label class="ek-label">Email Address <span class="text-[#D71A21]">*</span></label>
+                              <input type="email" id="pax-email" class="ek-input bg-gray-50" required readonly>
                           </div>
                           <div>
-                              <label class="ek-label">Skywards Member ID (Optional)</label>
-                              <input type="text" id="pax-skywards" class="ek-input" placeholder="If applicable">
+                              <label class="ek-label text-[#5865F2]">Discord Username <span class="text-[#D71A21]">*</span></label>
+                              <input type="text" id="pax-discord-user" class="ek-input border-[#5865F2]/30 focus:border-[#5865F2]" placeholder="e.g. johndoe" required>
                           </div>
                           <div>
-                              <label class="ek-label">Emirates Account ID (Optional)</label>
-                              <input type="text" id="pax-ekid" class="ek-input" placeholder="Internal ID">
+                              <label class="ek-label text-[#5865F2]">Discord ID <span class="text-[#D71A21]">*</span></label>
+                              <input type="text" id="pax-discord-id" class="ek-input border-[#5865F2]/30 focus:border-[#5865F2]" placeholder="e.g. 123456789012345678" required>
+                          </div>
+                      </div>
+
+                      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                          <div>
+                              <label class="ek-label">Roblox Username <span class="text-[#D71A21]">*</span></label>
+                              <input type="text" id="pax-roblox" class="ek-input" placeholder="e.g. Player123" required>
+                          </div>
+                          <div>
+                              <label class="ek-label text-[#b39556]">Skywards Member ID <span class="text-[#D71A21]">*</span></label>
+                              <input type="text" id="pax-skywards" class="ek-input border-[#b39556]/30 focus:border-[#b39556]" placeholder="e.g. 392019485" required>
+                          </div>
+                          <div>
+                              <label class="ek-label">Emirates Account ID <span class="text-[#D71A21]">*</span></label>
+                              <input type="text" id="pax-ekid" class="ek-input" placeholder="e.g. EK-83492015" required>
                           </div>
                       </div>
 
@@ -485,11 +489,6 @@
               <li><a href="/experience/" class="footer-link">Cabin features</a></li>
               <li><a href="/experience/" class="footer-link">Dining</a></li>
             </ul>
-            <h4 class="font-bold text-white mb-4 text-base mt-8">Loyalty</h4>
-            <ul class="space-y-3">
-              <li><a href="https://emiratesgrouproblox.link/myportal/login/" class="footer-link">Log in to Emirates Skywards</a></li>
-              <li><a href="https://emiratesgrouproblox.link/network/skywards" class="footer-link">About Emirates Skywards</a></li>
-            </ul>
           </div>
         </div>
         <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-[#c8c8c8]">
@@ -503,14 +502,12 @@
   </div>
 
   <script>
-    // --- GLOBAL STATE ---
     let currentUser = null;
     let allFetchedFlights = [];
     let selectedFlight = null;
     let selectedClass = 'Economy';
     let calculatedTotal = 0;
 
-    // Load Waiter
     window.addEventListener('load', () => {
         const pageLoader = document.getElementById('page-loader');
         setTimeout(() => {
@@ -522,7 +519,6 @@
     });
     document.body.style.overflow = 'hidden';
 
-    // --- MAIN INIT ---
     async function initApp() {
         if (!window.supabase) {
             console.error("Supabase CDN missing.");
@@ -556,7 +552,6 @@
         handleSession(session);
         window.sb.auth.onAuthStateChange((_e, s) => handleSession(s));
 
-        // Gate Login
         document.getElementById('airline-login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('login-btn');
@@ -578,14 +573,12 @@
             }
         });
 
-        // Passenger Form Link
         document.getElementById('passenger-form').addEventListener('submit', (e) => {
             e.preventDefault();
             goToStep(4);
         });
     }
 
-    // --- STEP 1: FETCH & RENDER FLIGHTS ---
     async function loadFlights() {
         const container = document.getElementById('flight-list-container');
         try {
@@ -598,17 +591,14 @@
                 .limit(50);
 
             if (error) throw error;
-            
             allFetchedFlights = data || [];
             renderFlightList(allFetchedFlights);
-            
         } catch (err) {
             console.error(err);
-            container.innerHTML = '<div class="p-12 text-center text-red-500 bg-white border border-red-200 rounded font-bold">Error connecting to Dispatch. Check console.</div>';
+            container.innerHTML = '<div class="p-12 text-center text-red-500 bg-white border border-red-200 rounded font-bold">Error connecting to Dispatch.</div>';
         }
     }
 
-    // Filter Logic
     window.filterFlights = function() {
         const depFilter = document.getElementById('filter-dep').value.toLowerCase();
         const arrFilter = document.getElementById('filter-arr').value.toLowerCase();
@@ -618,7 +608,6 @@
             const arrMatch = f.arrival_airport && f.arrival_airport.toLowerCase().includes(arrFilter);
             return depMatch && arrMatch;
         });
-        
         renderFlightList(filtered);
     }
 
@@ -628,19 +617,17 @@
             container.innerHTML = flights.map(f => {
                 const depTime = f.departure_time ? f.departure_time.substring(0, 5) : '--:--';
                 const arrTime = f.arrival_time ? f.arrival_time.substring(0, 5) : '--:--';
-                const firstBadge = f.first_class_available ? `<span class="bg-yellow-100 text-yellow-800 text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded ml-2">First Class Config</span>` : '';
+                const firstBadge = f.first_class_available ? `<span class="bg-yellow-100 text-yellow-800 text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded ml-2">First Class</span>` : '';
 
-                // Safely extract codes
                 const depCodeMatch = f.departure_airport.match(/\((.*?)\)/);
                 const arrCodeMatch = f.arrival_airport.match(/\((.*?)\)/);
                 const depCode = depCodeMatch ? depCodeMatch[1] : f.departure_airport.substring(0,4).toUpperCase();
                 const arrCode = arrCodeMatch ? arrCodeMatch[1] : f.arrival_airport.substring(0,4).toUpperCase();
 
-                // INJECTED FIX: Passes the exact ID instead of the full object string
                 return `
-                    <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow flex flex-col md:flex-row justify-between items-center gap-6">
-                        <div class="flex-grow w-full">
-                            <div class="flex items-center mb-4">
+                    <div class="bg-white border border-gray-200 rounded shadow-sm hover:border-[#D71A21] transition-all flex flex-col md:flex-row justify-between items-center gap-6 group">
+                        <div class="flex-grow w-full p-6">
+                            <div class="flex items-center mb-4 border-b border-gray-100 pb-4">
                                 <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-4 mr-3 opacity-80 mix-blend-multiply">
                                 <span class="font-bold text-[#111827] mr-4">${f.flight_number}</span>
                                 <span class="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded">${f.flight_date || '--/--/----'}</span>
@@ -648,7 +635,7 @@
                             </div>
                             <div class="flex items-center justify-between max-w-md">
                                 <div class="text-center">
-                                    <p class="text-xl font-bold text-[#111827]">${depTime}</p>
+                                    <p class="text-2xl font-bold text-[#111827]">${depTime}</p>
                                     <p class="text-[10px] text-gray-500 font-bold uppercase">${depCode}</p>
                                 </div>
                                 <div class="flex-grow px-4 flex flex-col items-center">
@@ -658,38 +645,31 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <p class="text-xl font-bold text-[#111827]">${arrTime}</p>
+                                    <p class="text-2xl font-bold text-[#111827]">${arrTime}</p>
                                     <p class="text-[10px] text-gray-500 font-bold uppercase">${arrCode}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full md:w-auto text-right border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center">
+                        <div class="w-full md:w-auto text-center md:text-right border-t md:border-t-0 md:border-l border-gray-100 p-6 flex flex-col justify-center bg-gray-50">
                             <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">From</p>
-                            <p class="text-2xl font-bold text-[#111827] mb-4">${f.base_price_usd || 0} <span class="text-sm">USD</span></p>
-                            <button onclick="selectFlight('${f.id}')" class="bg-[#111827] hover:bg-[#D71A21] text-white font-bold px-8 py-3 rounded transition-colors text-xs uppercase tracking-widest w-full">Select</button>
+                            <p class="text-3xl font-bold text-[#111827] mb-4">${f.base_price_usd || 0} <span class="text-sm">USD</span></p>
+                            <button onclick="selectFlight('${f.id}')" class="bg-[#111827] hover:bg-[#D71A21] text-white font-bold px-10 py-3 rounded transition-colors text-xs uppercase tracking-widest w-full">Select</button>
                         </div>
                     </div>
                 `;
             }).join('');
         } else {
-            container.innerHTML = '<div class="p-12 text-center text-gray-500 bg-white border border-gray-200 rounded">No PTFS flights scheduled.</div>';
+            container.innerHTML = '<div class="p-12 text-center text-gray-500 bg-white border border-gray-200 rounded">No flights match this route criteria.</div>';
         }
     }
 
-    // --- STEP 2: FLIGHT SELECTED ---
-    // INJECTED FIX: Lookup the flight object by ID to prevent JS encoding breaks
     window.selectFlight = function(flightId) {
         selectedFlight = allFetchedFlights.find(f => f.id === flightId);
-        if (!selectedFlight) {
-            console.error("Flight ID not found in memory:", flightId);
-            return;
-        }
+        if (!selectedFlight) return;
         
-        // Populate Review Header
         document.getElementById('rev-flight-num').innerText = selectedFlight.flight_number;
         document.getElementById('rev-date').innerText = selectedFlight.flight_date || '--/--/----';
         
-        // Extract Codes via Regex if formatted like "Rockford (IRFD)"
         const depMatch = selectedFlight.departure_airport.match(/\((.*?)\)/);
         const arrMatch = selectedFlight.arrival_airport.match(/\((.*?)\)/);
         document.getElementById('rev-dep-code').innerText = depMatch ? depMatch[1] : 'DEP';
@@ -702,27 +682,21 @@
         document.getElementById('rev-arr-time').innerText = selectedFlight.arrival_time ? selectedFlight.arrival_time.substring(0,5) : '--:--';
         document.getElementById('rev-duration').innerText = selectedFlight.flight_duration || '--h --m';
 
-        // Render Classes
         const classGrid = document.getElementById('class-selection-grid');
         let classHtml = '';
-        
         const base = selectedFlight.base_price_usd || 0;
         
-        if(selectedFlight.economy_available !== false) {
-            classHtml += createClassCard('Economy', base, 'Standard seating, meals included.');
-        }
-        if(selectedFlight.business_available !== false) {
-            classHtml += createClassCard('Business', base * 2, 'Lie-flat seats, Lounge access.');
-        }
+        if(selectedFlight.economy_available !== false) classHtml += createClassCard('Economy', base, 'Standard seating, meals included.');
+        if(selectedFlight.business_available !== false) classHtml += createClassCard('Business', base * 2, 'Lie-flat seats, Lounge access.');
+        
         if(selectedFlight.first_class_available) {
             classHtml += createClassCard('First', base * 3, 'Private suite, Shower Spa.', true);
         } else {
-            classHtml += `<div class="p-4 border border-gray-200 bg-gray-50 rounded opacity-50 flex items-center justify-center text-xs font-bold text-gray-400 uppercase">First Class Unavailable on this aircraft</div>`;
+            classHtml += `<div class="p-4 border border-gray-200 bg-gray-50 rounded flex items-center justify-center text-xs font-bold text-gray-400 uppercase text-center">First Class Unavailable on this aircraft</div>`;
         }
         
         classGrid.innerHTML = classHtml;
         
-        // Auto-select Economy
         if(selectedFlight.economy_available !== false) setClass('Economy', base);
         else if(selectedFlight.business_available !== false) setClass('Business', base * 2);
 
@@ -730,12 +704,11 @@
     };
 
     function createClassCard(className, price, desc, isFirst = false) {
-        const id = `class-${className}`;
         const borderCol = isFirst ? 'border-[#D71A21]' : 'border-gray-200';
         return `
             <label class="cursor-pointer relative">
                 <input type="radio" name="cabin_class" value="${className}" class="peer sr-only" onchange="setClass('${className}', ${price})">
-                <div class="p-5 border-2 ${borderCol} rounded-lg hover:bg-gray-50 transition-all peer-checked:border-[#D71A21] peer-checked:bg-red-50">
+                <div class="p-5 border-2 ${borderCol} rounded hover:bg-gray-50 transition-all peer-checked:border-[#D71A21] peer-checked:bg-red-50">
                     <h4 class="font-bold text-[#111827] mb-1 text-lg">${className}</h4>
                     <p class="text-[10px] text-gray-500 font-medium mb-4">${desc}</p>
                     <p class="text-xl font-bold text-[#111827]">${price} <span class="text-xs text-gray-500">USD</span></p>
@@ -750,8 +723,6 @@
     window.setClass = function(cName, price) {
         selectedClass = cName;
         calculatedTotal = price;
-        
-        // Handle Experience Box toggle
         const expBox = document.getElementById('experience-box');
         if(cName === 'Business' || cName === 'First') {
             expBox.classList.remove('hidden');
@@ -761,30 +732,33 @@
         }
     }
 
-    // --- STEP 3: SYNC PROFILE ---
+    // --- STEP 3: NEW STRICT SYNC LOGIC ---
     window.syncProfileData = async function() {
         if(!currentUser) return;
-        
         try {
             const { data } = await window.sb.from('egr_users').select('*').eq('id', currentUser.id).single();
             if(data) {
+                // Instantly inject auto-generated IDs and required info
                 if(data.roblox_username) document.getElementById('pax-roblox').value = data.roblox_username;
-                if(data.discord_username) document.getElementById('pax-discord').value = data.discord_username;
-                if(data.discord_id) document.getElementById('pax-discord').value = data.discord_id;
+                if(data.discord_username) document.getElementById('pax-discord-user').value = data.discord_username;
+                if(data.discord_id) document.getElementById('pax-discord-id').value = data.discord_id;
+                if(data.skywards_id) document.getElementById('pax-skywards').value = data.skywards_id;
+                if(data.emirates_account_id) document.getElementById('pax-ekid').value = data.emirates_account_id;
                 
                 if(data.full_name) {
                     const parts = data.full_name.split(' ');
                     document.getElementById('pax-first').value = parts[0] || '';
                     if(parts.length > 1) document.getElementById('pax-last').value = parts.slice(1).join(' ');
                 }
+                
+                alert("Corporate profile securely synced. Please fill in any remaining blank fields.");
             }
-            alert("Profile sync attempted with available portal data.");
         } catch(e) {
-            console.log("No extended profile found, using auth email only.");
+            console.log("No extended profile found.");
+            alert("Unable to fetch complete profile. Please fill out the form manually.");
         }
     }
 
-    // --- STEP 4: PREPARE PAYMENT PAGE ---
     function prepPaymentPage() {
         const depMatch = selectedFlight.departure_airport.match(/\((.*?)\)/);
         const arrMatch = selectedFlight.arrival_airport.match(/\((.*?)\)/);
@@ -794,37 +768,35 @@
         document.getElementById('sum-route').innerText = `${depCode} to ${arrCode}`;
         document.getElementById('sum-flight').innerText = selectedFlight.flight_number;
         document.getElementById('sum-class').innerText = selectedClass;
-        
         document.getElementById('sum-base-price').innerText = selectedFlight.base_price_usd || 0;
         document.getElementById('sum-total-price').innerText = calculatedTotal;
     }
 
-    // --- STEP 5: PROCESS & INSERT INTO DB ---
+    // --- STEP 5: DB INSERT WITH STRICT PAYLOAD ---
     window.processBooking = async function() {
         const btn = document.getElementById('btn-confirm-pay');
         const errBox = document.getElementById('booking-error');
         
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Transmitting to Dispatch...';
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Transmitting...';
         btn.disabled = true;
         errBox.classList.add('hidden');
 
-        // Generate PNR & Ticket
         const pnr = generateString(6).toUpperCase();
         const tkt = '176-' + Math.floor(1000000000 + Math.random() * 9000000000);
 
-        // PAYLOAD WITH THE FIX INCLUDED (ticket_reference mapped to pnr)
+        // Using the split Discord fields
         const payload = {
             user_id: currentUser.id,
             flight_id: selectedFlight.id,
-            ticket_reference: pnr, // FIX: satisfies NOT NULL constraint
+            ticket_reference: pnr, 
             pnr_reference: pnr,
             e_ticket_number: tkt,
             title: document.getElementById('pax-title').value,
             first_name: document.getElementById('pax-first').value.trim(),
             last_name: document.getElementById('pax-last').value.trim(),
             email: currentUser.email,
-            discord_username: document.getElementById('pax-discord').value.trim(),
-            discord_id: document.getElementById('pax-discord').value.trim(), 
+            discord_username: document.getElementById('pax-discord-user').value.trim(),
+            discord_id: document.getElementById('pax-discord-id').value.trim(), 
             roblox_username: document.getElementById('pax-roblox').value.trim(),
             skywards_id: document.getElementById('pax-skywards').value.trim(),
             emirates_account_id: document.getElementById('pax-ekid').value.trim(),
@@ -838,7 +810,6 @@
             const { error } = await window.sb.from('egr_bookings').insert([payload]);
             if (error) throw error;
 
-            // Success: Render Ticket
             document.getElementById('tkt-number').innerText = tkt;
             document.getElementById('tkt-pnr').innerText = pnr;
             document.getElementById('tkt-name').innerText = `${payload.title} ${payload.first_name} ${payload.last_name}`;
@@ -863,19 +834,14 @@
         }
     }
 
-    // --- NAVIGATION UTILS ---
     window.goToStep = function(step) {
         if(step === 4) prepPaymentPage();
-
-        // Hide all
         for(let i=1; i<=5; i++) {
             const el = document.getElementById('step-'+i+'-container');
             if(el) el.classList.add('hidden');
         }
-        // Show target
         document.getElementById('step-'+step+'-container').classList.remove('hidden');
         
-        // Update Progress Bar
         for(let i=1; i<=4; i++) {
             const ind = document.getElementById('ind-'+i);
             const line = document.getElementById('line-'+(i-1));
@@ -902,7 +868,6 @@
         }
         window.scrollTo(0,0);
     }
-
     window.goBackTo = function(step) { goToStep(step); }
 
     function generateString(length) {
