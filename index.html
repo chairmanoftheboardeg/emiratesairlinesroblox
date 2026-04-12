@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home | Emirates Airlines</title></title>
+  <title>Emirates Airline | Fly Better | Emirates Group Roblox</title>
   
   <link rel="icon" href="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" id="favicon" />
   
@@ -21,12 +21,7 @@
     .font-serif { font-family: 'Playfair Display', serif; }
     
     /* Security Loader */
-    #page-loader {
-        position: fixed; inset: 0; z-index: 999999;
-        background-color: #111827; 
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        transition: opacity 0.8s ease, visibility 0.8s ease;
-    }
+    #page-loader { position: fixed; inset: 0; z-index: 999999; background-color: #111827; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s ease, visibility 0.8s ease; }
     
     /* Authentic Emirates Navbar */
     .ek-nav-bg { background-color: #333333; height: 60px; }
@@ -46,14 +41,6 @@
     .modal-backdrop { background-color: rgba(17, 24, 39, 0.8); backdrop-filter: blur(4px); }
     .modal-content { transform: scale(0.95); opacity: 0; transition: all 0.3s ease; }
     .modal-open .modal-content { transform: scale(1); opacity: 1; }
-
-    /* Flight Board Badges */
-    .status-badge { padding: 4px 10px; border-radius: 3px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-    .status-scheduled { background-color: #e0e7ff; color: #3730a3; }
-    .status-boarding { background-color: #dcfce7; color: #166534; }
-    .status-departed { background-color: #fef08a; color: #a16207; }
-    .status-arrived { background-color: #f3f4f6; color: #4b5563; }
-    .status-cancelled { background-color: #fee2e2; color: #991b1b; }
     
     /* Authentic Footer Links */
     .footer-link { color: #c8c8c8; font-size: 0.85rem; transition: color 0.2s; }
@@ -142,7 +129,7 @@
                   <h1 class="text-5xl md:text-7xl font-extrabold text-white uppercase tracking-tighter drop-shadow-lg mb-4">
                       FLIGHT SCHEDULES
                   </h1>
-                  <a href="/book/" class="inline-block bg-[#D71A21] hover:bg-red-800 text-white font-bold px-8 py-3 text-sm transition-colors rounded-sm">Learn more</a>
+                  <a href="/book/" class="inline-block bg-[#D71A21] hover:bg-red-800 text-white font-bold px-8 py-3 text-sm transition-colors rounded-sm shadow-md">Learn more</a>
               </div>
           </section>
 
@@ -154,7 +141,7 @@
                           <i class="fa-solid fa-plane-departure mr-3 text-lg"></i> Search flights
                       </button>
                       <button onclick="switchTab('manage')" id="tab-manage" class="widget-tab flex-1 py-5 text-sm font-bold flex items-center justify-center border-l border-gray-200 border-t-4 border-t-transparent hover:border-t-gray-300">
-                          <i class="fa-solid fa-tag mr-3 transform -rotate-45 text-lg"></i> Manage booking / Check in
+                          <i class="fa-solid fa-tag mr-3 transform -rotate-45 text-lg"></i> Manage booking
                       </button>
                       <button onclick="switchTab('status')" id="tab-status" class="widget-tab flex-1 py-5 text-sm font-bold flex items-center justify-center border-l border-gray-200 border-t-4 border-t-transparent hover:border-t-gray-300">
                           <i class="fa-solid fa-clock mr-3 text-lg"></i> Flight status
@@ -186,7 +173,7 @@
                               <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Arrival airport</label>
                               <input type="text" name="arr" list="ptfs-airports" class="ek-input" placeholder="e.g. Perth (IPPH)" required autocomplete="off">
                           </div>
-                          <button type="submit" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold px-12 py-4 rounded-sm transition-colors text-sm w-full lg:w-auto">
+                          <button type="submit" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold px-12 py-4 rounded-sm transition-colors text-sm w-full lg:w-auto shadow">
                               Continue
                           </button>
                       </form>
@@ -204,12 +191,11 @@
                               <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Booking reference</label>
                               <input type="text" id="manage-pnr" class="ek-input" placeholder="e.g. X7B9WQ" required>
                           </div>
-                          <button type="submit" id="manage-search-btn" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold px-12 py-4 rounded-sm transition-colors text-sm w-full lg:w-auto">
+                          <button type="submit" id="manage-search-btn" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold px-12 py-4 rounded-sm transition-colors text-sm w-full lg:w-auto shadow">
                               Retrieve
                           </button>
                       </form>
-                      <div id="inline-manage-result" class="hidden border border-gray-200 rounded p-6 bg-gray-50 mt-4 shadow-inner">
-                          </div>
+                      <div id="inline-manage-result" class="hidden border border-gray-200 rounded p-6 bg-gray-50 mt-4 shadow-inner"></div>
                   </div>
 
                   <div id="content-status" class="p-6 md:p-8 hidden">
@@ -217,40 +203,18 @@
                           <div class="relative flex-1">
                               <i class="fa-solid fa-plane input-icon"></i>
                               <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Flight number</label>
-                              <input type="text" id="status-flight-num" class="ek-input" placeholder="e.g. EK 408" required>
+                              <input type="text" id="status-flight-num" class="ek-input" placeholder="e.g. EK 707" required>
                           </div>
                           <div class="relative flex-1">
                               <i class="fa-solid fa-calendar input-icon"></i>
                               <label class="absolute top-1 left-10 text-[10px] text-gray-500 font-medium">Date</label>
                               <input type="date" id="status-flight-date" class="ek-input" required>
                           </div>
-                          <button type="submit" id="status-search-btn" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold px-12 py-4 rounded-sm transition-colors text-sm w-full lg:w-auto">
+                          <button type="submit" id="status-search-btn" class="bg-[#D71A21] hover:bg-red-800 text-white font-bold px-12 py-4 rounded-sm transition-colors text-sm w-full lg:w-auto shadow">
                               Search
                           </button>
                       </form>
-                      <div id="inline-status-result" class="hidden border border-gray-200 rounded p-4 bg-gray-50 mt-4">
-                          </div>
-                  </div>
-
-                  <div class="border-t border-gray-200 grid grid-cols-3 md:grid-cols-6 text-center divide-x divide-y md:divide-y-0 divide-gray-200 bg-white pb-2 pt-2">
-                      <a href="https://emiratesgrouproblox.link/network/holidays" class="py-4 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
-                          <i class="fa-regular fa-building text-2xl mb-1"></i><p class="text-[11px] font-medium">Hotels</p>
-                      </a>
-                      <a href="https://emiratesgrouproblox.link/network/holidays" class="py-4 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
-                          <i class="fa-solid fa-car text-2xl mb-1"></i><p class="text-[11px] font-medium">Car rentals</p>
-                      </a>
-                      <a href="https://emiratesgrouproblox.link/network/holidays" class="py-4 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
-                          <i class="fa-solid fa-map-location-dot text-2xl mb-1"></i><p class="text-[11px] font-medium">Tours</p>
-                      </a>
-                      <button onclick="openModal('chauffeur')" class="py-4 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
-                          <i class="fa-solid fa-taxi text-2xl mb-1"></i><p class="text-[11px] font-medium">Chauffeur</p>
-                      </button>
-                      <button onclick="openModal('meet')" class="py-4 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
-                          <i class="fa-regular fa-handshake text-2xl mb-1"></i><p class="text-[11px] font-medium">Meet & greet</p>
-                      </button>
-                      <button onclick="openModal('transfers')" class="py-4 text-gray-500 hover:text-[#D71A21] hover:bg-gray-50 transition-colors">
-                          <i class="fa-solid fa-van-shuttle text-2xl mb-1"></i><p class="text-[11px] font-medium">Transfers</p>
-                      </button>
+                      <div id="inline-status-result" class="hidden border border-gray-200 rounded p-6 bg-white mt-4 shadow-sm"></div>
                   </div>
               </div>
           </div>
@@ -275,30 +239,47 @@
 
           <section class="py-10 px-6">
               <div class="max-w-[1200px] mx-auto">
-                  <div class="flex flex-col sm:flex-row items-center justify-between mb-6">
-                      <h2 class="text-3xl font-serif font-bold text-[#111827]">Live Flight Board</h2>
-                      <div class="flex items-center text-sm font-bold text-[#D71A21] mt-2 sm:mt-0 bg-red-50 px-3 py-1 rounded">
-                          <span class="relative flex h-2.5 w-2.5 mr-2">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D71A21] opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#D71A21]"></span>
-                          </span>
-                          PTFS NETWORK LIVE
+                  
+                  <div class="flex flex-col md:flex-row justify-between items-end mb-6 gap-4">
+                      <div>
+                          <h2 class="text-2xl font-serif font-bold text-[#111827] flex items-center">
+                              Live Flight Board
+                              <span class="ml-4 relative flex h-2.5 w-2.5">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D71A21] opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#D71A21]"></span>
+                              </span>
+                          </h2>
+                          <p class="text-xs text-gray-500 mt-2 font-medium"><i class="fa-solid fa-circle-info text-[#D71A21] mr-1"></i> All dates and times are reflected in <strong id="current-tz-display">Dubai Local Time (GST)</strong>.</p>
+                      </div>
+                      
+                      <div class="flex items-center gap-2 bg-white border border-gray-200 rounded px-4 py-2 shadow-sm">
+                          <i class="fa-solid fa-globe text-gray-400"></i>
+                          <span class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mr-2">Timezone:</span>
+                          <select id="tz-selector" class="bg-transparent text-sm font-bold text-[#111827] focus:outline-none cursor-pointer" onchange="renderLiveBoard()">
+                              <option value="4">Dubai (GST)</option>
+                              <option value="0">London (GMT)</option>
+                              <option value="-4">New York (EST)</option>
+                              <option value="-7">Los Angeles (PST)</option>
+                              <option value="8">Perth (AWST)</option>
+                              <option value="9">Tokyo (JST)</option>
+                          </select>
                       </div>
                   </div>
                   
                   <div class="bg-white shadow-sm rounded border border-gray-200 overflow-x-auto">
-                      <table class="w-full text-left border-collapse min-w-[800px]">
+                      <table class="w-full text-left border-collapse min-w-[900px]">
                           <thead>
-                              <tr class="bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-widest text-gray-500">
-                                  <th class="p-4 font-bold">Flight</th>
-                                  <th class="p-4 font-bold">Route</th>
-                                  <th class="p-4 font-bold">Departure</th>
-                                  <th class="p-4 font-bold">Arrival</th>
-                                  <th class="p-4 font-bold">Status</th>
+                              <tr class="border-b border-gray-200 text-[10px] font-bold uppercase tracking-widest text-gray-500 bg-gray-50/50">
+                                  <th class="py-4 px-6">Flight</th>
+                                  <th class="py-4 px-6">Route</th>
+                                  <th class="py-4 px-6">Date</th>
+                                  <th class="py-4 px-6">Departure</th>
+                                  <th class="py-4 px-6">Arrival</th>
+                                  <th class="py-4 px-6">Status</th>
                               </tr>
                           </thead>
                           <tbody id="flight-board-body" class="text-sm font-medium text-[#111827]">
-                              <tr><td colspan="5" class="p-8 text-center text-gray-500"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Syncing with Dispatch...</td></tr>
+                              <tr><td colspan="6" class="p-8 text-center text-gray-500"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Syncing with Dispatch...</td></tr>
                           </tbody>
                       </table>
                   </div>
@@ -397,7 +378,6 @@
 
       <footer class="bg-[#2c2d31] text-white py-16 px-6 md:px-12 relative z-20 font-sans border-t-4 border-[#D71A21]">
         <div class="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-gray-600 pb-12 mb-8">
-          
           <div>
             <h4 class="font-bold text-white mb-4 text-base">About us</h4>
             <ul class="space-y-3">
@@ -407,20 +387,13 @@
               <li><a href="https://tylernicholasgroup.com" target="_blank" class="footer-link">Tyler Nicholas Group <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i></a></li>
             </ul>
           </div>
-          
           <div>
             <h4 class="font-bold text-white mb-4 text-base">Help</h4>
             <ul class="space-y-3">
               <li><a href="https://emiratesgrouproblox.link/help" class="footer-link">Help and Contact</a></li>
               <li><a href="https://emiratesgrouproblox.link/help" class="footer-link">Travel Updates</a></li>
             </ul>
-            <h4 class="font-bold text-white mb-4 text-base mt-8">Book</h4>
-            <ul class="space-y-3">
-              <li><a href="/book/" class="footer-link">Book flights</a></li>
-              <li><a href="https://emiratesgrouproblox.link/network/holidays" class="footer-link">Travel services (Holidays)</a></li>
-            </ul>
           </div>
-
           <div>
             <h4 class="font-bold text-white mb-4 text-base">Manage</h4>
             <ul class="space-y-3">
@@ -429,21 +402,14 @@
               <li><a href="/status/" class="footer-link">Flight status</a></li>
             </ul>
           </div>
-
           <div>
             <h4 class="font-bold text-white mb-4 text-base">Experience</h4>
             <ul class="space-y-3">
               <li><a href="/experience/" class="footer-link">Cabin features</a></li>
               <li><a href="/experience/" class="footer-link">Dining</a></li>
             </ul>
-            <h4 class="font-bold text-white mb-4 text-base mt-8">Loyalty</h4>
-            <ul class="space-y-3">
-              <li><a href="https://emiratesgrouproblox.link/myportal/login/" class="footer-link">Log in to Emirates Skywards</a></li>
-              <li><a href="https://emiratesgrouproblox.link/network/skywards" class="footer-link">About Emirates Skywards</a></li>
-            </ul>
           </div>
         </div>
-        
         <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-[#c8c8c8]">
           <div class="flex flex-wrap gap-4 mb-4 md:mb-0">
               <a href="#" class="hover:text-white">Accessibility statement</a>
@@ -459,38 +425,10 @@
 
   </div>
 
-  <div id="modal-chauffeur" class="fixed inset-0 z-[100000] hidden flex items-center justify-center modal-backdrop">
-      <div class="modal-content bg-white w-full max-w-sm mx-4 rounded shadow-xl overflow-hidden relative border-t-4 border-[#D71A21]">
-          <div class="p-6">
-              <h3 class="text-lg font-bold text-[#111827] mb-3"><i class="fa-solid fa-taxi mr-2 text-[#D71A21]"></i> Chauffeur Drive</h3>
-              <p class="text-gray-600 text-sm leading-relaxed">Chauffeur drive services may be available for your journey depending on your booked cabin class, Emirates Holidays package, or active Investor/Skywards Tier.</p>
-              <button onclick="closeModal('chauffeur')" class="mt-6 w-full border border-gray-300 hover:bg-gray-100 text-gray-800 px-4 py-2 rounded text-sm font-bold transition-colors">Close</button>
-          </div>
-      </div>
-  </div>
-
-  <div id="modal-meet" class="fixed inset-0 z-[100000] hidden flex items-center justify-center modal-backdrop">
-      <div class="modal-content bg-white w-full max-w-sm mx-4 rounded shadow-xl overflow-hidden relative border-t-4 border-[#D71A21]">
-          <div class="p-6">
-              <h3 class="text-lg font-bold text-[#111827] mb-3"><i class="fa-solid fa-handshake-angle mr-2 text-[#D71A21]"></i> Meet & Greet</h3>
-              <p class="text-gray-600 text-sm leading-relaxed">Our staff are the best trained in the industry. We offer the highest level of professionalism in Roblox Aviation, ensuring the best VIP meet & greet experience.</p>
-              <button onclick="closeModal('meet')" class="mt-6 w-full border border-gray-300 hover:bg-gray-100 text-gray-800 px-4 py-2 rounded text-sm font-bold transition-colors">Close</button>
-          </div>
-      </div>
-  </div>
-
-  <div id="modal-transfers" class="fixed inset-0 z-[100000] hidden flex items-center justify-center modal-backdrop">
-      <div class="modal-content bg-white w-full max-w-sm mx-4 rounded shadow-xl overflow-hidden relative border-t-4 border-[#D71A21]">
-          <div class="p-6">
-              <h3 class="text-lg font-bold text-[#111827] mb-3"><i class="fa-solid fa-van-shuttle mr-2 text-[#D71A21]"></i> Transfers</h3>
-              <p class="text-gray-600 text-sm leading-relaxed">Airport transfers are available at select destination airports across both our networks. Please check your booking itinerary for operational information.</p>
-              <button onclick="closeModal('transfers')" class="mt-6 w-full border border-gray-300 hover:bg-gray-100 text-gray-800 px-4 py-2 rounded text-sm font-bold transition-colors">Close</button>
-          </div>
-      </div>
-  </div>
-
   <script>
-    // --- 1. STRICT ASSET PRELOADER ---
+    // --- 1. GLOBAL STATE & PRELOADER ---
+    let activeLiveFlights = []; // Store flights globally for timezone calculations
+    
     window.addEventListener('load', () => {
         const pageLoader = document.getElementById('page-loader');
         setTimeout(() => {
@@ -502,7 +440,33 @@
     });
     document.body.style.overflow = 'hidden';
 
-    // --- 2. MAIN APPLICATION LOGIC ---
+    // --- 2. TIMEZONE ENGINE HELPER ---
+    function parseSafeTime(timeStr) {
+        if (!timeStr) return '--:--';
+        // Extract just the time if a full timestamp was saved in the DB
+        if (timeStr.includes('T') || timeStr.includes(' ')) {
+            return timeStr.split(/[T ]/).pop().substring(0, 5);
+        }
+        return timeStr.substring(0, 5);
+    }
+
+    function adjustTimezone(timeStr, targetOffset) {
+        if (!timeStr || timeStr === '--:--') return timeStr;
+        let [hours, minutes] = timeStr.split(':').map(Number);
+        if (isNaN(hours)) return timeStr;
+        
+        // Base is Dubai (UTC +4)
+        let diff = targetOffset - 4; 
+        hours += diff;
+        
+        // Wrap around midnight
+        if (hours < 0) hours += 24;
+        if (hours >= 24) hours -= 24;
+        
+        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    }
+
+    // --- 3. MAIN APPLICATION LOGIC ---
     async function initApplication() {
         if (!window.supabase) {
             console.error("Supabase CDN failed to load.");
@@ -510,7 +474,7 @@
             return;
         }
 
-        // MAKE SUPABASE GLOBAL SO ALL FUNCTIONS CAN ACCESS IT
+        // Global Client
         window.supabaseClient = window.supabase.createClient(
             'https://zboyabxzhptnxnmofvcz.supabase.co', 
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpib3lhYnh6aHB0bnhubW9mdmN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3NjU3MTgsImV4cCI6MjA4NTM0MTcxOH0.2et1T3bQqr-ZzZgx-VWaq3kR0FJDprcAbbWBby6oRys'
@@ -519,14 +483,13 @@
         const loginGate = document.getElementById('airline-login-gate');
         const mainContent = document.getElementById('main-content-wrapper');
 
-        // --- AUTH LOGIC ---
         function handleSessionState(session) {
             if (session) {
                 loginGate.style.display = 'none';
                 mainContent.style.visibility = 'visible';
                 mainContent.style.opacity = '1';
                 mainContent.style.display = 'flex';
-                fetchLiveFlights(); // Fetch flights on verified login
+                fetchLiveFlights(); 
             } else {
                 mainContent.style.display = 'none';
                 loginGate.style.display = 'flex';
@@ -540,37 +503,33 @@
             handleSessionState(session);
         });
 
-        // --- LOGIN SUBMISSION ---
+        // Secure Login Submission
         const loginForm = document.getElementById('airline-login-form');
         if (loginForm) {
             loginForm.addEventListener('submit', async (e) => {
                 e.preventDefault(); 
-                const email = document.getElementById('login-email').value.trim();
-                const password = document.getElementById('login-password').value;
                 const btn = document.getElementById('login-btn');
                 const alertBox = document.getElementById('login-alert');
-                const alertText = document.getElementById('login-alert-text');
-
+                
                 btn.innerHTML = 'VERIFYING...';
                 btn.disabled = true;
                 alertBox.style.display = 'none';
 
-                const { error } = await window.supabaseClient.auth.signInWithPassword({ email, password });
+                const { error } = await window.supabaseClient.auth.signInWithPassword({ 
+                    email: document.getElementById('login-email').value.trim(), 
+                    password: document.getElementById('login-password').value 
+                });
 
                 if (error) {
                     alertBox.style.display = 'block';
-                    alertText.innerText = error.message;
-                    btn.innerHTML = 'Verify Identity &rarr;';
-                    btn.disabled = false;
-                } else {
-                    loginForm.reset();
+                    document.getElementById('login-alert-text').innerText = error.message;
                     btn.innerHTML = 'Verify Identity &rarr;';
                     btn.disabled = false;
                 }
             });
         }
 
-        // --- INLINE FLIGHT STATUS FETCH ---
+        // --- BULLETPROOF FLIGHT STATUS WIDGET ---
         const statusForm = document.getElementById('status-search-form');
         const statusResultBox = document.getElementById('inline-status-result');
 
@@ -579,7 +538,9 @@
                 e.preventDefault(); 
                 
                 const btn = document.getElementById('status-search-btn');
-                const flightNumInput = document.getElementById('status-flight-num').value.trim();
+                // Clean the input: Remove spaces, make uppercase, strip "EK"
+                const flightNumInput = document.getElementById('status-flight-num').value.replace(/\s+/g, '').toUpperCase();
+                const flightSearchCode = flightNumInput.replace('EK', '');
                 const flightDateInput = document.getElementById('status-flight-date').value;
 
                 btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
@@ -588,10 +549,11 @@
                 statusResultBox.innerHTML = '<p class="text-sm text-gray-500 text-center py-4">Locating flight details...</p>';
 
                 try {
+                    // Safe ILIKE search handles missing spaces in user input
                     const { data, error } = await window.supabaseClient
                         .from('egr_flights')
                         .select('*')
-                        .eq('flight_number', flightNumInput)
+                        .ilike('flight_number', `%${flightSearchCode}%`)
                         .eq('flight_date', flightDateInput)
                         .limit(1);
 
@@ -599,37 +561,43 @@
 
                     if (data && data.length > 0) {
                         const f = data[0];
-                        let statusClass = 'status-scheduled';
-                        if (f.status === 'Boarding') statusClass = 'status-boarding';
-                        else if (f.status === 'Departed') statusClass = 'status-departed';
-                        else if (f.status === 'Arrived') statusClass = 'status-arrived';
-                        else if (f.status === 'Cancelled') statusClass = 'status-cancelled';
+                        
+                        let statusClass = 'bg-blue-100 text-blue-700'; 
+                        let statusText = (f.status || 'SCHEDULED').toUpperCase();
+                        if (statusText === 'BOARDING') statusClass = 'bg-green-100 text-green-700';
+                        else if (statusText === 'DEPARTED') statusClass = 'bg-yellow-100 text-yellow-800';
+                        else if (statusText === 'ARRIVED') statusClass = 'bg-gray-100 text-gray-600';
+                        else if (statusText === 'CANCELLED') statusClass = 'bg-red-100 text-red-700';
 
-                        const depTime = f.departure_time ? f.departure_time.substring(0, 5) : '--:--';
-                        const arrTime = f.arrival_time ? f.arrival_time.substring(0, 5) : '--:--';
+                        // Apply clean parsing
+                        const cleanDepTime = parseSafeTime(f.departure_time);
+                        const cleanArrTime = parseSafeTime(f.arrival_time);
+                        const depName = f.departure_airport ? f.departure_airport.split('(')[0].trim() : 'Unknown';
+                        const arrName = f.arrival_airport ? f.arrival_airport.split('(')[0].trim() : 'Unknown';
 
                         statusResultBox.innerHTML = `
                             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                                <div>
+                                <div class="text-center md:text-left">
                                     <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Flight Number</p>
                                     <p class="text-xl font-bold text-[#111827]"><img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-4 inline mr-2 opacity-80 mix-blend-multiply"> ${f.flight_number}</p>
+                                    <p class="text-xs text-gray-500 mt-1">${f.flight_date || '--/--/----'}</p>
                                 </div>
-                                <div class="text-center flex-grow">
-                                    <div class="flex items-center justify-center gap-4">
+                                <div class="text-center flex-grow px-4 border-l border-r border-gray-100 py-2 md:py-0">
+                                    <div class="flex items-center justify-center gap-6">
                                         <div class="text-right">
-                                            <p class="font-bold text-[#111827]">${f.departure_airport}</p>
-                                            <p class="text-sm text-gray-500">${depTime}</p>
+                                            <p class="font-bold text-[#111827] text-lg">${cleanDepTime}</p>
+                                            <p class="text-xs text-gray-500">${depName}</p>
                                         </div>
                                         <i class="fa-solid fa-plane text-gray-300"></i>
                                         <div class="text-left">
-                                            <p class="font-bold text-[#111827]">${f.arrival_airport}</p>
-                                            <p class="text-sm text-gray-500">${arrTime}</p>
+                                            <p class="font-bold text-[#111827] text-lg">${cleanArrTime}</p>
+                                            <p class="text-xs text-gray-500">${arrName}</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="text-right">
-                                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Current Status</p>
-                                    <span class="status-badge ${statusClass} px-4 py-2 text-xs">${f.status || 'Unknown'}</span>
+                                <div class="text-center md:text-right">
+                                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Status</p>
+                                    <span class="${statusClass} px-3 py-1 rounded text-[10px] font-bold tracking-widest inline-block mt-1">${statusText}</span>
                                 </div>
                             </div>
                         `;
@@ -652,7 +620,6 @@
         if (manageForm) {
             manageForm.addEventListener('submit', async (e) => {
                 e.preventDefault(); 
-                
                 const btn = document.getElementById('manage-search-btn');
                 const lnameInput = document.getElementById('manage-lname').value.trim();
                 const pnrInput = document.getElementById('manage-pnr').value.trim().toUpperCase();
@@ -663,11 +630,9 @@
                 manageResultBox.innerHTML = '<p class="text-sm text-gray-500 text-center py-4">Retrieving itinerary...</p>';
 
                 try {
-                    // Requires join with flight table if you want flight details, 
-                    // but for a quick check we just query egr_bookings
                     const { data, error } = await window.supabaseClient
                         .from('egr_bookings')
-                        .select('*, egr_flights(*)') // assuming foreign key exists
+                        .select('*, egr_flights(*)')
                         .eq('pnr_reference', pnrInput)
                         .eq('last_name', lnameInput)
                         .limit(1);
@@ -677,7 +642,7 @@
                     if (data && data.length > 0) {
                         const b = data[0];
                         const f = b.egr_flights || {};
-                        const depTime = f.departure_time ? f.departure_time.substring(0, 5) : '--:--';
+                        const cleanDepTime = parseSafeTime(f.departure_time);
                         
                         manageResultBox.innerHTML = `
                             <div class="border-b border-gray-200 pb-4 mb-4 flex justify-between items-center">
@@ -693,15 +658,15 @@
                             <div class="flex justify-between items-center">
                                 <div>
                                     <p class="font-bold text-[#111827]">${f.flight_number || 'EK ---'}</p>
-                                    <p class="text-xs text-gray-500">${f.departure_airport || 'Unknown'} to ${f.arrival_airport || 'Unknown'}</p>
+                                    <p class="text-xs text-gray-500">${(f.departure_airport||'').split('(')[0]} to ${(f.arrival_airport||'').split('(')[0]}</p>
                                 </div>
                                 <div class="text-right">
-                                    <p class="font-bold text-[#111827]">${f.flight_date || '--/--/----'} at ${depTime}</p>
+                                    <p class="font-bold text-[#111827]">${f.flight_date || '--/--/----'} at ${cleanDepTime}</p>
                                     <p class="text-xs text-[#D71A21] font-bold uppercase">${b.seat_class || 'Economy'}</p>
                                 </div>
                             </div>
                             <div class="mt-6 text-center">
-                                <a href="/manage/" class="text-xs font-bold text-[#D71A21] hover:underline uppercase tracking-widest">Go to Full Dashboard &rarr;</a>
+                                <a href="/manage/" class="text-xs font-bold text-white bg-[#111827] hover:bg-gray-800 px-6 py-2 rounded uppercase tracking-widest inline-block shadow">Go to Full Dashboard &rarr;</a>
                             </div>
                         `;
                     } else {
@@ -715,50 +680,73 @@
                 btn.disabled = false;
             });
         }
+    }
 
-        // --- LIVE FLIGHT BOARD FETCHING ---
-        async function fetchLiveFlights() {
-            const tbody = document.getElementById('flight-board-body');
-            
-            try {
-                const { data, error } = await window.supabaseClient
-                    .from('egr_flights')
-                    .select('*')
-                    .eq('platform', 'PTFS')
-                    .eq('airline', 'Emirates')
-                    .order('departure_time', { ascending: true })
-                    .limit(5);
+    // --- 4. LIVE FLIGHT BOARD & TIMEZONE RENDERING ---
+    async function fetchLiveFlights() {
+        try {
+            const { data, error } = await window.supabaseClient
+                .from('egr_flights')
+                .select('*')
+                .eq('platform', 'PTFS')
+                .eq('airline', 'Emirates')
+                .order('flight_date', { ascending: true })
+                .limit(10);
 
-                if (error) throw error;
+            if (error) throw error;
+            activeLiveFlights = data || [];
+            renderLiveBoard(); // Triggers dynamic render
+        } catch (err) {
+            console.error("Flight fetch error:", err);
+            document.getElementById('flight-board-body').innerHTML = '<tr><td colspan="6" class="p-8 text-center text-red-500 font-medium bg-red-50">Unable to sync with Dispatch. Please check your connection.</td></tr>';
+        }
+    }
 
-                if (data && data.length > 0) {
-                    tbody.innerHTML = data.map(f => {
-                        let statusClass = 'status-scheduled';
-                        if (f.status === 'Boarding') statusClass = 'status-boarding';
-                        else if (f.status === 'Departed') statusClass = 'status-departed';
-                        else if (f.status === 'Arrived') statusClass = 'status-arrived';
-                        else if (f.status === 'Cancelled') statusClass = 'status-cancelled';
+    window.renderLiveBoard = function() {
+        const tbody = document.getElementById('flight-board-body');
+        const tzSelect = document.getElementById('tz-selector');
+        const tzOffset = parseInt(tzSelect.value);
+        const tzName = tzSelect.options[tzSelect.selectedIndex].text;
+        
+        // Update Disclaimer Text
+        document.getElementById('current-tz-display').innerText = tzName;
 
-                        const depTime = f.departure_time ? f.departure_time.substring(0, 5) : '--:--';
-                        const arrTime = f.arrival_time ? f.arrival_time.substring(0, 5) : '--:--';
+        if (activeLiveFlights.length > 0) {
+            tbody.innerHTML = activeLiveFlights.map(f => {
+                
+                // EXACT UI MATCH: Badges
+                let statusClass = 'bg-blue-100 text-blue-700'; 
+                let statusText = (f.status || 'SCHEDULED').toUpperCase();
+                if (statusText === 'BOARDING') statusClass = 'bg-green-100 text-green-700';
+                else if (statusText === 'DEPARTED') statusClass = 'bg-yellow-100 text-yellow-800';
+                else if (statusText === 'ARRIVED') statusClass = 'bg-gray-100 text-gray-600';
+                else if (statusText === 'CANCELLED') statusClass = 'bg-red-100 text-red-700';
 
-                        return `
-                            <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                                <td class="p-4 font-bold whitespace-nowrap text-[#111827]"><img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-3 inline mr-2 opacity-80 mix-blend-multiply"> ${f.flight_number}</td>
-                                <td class="p-4 text-gray-600 font-medium">${f.departure_airport.split('(')[0]} <i class="fa-solid fa-arrow-right mx-2 text-gray-300 text-[10px]"></i> ${f.arrival_airport.split('(')[0]}</td>
-                                <td class="p-4">${depTime}</td>
-                                <td class="p-4">${arrTime}</td>
-                                <td class="p-4"><span class="status-badge ${statusClass}">${f.status || 'Scheduled'}</span></td>
-                            </tr>
-                        `;
-                    }).join('');
-                } else {
-                    tbody.innerHTML = '<tr><td colspan="5" class="p-8 text-center text-gray-500 font-medium bg-gray-50">No active PTFS flights scheduled at this time.</td></tr>';
-                }
-            } catch (err) {
-                console.error("Flight fetch error:", err);
-                tbody.innerHTML = '<tr><td colspan="5" class="p-8 text-center text-red-500 font-medium bg-red-50">Unable to sync with Dispatch. Please check your connection.</td></tr>';
-            }
+                // CLEAN PARSE (Removes '2026-' glitch)
+                const rawDep = parseSafeTime(f.departure_time);
+                const rawArr = parseSafeTime(f.arrival_time);
+
+                // APPLY TIMEZONE MATH
+                const adjDep = adjustTimezone(rawDep, tzOffset);
+                const adjArr = adjustTimezone(rawArr, tzOffset);
+
+                // CLEAN AIRPORT NAMES
+                const depName = f.departure_airport ? f.departure_airport.split('(')[0].trim() : 'Unknown';
+                const arrName = f.arrival_airport ? f.arrival_airport.split('(')[0].trim() : 'Unknown';
+
+                return `
+                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                        <td class="py-5 px-6 font-bold whitespace-nowrap text-[#111827]"><img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-3 inline mr-2 opacity-80 mix-blend-multiply"> ${f.flight_number}</td>
+                        <td class="py-5 px-6 text-gray-600 font-medium">${depName} <i class="fa-solid fa-arrow-right mx-2 text-gray-300 text-[10px]"></i> ${arrName}</td>
+                        <td class="py-5 px-6 text-[#111827] font-medium">${f.flight_date || '--/--/----'}</td>
+                        <td class="py-5 px-6 font-bold text-[#111827]">${adjDep}</td>
+                        <td class="py-5 px-6 font-bold text-[#111827]">${adjArr}</td>
+                        <td class="py-5 px-6"><span class="${statusClass} px-3 py-1 rounded text-[10px] font-bold tracking-widest">${statusText}</span></td>
+                    </tr>
+                `;
+            }).join('');
+        } else {
+            tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-gray-500 font-medium bg-gray-50">No active PTFS flights scheduled at this time.</td></tr>';
         }
     }
 
@@ -772,19 +760,6 @@
         document.getElementById('tab-' + tabId).classList.add('active', 'border-b-[#D71A21]', 'text-[#111827]', 'bg-white');
         document.getElementById('tab-' + tabId).classList.remove('border-transparent');
         document.getElementById('content-' + tabId).classList.remove('hidden');
-    }
-
-    // --- MODAL CONTROLLERS ---
-    window.openModal = function(id) {
-        const modal = document.getElementById('modal-' + id);
-        modal.classList.remove('hidden');
-        setTimeout(() => { modal.classList.add('modal-open'); }, 10);
-    }
-
-    window.closeModal = function(id) {
-        const modal = document.getElementById('modal-' + id);
-        modal.classList.remove('modal-open');
-        setTimeout(() => { modal.classList.add('hidden'); }, 300);
     }
   </script>
 </body>
