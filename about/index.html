@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Emirates Airline Roblox</title>
+  
+  <link rel="icon" href="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" id="favicon" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Open Sans', sans-serif; background-color: #ffffff; color: #111827; overflow-x: hidden; scroll-behavior: smooth; }
+    h1, h2, h3, h4, h5, h6, .font-heading { font-family: 'Montserrat', sans-serif; }
+    
+    /* Preloader: Clean Circular Spinner */
+    #page-loader { position: fixed; inset: 0; z-index: 999999; background-color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+    .spinner { width: 50px; height: 50px; border: 4px solid #f3f4f6; border-top: 4px solid #D71A21; border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    
+    /* Sleek Navbar */
+    .ek-nav { background-color: #ffffff; border-bottom: 1px solid #f3f4f6; position: sticky; top: 0; z-index: 50; }
+    .ek-nav-link { position: relative; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #374151; transition: color 0.3s; padding: 0.5rem 0; }
+    .ek-nav-link:hover, .ek-nav-link.active { color: #D71A21; }
+    .ek-nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #D71A21; transition: width 0.3s ease; }
+    .ek-nav-link:hover::after, .ek-nav-link.active::after { width: 100%; }
+
+    /* Custom Corporate Buttons */
+    .ek-btn-primary { display: inline-block; background-color: #D71A21; color: #ffffff; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 1rem 2rem; border-radius: 2px; transition: all 0.3s ease; border: 1px solid #D71A21; }
+    .ek-btn-primary:hover { background-color: #991b1b; border-color: #991b1b; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(215, 26, 33, 0.3); }
+    .ek-btn-outline { display: inline-block; background-color: transparent; color: #111827; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 1rem 2rem; border-radius: 2px; transition: all 0.3s ease; border: 1px solid #111827; }
+    .ek-btn-outline:hover { background-color: #111827; color: #ffffff; transform: translateY(-2px); }
+
+    /* Image Styling */
+    .showcase-img { object-fit: cover; width: 100%; height: 100%; transition: transform 0.7s ease; }
+    .img-container { overflow: hidden; border-radius: 4px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); }
+    .img-container:hover .showcase-img { transform: scale(1.05); }
+
+    /* Scroll Animations */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* Accents */
+    .red-accent { width: 40px; height: 3px; background-color: #D71A21; margin-top: 1rem; margin-bottom: 1.5rem; }
+    .center-accent { margin-left: auto; margin-right: auto; }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+  <div id="page-loader">
+      <div class="spinner mb-6"></div>
+      <div class="font-heading text-gray-800 text-xs font-bold uppercase tracking-widest">
+          Loading Emirates Airline...
+      </div>
+  </div>
+
+  <header class="ek-nav w-full py-4 px-6 md:px-12 shadow-sm">
+      <div class="max-w-[1400px] mx-auto flex items-center justify-between">
+          <a href="/" class="flex-shrink-0">
+              <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-8 md:h-10 object-contain" alt="Emirates Airline">
+          </a>
+          <nav class="hidden lg:flex items-center space-x-8">
+              <a href="/book/" class="ek-nav-link">Book</a>
+              <a href="/manage/" class="ek-nav-link">Manage</a>
+              <a href="/about/" class="ek-nav-link active">About Us</a>
+              <a href="https://emiratesgrouproblox.link/network/skywards" class="ek-nav-link">Loyalty</a>
+              <a href="https://emiratesgrouproblox.link/help" class="ek-nav-link">Help</a>
+          </nav>
+          <div class="hidden md:flex items-center space-x-6">
+              <a href="#" class="font-heading text-xs font-bold text-gray-500 hover:text-[#D71A21] transition-colors uppercase tracking-widest"><i class="fa-solid fa-globe mr-1"></i> Global</a>
+              <a href="https://emiratesgrouproblox.link/myportal/" class="ek-btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.7rem;">Portal Login</a>
+          </div>
+      </div>
+  </header>
+
+  <main class="flex-grow w-full">
+
+      <section class="relative h-[70vh] min-h-[500px] flex items-center justify-center px-6">
+          <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://i.ibb.co/tTyxcwxP/a350v2.webp'); background-position: center 60%;"></div>
+          <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10"></div>
+          
+          <div class="relative z-20 text-center max-w-4xl mx-auto mt-10 reveal">
+              <p class="font-heading text-[#D71A21] font-bold tracking-[0.3em] uppercase text-sm mb-4 drop-shadow-md">Emirates Airline</p>
+              <h1 class="text-5xl md:text-7xl font-heading font-black text-white leading-tight mb-6 drop-shadow-lg">
+                  About Us
+              </h1>
+              <div class="w-20 h-1 bg-[#D71A21] mx-auto mb-8"></div>
+              <p class="text-xl md:text-2xl text-gray-200 font-light leading-relaxed drop-shadow">
+                  To redefine virtual aviation by delivering unparalleled realism, unmatched luxury, and a community-driven roleplay experience.
+              </p>
+          </div>
+      </section>
+
+      <section class="py-24 px-6 md:px-12 bg-white">
+          <div class="max-w-[1200px] mx-auto">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                  <div class="reveal">
+                      <h2 class="text-4xl font-heading font-bold text-[#111827] mb-2">Elevating the Standard</h2>
+                      <div class="red-accent"></div>
+                      
+                      <h3 class="text-xl font-heading font-bold text-[#D71A21] mb-3 mt-8">The Problem We Saw</h3>
+                      <p class="text-gray-600 leading-relaxed mb-6">
+                          The virtual aviation community is vast, but it is often plagued by disorganized flights, a severe lack of realism, and inconsistent customer service. Players looking for an authentic, immersive aviation experience are frequently left disappointed by chaotic boarding processes and untrained staff.
+                      </p>
+                      
+                      <h3 class="text-xl font-heading font-bold text-[#111827] mb-3">Our Solution</h3>
+                      <p class="text-gray-600 leading-relaxed mb-8">
+                          Emirates Airline was built to bridge this gap. By implementing strict Standard Operating Procedures (SOPs), integrating a fully functional web-based booking and dispatch network, and rigorously training our cabin crew and pilots, we ensure that every single flight on our PTFS and ROAV networks is a premium, flawlessly executed journey.
+                      </p>
+
+                      <a href="/book/" class="ek-btn-outline">Experience the Difference</a>
+                  </div>
+                  
+                  <div class="grid grid-cols-2 gap-4 reveal" style="transition-delay: 0.2s;">
+                      <div class="h-64 img-container mt-8">
+                          <img src="https://i.ibb.co/39ZhfFMX/Screenshot-2026-02-28-194310.png" alt="Emirates Aircraft" class="showcase-img">
+                      </div>
+                      <div class="h-64 img-container">
+                          <img src="https://i.ibb.co/GQBzWgPW/a350-900.jpg" alt="Emirates A350" class="showcase-img">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="py-24 px-6 md:px-12 bg-[#111827] text-white">
+          <div class="max-w-[1200px] mx-auto text-center mb-16 reveal">
+              <h2 class="text-4xl font-heading font-bold mb-2">Our Journey</h2>
+              <div class="red-accent center-accent"></div>
+              <p class="text-gray-400 max-w-2xl mx-auto">From a bold vision to the premier virtual airline on the Roblox platform.</p>
+          </div>
+
+          <div class="max-w-[1000px] mx-auto relative reveal">
+              <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-gray-700 z-0"></div>
+              
+              <div class="flex flex-col md:flex-row items-center justify-between mb-16 relative z-10">
+                  <div class="w-full md:w-5/12 text-right pr-0 md:pr-8 mb-6 md:mb-0">
+                      <h3 class="text-2xl font-heading font-bold text-white">The Foundation</h3>
+                      <p class="text-[#D71A21] font-bold text-sm mb-2">Phase One</p>
+                      <p class="text-gray-400 text-sm leading-relaxed">Emirates Airline was established with a singular goal: to bring the luxury and precision of the real-world Emirates to the Roblox platform, starting with heavily structured foundational documents and staff training protocols.</p>
+                  </div>
+                  <div class="w-4 h-4 bg-[#D71A21] rounded-full hidden md:block border-4 border-[#111827] shadow-[0_0_0_2px_#374151]"></div>
+                  <div class="w-full md:w-5/12 pl-0 md:pl-8 h-48 img-container border border-gray-700">
+                      <img src="https://i.ibb.co/8SSLMk4/Screenshot-2026-02-28-191613.png" alt="Foundation" class="showcase-img opacity-80 hover:opacity-100">
+                  </div>
+              </div>
+
+              <div class="flex flex-col md:flex-row-reverse items-center justify-between mb-16 relative z-10 reveal">
+                  <div class="w-full md:w-5/12 text-left pl-0 md:pl-8 mb-6 md:mb-0">
+                      <h3 class="text-2xl font-heading font-bold text-white">Digital Integration</h3>
+                      <p class="text-[#D71A21] font-bold text-sm mb-2">Phase Two</p>
+                      <p class="text-gray-400 text-sm leading-relaxed">We moved beyond discord-only operations by developing our proprietary, bespoke web portal. Featuring live flight boards, integrated dynamic booking engines, and online check-in, setting a new tech standard.</p>
+                  </div>
+                  <div class="w-4 h-4 bg-[#D71A21] rounded-full hidden md:block border-4 border-[#111827] shadow-[0_0_0_2px_#374151]"></div>
+                  <div class="w-full md:w-5/12 pr-0 md:pr-8 h-48 img-container border border-gray-700">
+                      <img src="https://i.ibb.co/tTyxcwxP/a350v2.webp" alt="Technology" class="showcase-img opacity-80 hover:opacity-100">
+                  </div>
+              </div>
+
+              <div class="flex flex-col md:flex-row items-center justify-between relative z-10 reveal">
+                  <div class="w-full md:w-5/12 text-right pr-0 md:pr-8 mb-6 md:mb-0">
+                      <h3 class="text-2xl font-heading font-bold text-white">Fleet & Network Expansion</h3>
+                      <p class="text-[#D71A21] font-bold text-sm mb-2">Current Era</p>
+                      <p class="text-gray-400 text-sm leading-relaxed">Operating across the expansive Pilot Training Flight Simulator (PTFS) network, with specialized ROAV divisions in development, to bring long-haul realism to thousands of passengers.</p>
+                  </div>
+                  <div class="w-4 h-4 bg-[#D71A21] rounded-full hidden md:block border-4 border-[#111827] shadow-[0_0_0_2px_#374151]"></div>
+                  <div class="w-full md:w-5/12 pl-0 md:pl-8 h-48 img-container border border-gray-700">
+                      <img src="https://i.ibb.co/YBrzVC2B/A350-New-Pics.png" alt="Expansion" class="showcase-img opacity-80 hover:opacity-100">
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="py-24 px-6 bg-gray-50 border-b border-gray-200">
+          <div class="max-w-[1000px] mx-auto flex flex-col md:flex-row items-center gap-12 reveal">
+              <div class="w-full md:w-1/3 flex justify-center md:justify-end">
+                  <div class="relative">
+                      <div class="absolute inset-0 border-2 border-[#D71A21] translate-x-3 translate-y-3 rounded-sm z-0"></div>
+                      <img src="https://media.istockphoto.com/id/521573873/vector/unknown-person-silhouette-whith-blue-tie.jpg?s=612x612&w=0&k=20&c=5Ax4LbSxC0swuxzNmRarYD5R0bxE5u7p31AHfy9Iqd8=" class="relative z-10 w-56 h-56 object-cover rounded-sm shadow-lg grayscale" alt="Daniel Thompson">
+                  </div>
+              </div>
+              <div class="w-full md:w-2/3 text-center md:text-left">
+                  <h3 class="text-3xl font-heading font-bold text-[#111827] mb-6">A Message from Leadership</h3>
+                  <div class="space-y-4 text-gray-600 leading-relaxed italic border-l-4 border-gray-200 pl-6">
+                      <p>"Welcome aboard Emirates Airline. In this network, we aren't just simulating standard flights; we are setting the definitive benchmark for realism, operational professionalism, and structural perfection in virtual aviation.</p>
+                      <p>From the moment you check in to the second you disembark, our dispatchers, pilots, and cabin crew are dedicated to ensuring a flawless journey. We invite you to fly better."</p>
+                  </div>
+                  <div class="mt-8">
+                      <h4 class="font-heading font-bold text-[#111827] text-lg">Daniel Thompson</h4>
+                      <p class="text-[10px] text-[#D71A21] font-bold uppercase tracking-widest mt-1">Chief Executive Officer | Emirates Airline</p>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="py-24 px-6 md:px-12 bg-white">
+          <div class="max-w-[1200px] mx-auto text-center mb-16 reveal">
+              <h2 class="text-4xl font-heading font-bold text-[#111827] mb-2">The Fly Better Experience</h2>
+              <div class="red-accent center-accent"></div>
+              <p class="text-gray-600 max-w-2xl mx-auto mb-10">Discover the unparalleled comfort and service across our distinct cabin classes and ground operations.</p>
+          </div>
+
+          <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              
+              <div class="group reveal">
+                  <div class="h-64 img-container mb-6">
+                      <img src="https://i.ibb.co/1J015gg2/Screenshot-2026-03-08-191357.png" alt="First Class" class="showcase-img">
+                  </div>
+                  <h3 class="text-xl font-heading font-bold text-[#111827] mb-2 group-hover:text-[#D71A21] transition-colors">First Class Exclusivity</h3>
+                  <p class="text-gray-600 text-sm leading-relaxed">Private suites, dine-on-demand services, and dedicated purser attention ensure the ultimate hotel-in-the-sky roleplay experience.</p>
+              </div>
+
+              <div class="group reveal" style="transition-delay: 0.2s;">
+                  <div class="h-64 img-container mb-6">
+                      <img src="https://i.ibb.co/0jY5xFJh/Screenshot-2026-03-08-191326.png" alt="Business Class" class="showcase-img">
+                  </div>
+                  <h3 class="text-xl font-heading font-bold text-[#111827] mb-2 group-hover:text-[#D71A21] transition-colors">Business Class Comfort</h3>
+                  <p class="text-gray-600 text-sm leading-relaxed">Seamless lie-flat seating, premium plated dining, and access to the iconic onboard lounge to network at 40,000 feet.</p>
+              </div>
+
+              <div class="group reveal" style="transition-delay: 0.4s;">
+                  <div class="h-64 img-container mb-6">
+                      <img src="https://i.ibb.co/rfTyNXNw/Screenshot-2026-02-28-193021.png" alt="Cabin Crew" class="showcase-img">
+                  </div>
+                  <h3 class="text-xl font-heading font-bold text-[#111827] mb-2 group-hover:text-[#D71A21] transition-colors">Elite Cabin Crew</h3>
+                  <p class="text-gray-600 text-sm leading-relaxed">Our staff undergo rigorous simulated training to provide authentic, professional, and courteous trolley and cabin services.</p>
+              </div>
+
+              <div class="group reveal" style="transition-delay: 0.1s;">
+                  <div class="h-64 img-container mb-6">
+                      <img src="https://i.ibb.co/TQrP2rm/ground-cre-truck-with-330-in-the-background.jpg" alt="Ground Operations" class="showcase-img">
+                  </div>
+                  <h3 class="text-xl font-heading font-bold text-[#111827] mb-2 group-hover:text-[#D71A21] transition-colors">Precision Ground Ops</h3>
+                  <p class="text-gray-600 text-sm leading-relaxed">From baggage handlers to pushback crews, our ground operations team ensures on-time departures and secure turnarounds.</p>
+              </div>
+
+              <div class="group reveal" style="transition-delay: 0.3s;">
+                  <div class="h-64 img-container mb-6">
+                      <img src="https://i.ibb.co/B2t8vDQf/Screenshot-2026-02-28-194600.png" alt="Economy Class" class="showcase-img">
+                  </div>
+                  <h3 class="text-xl font-heading font-bold text-[#111827] mb-2 group-hover:text-[#D71A21] transition-colors">Premium Economy</h3>
+                  <p class="text-gray-600 text-sm leading-relaxed">Setting a new standard with spacious seating, immersive entertainment, and highly attentive service for every single passenger.</p>
+              </div>
+
+              <div class="group reveal" style="transition-delay: 0.5s;">
+                  <div class="h-64 img-container mb-6">
+                      <img src="https://i.ibb.co/p8hp3QC/Screenshot-2026-02-28-161652-1.png" alt="Airport Lounge" class="showcase-img">
+                  </div>
+                  <h3 class="text-xl font-heading font-bold text-[#111827] mb-2 group-hover:text-[#D71A21] transition-colors">The Emirates Lounges</h3>
+                  <p class="text-gray-600 text-sm leading-relaxed">Eligible passengers can relax pre-flight in our highly detailed, luxurious terminal lounges away from the busy concourse.</p>
+              </div>
+
+          </div>
+          
+          <div class="mt-16 text-center reveal">
+               <a href="/manage/" class="ek-btn-primary">Manage Your Flight</a>
+          </div>
+      </section>
+
+      <section class="bg-gray-100 py-24 px-6 text-center border-t border-gray-200">
+          <div class="max-w-3xl mx-auto reveal">
+              <i class="fa-solid fa-leaf text-4xl text-green-600 mb-6"></i>
+              <h3 class="text-3xl font-heading font-bold text-[#111827] mb-4">Commitment to the Future</h3>
+              <p class="text-gray-600 text-base leading-relaxed mb-10">
+                  Emirates Airline is more than a virtual carrier. We are deeply aligned with the humanitarian and environmental ethics of our parent organization. We proudly support the real-world Emirates Airline Foundation and work alongside the **Tyler Nicholas Foundation** to promote youth leadership and environmental sustainability initiatives.
+              </p>
+              
+              <div class="inline-block bg-white border border-gray-200 px-10 py-6 rounded shadow-sm">
+                  <p class="text-sm font-bold uppercase tracking-[0.2em] text-[#111827]">
+                      We stand with the United Arab Emirates.<br><span class="text-[#D71A21] mt-3 block font-black text-lg">NO WARS. WORLD PEACE.</span>
+                  </p>
+              </div>
+          </div>
+      </section>
+
+  </main>
+
+  <footer class="bg-[#111827] text-white py-16 px-6 md:px-12 mt-auto w-full border-t-4 border-[#D71A21]">
+    <div class="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-gray-700 pb-12 mb-8">
+      <div>
+        <h4 class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-widest">About us</h4>
+        <ul class="space-y-4">
+          <li><a href="/about/" class="footer-link text-white font-bold">About Emirates Airline</a></li>
+          <li><a href="https://careers.emiratesgrouproblox.link" class="footer-link">Careers <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i></a></li>
+          <li><a href="https://emiratesgrouproblox.link/network/foundation" class="footer-link">Emirates Airline Foundation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-widest">Help</h4>
+        <ul class="space-y-4">
+          <li><a href="https://emiratesgrouproblox.link/help" class="footer-link">Help and Contact</a></li>
+          <li><a href="https://emiratesgrouproblox.link/help" class="footer-link">Travel Updates</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-widest">Manage</h4>
+        <ul class="space-y-4">
+          <li><a href="/book/" class="footer-link">Book a Flight</a></li>
+          <li><a href="/manage/" class="footer-link">Online Check-in</a></li>
+          <li><a href="/status/" class="footer-link">Flight Status</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-widest">Loyalty</h4>
+        <ul class="space-y-4">
+          <li><a href="https://emiratesgrouproblox.link/myportal/login/" class="footer-link">Log in to Skywards</a></li>
+          <li><a href="https://emiratesgrouproblox.link/network/skywards" class="footer-link">About Emirates Skywards</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 font-medium">
+      <div class="flex flex-wrap justify-center gap-6 mb-6 md:mb-0">
+          <a href="https://emiratesgrouproblox.link/help" class="hover:text-white transition-colors">Accessibility statement</a>
+          <a href="https://emiratesgrouproblox.link/help" class="hover:text-white transition-colors">Contact us</a>
+          <a href="https://emiratesgrouproblox.link/help" class="hover:text-white transition-colors">Terms and conditions</a>
+      </div>
+      <div class="flex items-center gap-4">
+          <p>&copy; 2026 Emirates Airline (Roblox). All Rights Reserved.</p>
+          <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-6 hidden md:block opacity-40 mix-blend-screen" alt="Emirates">
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Remove Preloader
+    window.addEventListener('load', () => {
+        const pageLoader = document.getElementById('page-loader');
+        setTimeout(() => {
+            pageLoader.style.opacity = '0';
+            pageLoader.style.visibility = 'hidden';
+        }, 600); // Quick fade out for the clean spinner
+    });
+
+    // Scroll Reveal Animation Logic
+    document.addEventListener("DOMContentLoaded", function() {
+        const reveals = document.querySelectorAll(".reveal");
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 100;
+
+            reveals.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add("active");
+                }
+            });
+        };
+
+        // Trigger once on load
+        revealOnScroll();
+        
+        // Trigger on scroll
+        window.addEventListener("scroll", revealOnScroll);
+    });
+  </script>
+</body>
+</html>
