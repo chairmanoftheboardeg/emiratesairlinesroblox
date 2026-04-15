@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leadership & Structure | Emirates Airline Roblox</title>
+  
+  <link rel="icon" href="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" id="favicon" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Open Sans', sans-serif; background-color: #f9fafb; color: #111827; overflow-x: hidden; scroll-behavior: smooth; }
+    h1, h2, h3, h4, h5, h6, .font-heading { font-family: 'Montserrat', sans-serif; }
+    
+    /* Preloader */
+    #page-loader { position: fixed; inset: 0; z-index: 999999; background-color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+    .spinner { width: 50px; height: 50px; border: 4px solid #f3f4f6; border-top: 4px solid #D71A21; border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    
+    /* Navbar */
+    .ek-nav { background-color: #ffffff; border-bottom: 1px solid #f3f4f6; position: sticky; top: 0; z-index: 50; }
+    .ek-nav-link { position: relative; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #374151; transition: color 0.3s; padding: 0.5rem 0; }
+    .ek-nav-link:hover, .ek-nav-link.active { color: #D71A21; }
+    .ek-nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #D71A21; transition: width 0.3s ease; }
+    .ek-nav-link:hover::after, .ek-nav-link.active::after { width: 100%; }
+
+    /* Custom Buttons */
+    .ek-btn-primary { display: inline-block; background-color: #D71A21; color: #ffffff; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 1rem 2rem; border-radius: 2px; transition: all 0.3s ease; border: 1px solid #D71A21; cursor: pointer; }
+    .ek-btn-primary:hover { background-color: #991b1b; border-color: #991b1b; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(215, 26, 33, 0.3); }
+
+    /* Scroll Animations */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* Accents */
+    .red-accent { width: 40px; height: 3px; background-color: #D71A21; margin-top: 1rem; margin-bottom: 1.5rem; }
+    .center-accent { margin-left: auto; margin-right: auto; }
+
+    /* Hierarchy Role Cards */
+    .role-card { background-color: #ffffff; border: 1px solid #e5e7eb; border-left: 4px solid #111827; padding: 1rem 1.5rem; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); font-family: 'Montserrat', sans-serif; font-weight: 700; color: #111827; display: flex; align-items: center; transition: transform 0.2s, box-shadow 0.2s; }
+    .role-card:hover { transform: translateX(5px); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    .role-card-executive { border-left-color: #D71A21; }
+    .role-card-flight { border-left-color: #b39556; }
+    .role-card-cabin { border-left-color: #3b82f6; }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+  <div id="page-loader">
+      <div class="spinner mb-6"></div>
+      <div class="font-heading text-gray-800 text-xs font-bold uppercase tracking-widest">
+          Loading Emirates Airline...
+      </div>
+  </div>
+
+  <header class="ek-nav w-full py-4 px-6 md:px-12 shadow-sm">
+      <div class="max-w-[1400px] mx-auto flex items-center justify-between">
+          <a href="/" class="flex-shrink-0">
+              <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-8 md:h-10 object-contain" alt="Emirates Airline">
+          </a>
+          <nav class="hidden lg:flex items-center space-x-8">
+              <a href="/book/" class="ek-nav-link">Book</a>
+              <a href="/manage/" class="ek-nav-link">Manage</a>
+              <a href="/about/" class="ek-nav-link active">About Us</a>
+              <a href="https://emiratesgrouproblox.link/network/skywards" class="ek-nav-link">Loyalty</a>
+              <a href="https://emiratesgrouproblox.link/help" class="ek-nav-link">Help</a>
+          </nav>
+          <div class="hidden md:flex items-center space-x-6">
+              <a href="#" class="font-heading text-xs font-bold text-gray-500 hover:text-[#D71A21] transition-colors uppercase tracking-widest"><i class="fa-solid fa-globe mr-1"></i> Global</a>
+              <a href="https://myportal.emiratesgrouproblox.link/login/" class="ek-btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.7rem;">Portal Login</a>
+          </div>
+      </div>
+  </header>
+
+  <main class="flex-grow w-full pb-24">
+
+      <section class="bg-white py-20 px-6 border-b border-gray-200">
+          <div class="max-w-[1000px] mx-auto text-center reveal">
+              <p class="font-heading text-[#D71A21] font-bold tracking-[0.2em] uppercase text-xs mb-4">Organizational Hierarchy</p>
+              <h1 class="text-4xl md:text-6xl font-heading font-black text-[#111827] leading-tight mb-6">
+                  Leadership & Structure
+              </h1>
+              <div class="w-20 h-1 bg-[#D71A21] mx-auto mb-8"></div>
+              <p class="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
+                  Discover the structured departments and highly trained divisions that work in unison to deliver the ultimate virtual aviation experience across Emirates Group Roblox.
+              </p>
+          </div>
+      </section>
+
+      <section class="py-16 px-6 max-w-[1000px] mx-auto reveal">
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 md:p-12">
+              <div class="flex items-start gap-6 flex-col md:flex-row mb-10">
+                  <div class="w-16 h-16 bg-red-50 text-[#D71A21] rounded-lg flex items-center justify-center text-3xl shrink-0">
+                      <i class="fa-solid fa-building-columns"></i>
+                  </div>
+                  <div>
+                      <h2 class="text-3xl font-heading font-bold text-[#111827] mb-2">Executive Department</h2>
+                      <div class="red-accent mb-4"></div>
+                      <p class="text-gray-600 leading-relaxed">
+                          The Executive Department provides the strategic vision, corporate governance, and operational oversight for Emirates Airlines. This elite tier of leadership is responsible for defining our platform standards, managing global network expansions, and ensuring that our unwavering commitment to excellence is upheld across every single division.
+                      </p>
+                  </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pl-0 md:pl-22">
+                  <div class="role-card role-card-executive">
+                      <i class="fa-solid fa-user-tie text-gray-400 mr-4"></i> Chief Executive Officer
+                  </div>
+                  <div class="role-card role-card-executive">
+                      <i class="fa-solid fa-user-tie text-gray-400 mr-4"></i> Deputy Chief Executive Officer
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="py-8 px-6 max-w-[1000px] mx-auto reveal">
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 md:p-12">
+              <div class="flex items-start gap-6 flex-col md:flex-row mb-12">
+                  <div class="w-16 h-16 bg-gray-100 text-[#111827] rounded-lg flex items-center justify-center text-3xl shrink-0">
+                      <i class="fa-solid fa-plane"></i>
+                  </div>
+                  <div>
+                      <h2 class="text-3xl font-heading font-bold text-[#111827] mb-2">Flight Operations Department</h2>
+                      <div class="red-accent mb-4"></div>
+                      <p class="text-gray-600 leading-relaxed">
+                          The absolute backbone of our airline. The Flight Operations Department is tasked with ensuring that every scheduled route is executed with unmatched precision, safety, and realism. This department is divided into two highly specialized divisions that work in seamless harmony to deliver the definitive Emirates passenger experience.
+                      </p>
+                  </div>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                  
+                  <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                      <div class="flex items-center gap-3 mb-4 border-b border-gray-200 pb-4">
+                          <i class="fa-solid fa-plane-up text-[#b39556] text-xl"></i>
+                          <h3 class="text-xl font-heading font-bold text-[#111827]">Flight Deck Division</h3>
+                      </div>
+                      <p class="text-sm text-gray-600 leading-relaxed mb-6">
+                          Tasked with the safe navigation and technical operation of our fleet. From mastering complex PTFS/ROAV aircraft systems to executing flawless landings in challenging weather, our flight deck crew represents the absolute pinnacle of virtual airmanship.
+                      </p>
+                      <div class="space-y-3">
+                          <div class="role-card role-card-flight"><i class="fa-solid fa-jet-fighter-up text-gray-300 mr-3"></i> Chief Pilot</div>
+                          <div class="role-card role-card-flight"><i class="fa-solid fa-jet-fighter-up text-gray-300 mr-3"></i> Captain</div>
+                          <div class="role-card role-card-flight"><i class="fa-solid fa-jet-fighter-up text-gray-300 mr-3"></i> First Officer</div>
+                          <div class="role-card role-card-flight"><i class="fa-solid fa-user-graduate text-gray-300 mr-3"></i> Trainee Pilot</div>
+                      </div>
+                  </div>
+
+                  <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                      <div class="flex items-center gap-3 mb-4 border-b border-gray-200 pb-4">
+                          <i class="fa-solid fa-mug-hot text-[#3b82f6] text-xl"></i>
+                          <h3 class="text-xl font-heading font-bold text-[#111827]">Cabin Services Division</h3>
+                      </div>
+                      <p class="text-sm text-gray-600 leading-relaxed mb-6">
+                          The face of Emirates Airlines. Our highly trained Cabin Services team is dedicated to passenger safety, cabin security, and delivering world-class hospitality. They ensure every guest, from Economy to First Class, enjoys our signature in-flight service.
+                      </p>
+                      <div class="space-y-3">
+                          <div class="role-card role-card-cabin"><i class="fa-solid fa-star text-gray-300 mr-3"></i> Purser</div>
+                          <div class="role-card role-card-cabin"><i class="fa-solid fa-user-nurse text-gray-300 mr-3"></i> Flight Attendant</div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </section>
+
+      <section class="py-20 px-6 max-w-[1000px] mx-auto reveal mt-10">
+          <div class="bg-[#111827] rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row items-center border-t-4 border-[#D71A21]">
+              <div class="w-full md:w-5/12 p-10 bg-white flex items-center justify-center border-b md:border-b-0 md:border-r border-gray-200">
+                  <img src="https://i.ibb.co/ZR4yFF15/Emirates-Group-Careers.png" alt="Emirates Group Careers" class="max-w-full h-auto object-contain drop-shadow-md">
+              </div>
+              <div class="w-full md:w-7/12 p-10 text-white text-center md:text-left">
+                  <h2 class="text-3xl font-heading font-bold mb-4">Want to join the team?</h2>
+                  <p class="text-gray-300 leading-relaxed mb-8">
+                      We are always looking for dedicated, professional individuals to join our ranks. Whether you belong in the Flight Deck or serving guests in the Cabin, your premium virtual aviation career starts here.
+                  </p>
+                  <a href="https://careers.emiratesgrouproblox.link" target="_blank" class="ek-btn-primary bg-white text-[#111827] border-white hover:bg-gray-200 hover:border-gray-200">
+                      Apply Now <i class="fa-solid fa-arrow-right ml-2"></i>
+                  </a>
+              </div>
+          </div>
+      </section>
+
+  </main>
+
+  <footer class="bg-white text-[#111827] py-16 px-6 md:px-12 mt-auto w-full border-t border-gray-200">
+    <div class="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-gray-200 pb-12 mb-8">
+      <div>
+        <h4 class="font-heading font-bold text-[#111827] mb-6 text-sm uppercase tracking-widest">About us</h4>
+        <ul class="space-y-4">
+          <li><a href="/about/" class="footer-link text-gray-600 hover:text-[#D71A21] transition-colors text-sm">About Emirates Airline</a></li>
+          <li><a href="/leadership/" class="footer-link text-[#D71A21] font-bold text-sm">Leadership & Structure</a></li>
+          <li><a href="https://careers.emiratesgrouproblox.link" class="footer-link text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Careers <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i></a></li>
+          <li><a href="https://emiratesgrouproblox.link/network/foundation" class="footer-link text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Emirates Airline Foundation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-heading font-bold text-[#111827] mb-6 text-sm uppercase tracking-widest">Help</h4>
+        <ul class="space-y-4">
+          <li><a href="https://emiratesgrouproblox.link/help" class="footer-link text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Help and Contact</a></li>
+          <li><a href="https://emiratesgrouproblox.link/help" class="footer-link text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Travel Updates</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-heading font-bold text-[#111827] mb-6 text-sm uppercase tracking-widest">Manage</h4>
+        <ul class="space-y-4">
+          <li><a href="/book/" class="footer-link text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Book a Flight</a></li>
+          <li><a href="/manage/" class="footer-link text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Online Check-in</a></li>
+          <li><a href="/status/" class="footer-link text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Flight Status</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-heading font-bold text-[#111827] mb-6 text-sm uppercase tracking-widest">Loyalty</h4>
+        <ul class="space-y-4">
+          <li><a href="https://myportal.emiratesgrouproblox.link/login/" class="footer-link text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Log in to Skywards</a></li>
+          <li><a href="https://emiratesgrouproblox.link/network/skywards" class="footer-link text-gray-600 hover:text-[#D71A21] transition-colors text-sm">About Emirates Skywards</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium">
+      <div class="flex flex-wrap justify-center gap-6 mb-6 md:mb-0">
+          <a href="https://emiratesgrouproblox.link/help" class="hover:text-[#D71A21] transition-colors">Accessibility statement</a>
+          <a href="https://emiratesgrouproblox.link/help" class="hover:text-[#D71A21] transition-colors">Contact us</a>
+          <a href="https://emiratesgrouproblox.link/help" class="hover:text-[#D71A21] transition-colors">Terms and conditions</a>
+      </div>
+      <div class="flex items-center gap-4">
+          <p>&copy; 2026 Emirates Airline (Roblox). All Rights Reserved.</p>
+          <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-6 hidden md:block grayscale opacity-50" alt="Emirates">
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('load', () => {
+        const pageLoader = document.getElementById('page-loader');
+        setTimeout(() => {
+            pageLoader.style.opacity = '0';
+            pageLoader.style.visibility = 'hidden';
+        }, 600);
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const reveals = document.querySelectorAll(".reveal");
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 100;
+            reveals.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add("active");
+                }
+            });
+        };
+        revealOnScroll();
+        window.addEventListener("scroll", revealOnScroll);
+    });
+  </script>
+</body>
+</html>
