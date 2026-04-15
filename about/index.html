@@ -46,6 +46,9 @@
     
     /* Text layout */
     .ceo-text p { margin-bottom: 1.25rem; line-height: 1.8; color: #374151; font-size: 0.95rem; }
+
+    /* NGO Card Image Override */
+    .ngo-logo { height: 60px; object-fit: contain; margin-bottom: 1rem; }
   </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -79,7 +82,7 @@
   <main class="flex-grow w-full">
 
       <section class="relative h-[65vh] min-h-[500px] flex items-center justify-center px-6">
-          <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://i.ibb.co/s9yqDDsy/herobanner.webp');"></div>
+          <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://i.ibb.co/p8hp3QC/Screenshot-2026-02-28-161652-1.png');"></div>
           <div class="absolute inset-0 bg-gradient-to-b from-[#111827]/80 via-[#111827]/50 to-[#111827]/90 z-10"></div>
           
           <div class="relative z-20 text-center max-w-4xl mx-auto mt-10 reveal">
@@ -149,7 +152,7 @@
           <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-start gap-16 reveal">
               
               <div class="w-full md:w-1/3 flex flex-col items-center sticky top-24">
-                  <div class="bg-gray-100 rounded-lg p-6 pt-12 w-full flex justify-center border border-gray-200">
+                  <div class="bg-gray-50 rounded-xl p-6 pt-12 w-full flex justify-center border border-gray-100">
                       <img src="https://i.ibb.co/zYr6PN6/8b873db86015742d0580a163e3c601efed4eb434-2-312x375-removebg-preview.png" alt="Daniel Thompson, CEO" class="h-[400px] object-contain drop-shadow-xl">
                   </div>
                   <div class="mt-6 text-center w-full">
@@ -184,7 +187,7 @@
           </div>
       </section>
 
-      <section class="py-16 px-6 bg-gray-50 border-t border-b border-gray-200 text-center">
+      <section class="py-16 px-6 bg-white border-t border-b border-gray-100 text-center">
           <div class="max-w-[800px] mx-auto reveal">
               <h2 class="text-3xl font-heading font-bold text-[#111827] mb-4">Guided by Visionaries</h2>
               <p class="text-gray-600 mb-8 leading-relaxed">Discover the dedicated team of directors and executives steering Emirates Airlines towards a new era of virtual aviation.</p>
@@ -192,125 +195,136 @@
           </div>
       </section>
 
-      <section class="relative py-32 px-6 overflow-hidden">
-          <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://i.ibb.co/p8hp3QC/Screenshot-2026-02-28-161652-1.png'); background-attachment: fixed;"></div>
-          <div class="absolute inset-0 bg-[#111827]/90 z-10"></div>
-          
-          <div class="relative z-20 max-w-[1200px] mx-auto text-center text-white reveal">
-              <i class="fa-solid fa-earth-americas text-5xl text-[#D71A21] mb-6"></i>
-              <h2 class="text-4xl font-heading font-bold mb-4">Global Impact & Responsibility</h2>
-              <div class="red-accent center-accent"></div>
-              <p class="text-gray-300 text-lg leading-relaxed mb-16 max-w-3xl mx-auto font-light">
-                  Emirates Airlines operates with a vision that extends far beyond virtual aviation. We are deeply committed to humanitarian ethics, global crisis relief, and supporting real-world organizations that drive tangible change.
-              </p>
+      <section class="py-24 px-6 bg-gray-50">
+          <div class="max-w-[1200px] mx-auto reveal">
+              
+              <div class="text-center mb-12">
+                  <h2 class="text-3xl font-heading font-bold text-[#111827] mb-4">Corporate Responsibility</h2>
+                  <div class="red-accent center-accent"></div>
+                  <p class="text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                      Emirates Airlines operates with a vision that extends far beyond virtual aviation. We are deeply committed to humanitarian ethics, global crisis relief, and supporting real-world organizations that drive tangible change.
+                  </p>
+              </div>
 
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                  <a href="https://tyler-nicholas-foundation.online/" target="_blank" class="bg-white rounded p-8 flex flex-col items-center justify-center text-center transform transition-transform hover:-translate-y-2 shadow-2xl group">
-                      <div class="h-24 flex items-center justify-center mb-6">
-                          <img src="https://i.ibb.co/DgTcFQhD/non-profit-logo-Made-with-Poster-My-Wall.jpg" alt="Tyler Nicholas Foundation" class="max-h-full object-contain">
-                      </div>
-                      <h3 class="text-[#111827] font-heading font-bold text-xl mb-2 group-hover:text-[#D71A21] transition-colors">Tyler Nicholas Foundation</h3>
-                      <p class="text-sm text-gray-500 font-medium">A non-profit organization based in Seychelles dedicated to global betterment and youth leadership initiatives.</p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                  <a href="https://tyler-nicholas-foundation.online/" target="_blank" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center justify-center text-center border border-gray-100">
+                      <img src="https://i.ibb.co/DgTcFQhD/non-profit-logo-Made-with-Poster-My-Wall.jpg" alt="Tyler Nicholas Foundation" class="h-20 object-contain mb-4">
+                      <h3 class="text-[#111827] font-bold text-lg">Tyler Nicholas Foundation</h3>
+                      <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Non-Profit Based In Seychelles</p>
                   </a>
                   
-                  <a href="https://emiratesgrouproblox.link/network/foundation" target="_blank" class="bg-white rounded p-8 flex flex-col items-center justify-center text-center transform transition-transform hover:-translate-y-2 shadow-2xl group">
-                      <div class="h-24 flex items-center justify-center mb-6">
-                          <img src="https://i.ibb.co/FLbTQZnf/Capture-removebg-preview.png" alt="Emirates Airline Foundation" class="max-h-full object-contain mix-blend-multiply opacity-90">
-                      </div>
-                      <h3 class="text-[#111827] font-heading font-bold text-xl mb-2 group-hover:text-[#D71A21] transition-colors">Emirates Airline Foundation</h3>
-                      <p class="text-sm text-gray-500 font-medium">Dedicated to transforming the lives of children and empowering local communities worldwide.</p>
+                  <a href="https://emiratesgrouproblox.link/network/foundation" target="_blank" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center justify-center text-center border border-gray-100">
+                      <img src="https://i.ibb.co/FLbTQZnf/Capture-removebg-preview.png" alt="Emirates Airline Foundation" class="h-20 object-contain mb-4 mix-blend-multiply">
+                      <h3 class="text-[#111827] font-bold text-lg">Emirates Airline Foundation</h3>
+                      <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Empowering Children Worldwide</p>
                   </a>
               </div>
 
-              <div class="w-full h-px bg-gray-700 mb-16"></div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  
+                  <a href="https://www.icrc.org/" target="_blank" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center text-center border border-gray-100">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_the_Red_Cross.svg/3840px-Flag_of_the_Red_Cross.svg.png" class="ngo-logo" alt="ICRC">
+                      <h4 class="font-bold text-[#111827] text-lg">ICRC</h4>
+                      <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">Intl. Committee of the Red Cross</p>
+                  </a>
 
-              <h3 class="text-2xl font-heading font-bold mb-10 text-gray-200">Non-Profits & NGOs We Proudly Support</h3>
-              <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                  <a href="https://www.icrc.org/" target="_blank" class="bg-white rounded p-6 flex flex-col items-center justify-center transform transition-transform hover:-translate-y-1 shadow">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_the_Red_Cross.svg/3840px-Flag_of_the_Red_Cross.svg.png" class="h-12 object-contain mb-3" alt="ICRC">
-                      <span class="text-[#111827] text-[10px] font-bold uppercase tracking-wider text-center mt-auto">ICRC</span>
+                  <a href="https://www.unhcr.org/" target="_blank" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center text-center border border-gray-100">
+                      <img src="https://www.ri.org//content/uploads/2019/07/united-nations-refugee-agency.png" class="ngo-logo" alt="UNHCR">
+                      <h4 class="font-bold text-[#111827] text-lg">UN Refugee Agency</h4>
+                      <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">UNHCR</p>
                   </a>
-                  <a href="https://www.unhcr.org/" target="_blank" class="bg-white rounded p-6 flex flex-col items-center justify-center transform transition-transform hover:-translate-y-1 shadow">
-                      <img src="https://www.ri.org//content/uploads/2019/07/united-nations-refugee-agency.png" class="h-12 object-contain mb-3" alt="UNHCR">
-                      <span class="text-[#111827] text-[10px] font-bold uppercase tracking-wider text-center mt-auto">UNHCR</span>
+
+                  <a href="https://www.wfp.org/" target="_blank" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center text-center border border-gray-100">
+                      <img src="https://cdn.wfp.org/guides/ui/v1.0.0/assets/logos/vertical/fr/wfp-logo-vertical-blue-fr.png" class="ngo-logo" alt="WFP">
+                      <h4 class="font-bold text-[#111827] text-lg">WFP</h4>
+                      <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">World Food Programme</p>
                   </a>
-                  <a href="https://www.wfp.org/" target="_blank" class="bg-white rounded p-6 flex flex-col items-center justify-center transform transition-transform hover:-translate-y-1 shadow">
-                      <img src="https://cdn.wfp.org/guides/ui/v1.0.0/assets/logos/vertical/fr/wfp-logo-vertical-blue-fr.png" class="h-12 object-contain mb-3" alt="WFP">
-                      <span class="text-[#111827] text-[10px] font-bold uppercase tracking-wider text-center mt-auto">WFP</span>
+
+                  <a href="https://www.unicef.org/" target="_blank" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center text-center border border-gray-100">
+                      <img src="https://d1jcea4y7xhp7l.cloudfront.net/2018/11/8950cbae-unicef-logo.png" class="ngo-logo" alt="UNICEF">
+                      <h4 class="font-bold text-[#111827] text-lg">UNICEF</h4>
+                      <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">UN Children's Fund</p>
                   </a>
-                  <a href="https://www.unicef.org/" target="_blank" class="bg-white rounded p-6 flex flex-col items-center justify-center transform transition-transform hover:-translate-y-1 shadow">
-                      <img src="https://d1jcea4y7xhp7l.cloudfront.net/2018/11/8950cbae-unicef-logo.png" class="h-10 object-contain mb-3" alt="UNICEF">
-                      <span class="text-[#111827] text-[10px] font-bold uppercase tracking-wider text-center mt-auto">UNICEF</span>
+
+                  <a href="https://www.unrwa.org/" target="_blank" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center text-center border border-gray-100">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/United_Nations_Relief_and_Works_Agency_for_Palestine_Refugees_in_the_Near_East_Logo.svg" class="ngo-logo" alt="UNRWA">
+                      <h4 class="font-bold text-[#111827] text-lg">UNRWA</h4>
+                      <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">Relief and Works Agency</p>
                   </a>
-                  <a href="https://www.unrwa.org/" target="_blank" class="bg-white rounded p-6 flex flex-col items-center justify-center transform transition-transform hover:-translate-y-1 shadow">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/United_Nations_Relief_and_Works_Agency_for_Palestine_Refugees_in_the_Near_East_Logo.svg" class="h-12 object-contain mb-3" alt="UNRWA">
-                      <span class="text-[#111827] text-[10px] font-bold uppercase tracking-wider text-center mt-auto">UNRWA</span>
+
+                  <a href="https://www.unocha.org/" target="_blank" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center text-center border border-gray-100">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/United_Nations_Office_for_the_Coordination_of_Humanitarian_Affairs_Logo.svg" class="ngo-logo" alt="OCHA">
+                      <h4 class="font-bold text-[#111827] text-lg">OCHA</h4>
+                      <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">Coordination of Humanitarian Affairs</p>
                   </a>
-                  <a href="https://www.unocha.org/" target="_blank" class="bg-white rounded p-6 flex flex-col items-center justify-center transform transition-transform hover:-translate-y-1 shadow">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/United_Nations_Office_for_the_Coordination_of_Humanitarian_Affairs_Logo.svg" class="h-12 object-contain mb-3" alt="OCHA">
-                      <span class="text-[#111827] text-[10px] font-bold uppercase tracking-wider text-center mt-auto">OCHA</span>
+
+                  <a href="https://www.ohchr.org/en/ohchr_homepage" target="_blank" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center text-center border border-gray-100">
+                      <img src="https://humanrightshouse.org/wp-content/uploads/2018/01/19752.jpg" class="ngo-logo" alt="OHCHR">
+                      <h4 class="font-bold text-[#111827] text-lg">OHCHR</h4>
+                      <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">Office of the High Commissioner</p>
                   </a>
-                  <a href="https://www.ohchr.org/en/ohchr_homepage" target="_blank" class="bg-white rounded p-6 flex flex-col items-center justify-center transform transition-transform hover:-translate-y-1 shadow">
-                      <img src="https://humanrightshouse.org/wp-content/uploads/2018/01/19752.jpg" class="h-12 object-contain mb-3" alt="OHCHR">
-                      <span class="text-[#111827] text-[10px] font-bold uppercase tracking-wider text-center mt-auto">OHCHR</span>
+
+                  <a href="https://www.undp.org/" target="_blank" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center text-center border border-gray-100">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/UNDP_logo.svg/1280px-UNDP_logo.svg.png" class="ngo-logo" alt="UNDP">
+                      <h4 class="font-bold text-[#111827] text-lg">UNDP</h4>
+                      <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">UN Development Programme</p>
                   </a>
-                  <a href="https://www.undp.org/" target="_blank" class="bg-white rounded p-6 flex flex-col items-center justify-center transform transition-transform hover:-translate-y-1 shadow">
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/UNDP_logo.svg/1280px-UNDP_logo.svg.png" class="h-12 object-contain mb-3" alt="UNDP">
-                      <span class="text-[#111827] text-[10px] font-bold uppercase tracking-wider text-center mt-auto">UNDP</span>
+
+                  <a href="https://www.unwomen.org/en" target="_blank" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center text-center border border-gray-100">
+                      <img src="https://www.un.org/sites/un2.un.org/files/2025/04/unwomen_logo.png" class="ngo-logo" alt="UN Women">
+                      <h4 class="font-bold text-[#111827] text-lg">UN Women</h4>
+                      <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">Entity for Gender Equality</p>
                   </a>
-                  <a href="https://www.unwomen.org/en" target="_blank" class="bg-white rounded p-6 flex flex-col items-center justify-center transform transition-transform hover:-translate-y-1 shadow md:col-start-2 lg:col-start-auto">
-                      <img src="https://www.un.org/sites/un2.un.org/files/2025/04/unwomen_logo.png" class="h-12 object-contain mb-3" alt="UN Women">
-                      <span class="text-[#111827] text-[10px] font-bold uppercase tracking-wider text-center mt-auto">UN Women</span>
-                  </a>
+
               </div>
           </div>
       </section>
 
   </main>
 
-  <footer class="bg-white text-[#111827] py-16 px-6 md:px-12 mt-auto w-full border-t border-gray-200">
-    <div class="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-gray-200 pb-12 mb-8">
+  <footer class="bg-[#111827] text-white py-16 px-6 md:px-12 mt-auto w-full border-t-4 border-[#D71A21]">
+    <div class="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-gray-700 pb-12 mb-8">
       <div>
-        <h4 class="font-heading font-bold text-[#111827] mb-6 text-sm uppercase tracking-widest">About us</h4>
+        <h4 class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-widest">About us</h4>
         <ul class="space-y-4">
-          <li><a href="/about/" class="footer-link text-[#D71A21] font-bold">About Emirates Airline</a></li>
-          <li><a href="https://careers.emiratesgrouproblox.link" class="footer-link">Careers <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i></a></li>
-          <li><a href="https://emiratesgrouproblox.link/network/foundation" class="footer-link">Emirates Airline Foundation</a></li>
+          <li><a href="/about/" class="text-gray-400 hover:text-white transition-colors text-sm">About Emirates Airline</a></li>
+          <li><a href="https://careers.emiratesgrouproblox.link" class="text-gray-400 hover:text-white transition-colors text-sm">Careers <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i></a></li>
+          <li><a href="https://emiratesgrouproblox.link/network/foundation" class="text-gray-400 hover:text-white transition-colors text-sm">Emirates Airline Foundation</a></li>
         </ul>
       </div>
       <div>
-        <h4 class="font-heading font-bold text-[#111827] mb-6 text-sm uppercase tracking-widest">Help</h4>
+        <h4 class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-widest">Help</h4>
         <ul class="space-y-4">
-          <li><a href="https://emiratesgrouproblox.link/help" class="footer-link">Help and Contact</a></li>
-          <li><a href="https://emiratesgrouproblox.link/help" class="footer-link">Travel Updates</a></li>
+          <li><a href="https://emiratesgrouproblox.link/help" class="text-gray-400 hover:text-white transition-colors text-sm">Help and Contact</a></li>
+          <li><a href="https://emiratesgrouproblox.link/help" class="text-gray-400 hover:text-white transition-colors text-sm">Travel Updates</a></li>
         </ul>
       </div>
       <div>
-        <h4 class="font-heading font-bold text-[#111827] mb-6 text-sm uppercase tracking-widest">Manage</h4>
+        <h4 class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-widest">Manage</h4>
         <ul class="space-y-4">
-          <li><a href="/book/" class="footer-link">Book a Flight</a></li>
-          <li><a href="/manage/" class="footer-link">Online Check-in</a></li>
-          <li><a href="/status/" class="footer-link">Flight Status</a></li>
+          <li><a href="/book/" class="text-gray-400 hover:text-white transition-colors text-sm">Book a Flight</a></li>
+          <li><a href="/manage/" class="text-gray-400 hover:text-white transition-colors text-sm">Online Check-in</a></li>
+          <li><a href="/status/" class="text-gray-400 hover:text-white transition-colors text-sm">Flight Status</a></li>
         </ul>
       </div>
       <div>
-        <h4 class="font-heading font-bold text-[#111827] mb-6 text-sm uppercase tracking-widest">Loyalty</h4>
+        <h4 class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-widest">Loyalty</h4>
         <ul class="space-y-4">
-          <li><a href="https://myportal.emiratesgrouproblox.link/login/" class="footer-link">Log in to Skywards</a></li>
-          <li><a href="https://emiratesgrouproblox.link/network/skywards" class="footer-link">About Emirates Skywards</a></li>
+          <li><a href="https://myportal.emiratesgrouproblox.link/login/" class="text-gray-400 hover:text-white transition-colors text-sm">Log in to Skywards</a></li>
+          <li><a href="https://emiratesgrouproblox.link/network/skywards" class="text-gray-400 hover:text-white transition-colors text-sm">About Emirates Skywards</a></li>
         </ul>
       </div>
     </div>
     
     <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium">
       <div class="flex flex-wrap justify-center gap-6 mb-6 md:mb-0">
-          <a href="https://emiratesgrouproblox.link/help" class="hover:text-[#D71A21] transition-colors">Accessibility statement</a>
-          <a href="https://emiratesgrouproblox.link/help" class="hover:text-[#D71A21] transition-colors">Contact us</a>
-          <a href="https://emiratesgrouproblox.link/help" class="hover:text-[#D71A21] transition-colors">Terms and conditions</a>
+          <a href="https://emiratesgrouproblox.link/help" class="hover:text-white transition-colors">Accessibility statement</a>
+          <a href="https://emiratesgrouproblox.link/help" class="hover:text-white transition-colors">Contact us</a>
+          <a href="https://emiratesgrouproblox.link/help" class="hover:text-white transition-colors">Terms and conditions</a>
       </div>
       <div class="flex items-center gap-4">
           <p>&copy; 2026 Emirates Airline (Roblox). All Rights Reserved.</p>
-          <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-6 hidden md:block grayscale opacity-50" alt="Emirates">
+          <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-6 hidden md:block opacity-40 mix-blend-screen" alt="Emirates">
       </div>
     </div>
   </footer>
