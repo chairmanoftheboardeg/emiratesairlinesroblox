@@ -120,7 +120,6 @@
                   <a href="https://emiratesgrouproblox.link/help" class="ek-nav-link">Help</a>
               </nav>
               <div class="hidden md:flex items-center space-x-6">
-                  <a href="#" class="font-heading text-xs font-bold text-gray-500 hover:text-[#D71A21] transition-colors uppercase tracking-widest"><i class="fa-solid fa-globe mr-1"></i> Global</a>
                   <a href="https://myportal.emiratesgrouproblox.link/login/" class="ek-btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.7rem;">Portal Login</a>
               </div>
           </div>
@@ -129,7 +128,7 @@
       <main class="flex-grow relative w-full bg-[#f9fafb]">
 
           <section class="relative bg-[#111827] pt-24 pb-48 lg:pb-64 px-6">
-              <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://i.ibb.co/tTyxcwxP/a350v2.webp'); background-position: center 60%;"></div>
+              <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://i.ibb.co/Y4v5785g/Screenshot-2026-02-28-162151.png'); background-position: center 50%;"></div>
               <div class="absolute inset-0 bg-gradient-to-b from-[#111827]/80 via-[#111827]/40 to-[#111827]/90 z-10"></div>
               
               <div class="max-w-[1200px] mx-auto relative z-20 text-center pt-10 reveal">
@@ -146,15 +145,15 @@
           <div class="max-w-[1200px] mx-auto relative z-30 -mt-32 lg:-mt-40 px-4 mb-16 reveal">
               <div class="bg-white rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden border border-gray-100">
                   
-                  <div class="flex border-b border-gray-100 bg-[#f9fafb]">
-                      <button onclick="switchTab('book')" id="tab-book" class="widget-tab active flex-1 py-5 text-sm font-bold flex items-center justify-center border-t-4 border-t-transparent hover:border-t-gray-300">
-                          <i class="fa-solid fa-plane-departure mr-3"></i> Search Flights
+                  <div class="flex flex-wrap md:flex-nowrap border-b border-gray-100 bg-[#f9fafb]">
+                      <button onclick="switchTab('book')" id="tab-book" class="widget-tab active w-full md:flex-1 py-4 md:py-5 text-xs md:text-sm font-bold flex items-center justify-center border-t-4 border-t-transparent hover:border-t-gray-300">
+                          <i class="fa-solid fa-plane-departure mr-2 md:mr-3"></i> Search Flights
                       </button>
-                      <button onclick="switchTab('manage')" id="tab-manage" class="widget-tab flex-1 py-5 text-sm font-bold flex items-center justify-center border-l border-gray-100 border-t-4 border-t-transparent hover:border-t-gray-300">
-                          <i class="fa-solid fa-suitcase-rolling mr-3"></i> Manage Booking
+                      <button onclick="switchTab('manage')" id="tab-manage" class="widget-tab w-full md:flex-1 py-4 md:py-5 text-xs md:text-sm font-bold flex items-center justify-center border-l-0 md:border-l border-gray-100 border-t-4 border-t-transparent hover:border-t-gray-300">
+                          <i class="fa-solid fa-suitcase-rolling mr-2 md:mr-3"></i> Manage Booking
                       </button>
-                      <button onclick="switchTab('status')" id="tab-status" class="widget-tab flex-1 py-5 text-sm font-bold flex items-center justify-center border-l border-gray-100 border-t-4 border-t-transparent hover:border-t-gray-300">
-                          <i class="fa-solid fa-clock mr-3"></i> Flight Status
+                      <button onclick="switchTab('status')" id="tab-status" class="widget-tab w-full md:flex-1 py-4 md:py-5 text-xs md:text-sm font-bold flex items-center justify-center border-l-0 md:border-l border-gray-100 border-t-4 border-t-transparent hover:border-t-gray-300">
+                          <i class="fa-solid fa-clock mr-2 md:mr-3"></i> Flight Status
                       </button>
                   </div>
 
@@ -171,7 +170,7 @@
                       <option value="Mellor Regional (IMLR)">
                   </datalist>
 
-                  <div id="content-book" class="p-8 md:p-10">
+                  <div id="content-book" class="p-6 md:p-10">
                       <form action="/book/" method="GET" class="flex flex-col lg:flex-row gap-6 items-end">
                           <div class="relative flex-1 w-full">
                               <i class="fa-solid fa-location-dot input-icon"></i>
@@ -189,7 +188,7 @@
                       </form>
                   </div>
 
-                  <div id="content-manage" class="p-8 md:p-10 hidden">
+                  <div id="content-manage" class="p-6 md:p-10 hidden">
                       <form id="manage-booking-form" class="flex flex-col lg:flex-row gap-6 items-end mb-4">
                           <div class="relative flex-1 w-full">
                               <i class="fa-solid fa-user input-icon"></i>
@@ -208,7 +207,7 @@
                       <div id="inline-manage-result" class="hidden border border-gray-200 rounded p-6 bg-gray-50 mt-6 shadow-inner"></div>
                   </div>
 
-                  <div id="content-status" class="p-8 md:p-10 hidden">
+                  <div id="content-status" class="p-6 md:p-10 hidden">
                       <form id="status-search-form" class="flex flex-col lg:flex-row gap-6 items-end mb-4">
                           <div class="relative flex-1 w-full">
                               <i class="fa-solid fa-plane input-icon"></i>
@@ -317,15 +316,13 @@
                   
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div class="bg-gray-50 rounded-xl p-10 border border-gray-100 hover:shadow-lg transition-shadow group reveal" style="transition-delay: 0.1s;">
-                          <i class="fa-solid fa-plane-up text-4xl text-[#D71A21] mb-6"></i>
-                          <h3 class="text-2xl font-heading font-bold text-[#111827] mb-3">The Aviation Standard</h3>
+                          <h3 class="text-2xl font-heading font-bold text-[#111827] mb-3 mt-4">The Aviation Standard</h3>
                           <p class="text-gray-600 text-sm leading-relaxed mb-8">We are setting the definitive benchmark for realism, operational professionalism, and structural perfection in virtual aviation.</p>
                           <a href="/about/" class="text-[10px] font-heading font-bold text-[#111827] uppercase tracking-widest group-hover:text-[#D71A21] transition-colors">Read Our Story &rarr;</a>
                       </div>
 
                       <div class="bg-gray-50 rounded-xl p-10 border border-gray-100 hover:shadow-lg transition-shadow group reveal" style="transition-delay: 0.2s;">
-                          <i class="fa-solid fa-users-viewfinder text-4xl text-[#D71A21] mb-6"></i>
-                          <h3 class="text-2xl font-heading font-bold text-[#111827] mb-3">Guided by Visionaries</h3>
+                          <h3 class="text-2xl font-heading font-bold text-[#111827] mb-3 mt-4">Guided by Visionaries</h3>
                           <p class="text-gray-600 text-sm leading-relaxed mb-8">Discover the dedicated team of directors, executives, and highly trained divisions steering our operations.</p>
                           <a href="/leadership/" class="text-[10px] font-heading font-bold text-[#111827] uppercase tracking-widest group-hover:text-[#D71A21] transition-colors">Meet the Team &rarr;</a>
                       </div>
