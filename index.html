@@ -32,12 +32,14 @@
     .ek-nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #D71A21; transition: width 0.3s ease; }
     .ek-nav-link:hover::after, .ek-nav-link.active::after { width: 100%; }
 
+    /* Mobile Menu */
+    #mobile-menu { transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; max-height: 0; opacity: 0; overflow: hidden; }
+    #mobile-menu.open { max-height: 400px; opacity: 1; }
+
     /* Custom Corporate Buttons */
     .ek-btn-primary { display: inline-block; background-color: #D71A21; color: #ffffff; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 1rem 2rem; border-radius: 2px; transition: all 0.3s ease; border: 1px solid #D71A21; cursor: pointer; text-align: center;}
     .ek-btn-primary:hover { background-color: #991b1b; border-color: #991b1b; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(215, 26, 33, 0.3); }
-    .ek-btn-outline { display: inline-block; background-color: transparent; color: #111827; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 1rem 2rem; border-radius: 2px; transition: all 0.3s ease; border: 1px solid #111827; cursor: pointer; text-align: center; }
-    .ek-btn-outline:hover { background-color: #111827; color: #ffffff; transform: translateY(-2px); }
-
+    
     /* Widget Styles */
     .widget-tab { border-bottom: 3px solid transparent; transition: all 0.2s; color: #6b7280; font-family: 'Montserrat', sans-serif; }
     .widget-tab:hover { color: #111827; }
@@ -107,11 +109,12 @@
 
   <div id="main-content-wrapper" style="visibility: hidden; opacity: 0; transition: opacity 0.5s ease;" class="flex flex-col min-h-screen relative w-full">
 
-      <header class="ek-nav w-full py-4 px-6 md:px-12 shadow-sm">
+      <header class="ek-nav w-full py-4 px-6 md:px-12 shadow-sm relative z-50">
           <div class="max-w-[1400px] mx-auto flex items-center justify-between">
               <a href="/" class="flex-shrink-0">
                   <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-8 md:h-10 object-contain" alt="Emirates Airline">
               </a>
+              
               <nav class="hidden lg:flex items-center space-x-8">
                   <a href="/book/" class="ek-nav-link">Book</a>
                   <a href="/manage/" class="ek-nav-link">Manage</a>
@@ -119,8 +122,24 @@
                   <a href="https://emiratesgrouproblox.link/network/skywards" class="ek-nav-link">Loyalty</a>
                   <a href="https://emiratesgrouproblox.link/help" class="ek-nav-link">Help</a>
               </nav>
-              <div class="hidden md:flex items-center space-x-6">
+              
+              <div class="hidden lg:flex items-center space-x-6">
                   <a href="https://myportal.emiratesgrouproblox.link/login/" class="ek-btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.7rem;">Portal Login</a>
+              </div>
+
+              <button onclick="toggleMobileMenu()" class="lg:hidden text-2xl text-[#111827] focus:outline-none">
+                  <i class="fa-solid fa-bars"></i>
+              </button>
+          </div>
+
+          <div id="mobile-menu" class="lg:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-100 flex flex-col items-center">
+              <a href="/book/" class="w-full text-center py-4 border-b border-gray-100 font-heading font-bold text-sm text-[#111827] uppercase tracking-widest hover:bg-gray-50">Book</a>
+              <a href="/manage/" class="w-full text-center py-4 border-b border-gray-100 font-heading font-bold text-sm text-[#111827] uppercase tracking-widest hover:bg-gray-50">Manage</a>
+              <a href="/about/" class="w-full text-center py-4 border-b border-gray-100 font-heading font-bold text-sm text-[#111827] uppercase tracking-widest hover:bg-gray-50">About Us</a>
+              <a href="https://emiratesgrouproblox.link/network/skywards" class="w-full text-center py-4 border-b border-gray-100 font-heading font-bold text-sm text-[#111827] uppercase tracking-widest hover:bg-gray-50">Loyalty</a>
+              <a href="https://emiratesgrouproblox.link/help" class="w-full text-center py-4 border-b border-gray-100 font-heading font-bold text-sm text-[#111827] uppercase tracking-widest hover:bg-gray-50">Help</a>
+              <div class="py-4 w-full px-6 flex justify-center">
+                  <a href="https://myportal.emiratesgrouproblox.link/login/" class="ek-btn-primary w-full max-w-xs text-center py-3">Portal Login</a>
               </div>
           </div>
       </header>
@@ -128,7 +147,7 @@
       <main class="flex-grow relative w-full bg-[#f9fafb]">
 
           <section class="relative bg-[#111827] pt-24 pb-48 lg:pb-64 px-6">
-              <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://i.ibb.co/Y4v5785g/Screenshot-2026-02-28-162151.png'); background-position: center 50%;"></div>
+              <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://i.ibb.co/ZpS8CqWF/unnamed.jpg'); background-position: center 60%;"></div>
               <div class="absolute inset-0 bg-gradient-to-b from-[#111827]/80 via-[#111827]/40 to-[#111827]/90 z-10"></div>
               
               <div class="max-w-[1200px] mx-auto relative z-20 text-center pt-10 reveal">
@@ -332,50 +351,50 @@
 
       </main>
 
-      <footer class="bg-[#111827] text-white py-16 px-6 md:px-12 mt-auto w-full border-t-4 border-[#D71A21]">
-        <div class="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-gray-700 pb-12 mb-8">
+      <footer class="bg-white text-[#111827] py-16 px-6 md:px-12 mt-auto w-full border-t border-gray-200">
+        <div class="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-gray-200 pb-12 mb-8">
           <div>
-            <h4 class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-widest">About us</h4>
+            <h4 class="font-heading font-bold text-[#111827] mb-6 text-sm uppercase tracking-widest">About us</h4>
             <ul class="space-y-4">
-              <li><a href="/about/" class="text-gray-400 hover:text-white transition-colors text-sm">About Emirates Airline</a></li>
-              <li><a href="/leadership/" class="text-gray-400 hover:text-white transition-colors text-sm">Leadership & Structure</a></li>
-              <li><a href="https://careers.emiratesgrouproblox.link" class="text-gray-400 hover:text-white transition-colors text-sm">Careers <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i></a></li>
-              <li><a href="https://emiratesgrouproblox.link/network/foundation" class="text-gray-400 hover:text-white transition-colors text-sm">Emirates Airline Foundation</a></li>
+              <li><a href="/about/" class="text-gray-600 hover:text-[#D71A21] transition-colors text-sm">About Emirates Airline</a></li>
+              <li><a href="/leadership/" class="text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Leadership & Structure</a></li>
+              <li><a href="https://careers.emiratesgrouproblox.link" class="text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Careers <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i></a></li>
+              <li><a href="https://emiratesgrouproblox.link/network/foundation" class="text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Emirates Airline Foundation</a></li>
             </ul>
           </div>
           <div>
-            <h4 class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-widest">Help</h4>
+            <h4 class="font-heading font-bold text-[#111827] mb-6 text-sm uppercase tracking-widest">Help</h4>
             <ul class="space-y-4">
-              <li><a href="https://emiratesgrouproblox.link/help" class="text-gray-400 hover:text-white transition-colors text-sm">Help and Contact</a></li>
-              <li><a href="https://emiratesgrouproblox.link/help" class="text-gray-400 hover:text-white transition-colors text-sm">Travel Updates</a></li>
+              <li><a href="https://emiratesgrouproblox.link/help" class="text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Help and Contact</a></li>
+              <li><a href="https://emiratesgrouproblox.link/help" class="text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Travel Updates</a></li>
             </ul>
           </div>
           <div>
-            <h4 class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-widest">Manage</h4>
+            <h4 class="font-heading font-bold text-[#111827] mb-6 text-sm uppercase tracking-widest">Manage</h4>
             <ul class="space-y-4">
-              <li><a href="/book/" class="text-gray-400 hover:text-white transition-colors text-sm">Book a Flight</a></li>
-              <li><a href="/manage/" class="text-gray-400 hover:text-white transition-colors text-sm">Online Check-in</a></li>
-              <li><a href="/status/" class="text-gray-400 hover:text-white transition-colors text-sm">Flight Status</a></li>
+              <li><a href="/book/" class="text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Book a Flight</a></li>
+              <li><a href="/manage/" class="text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Online Check-in</a></li>
+              <li><a href="/status/" class="text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Flight Status</a></li>
             </ul>
           </div>
           <div>
-            <h4 class="font-heading font-bold text-white mb-6 text-sm uppercase tracking-widest">Loyalty</h4>
+            <h4 class="font-heading font-bold text-[#111827] mb-6 text-sm uppercase tracking-widest">Loyalty</h4>
             <ul class="space-y-4">
-              <li><a href="https://myportal.emiratesgrouproblox.link/login/" class="text-gray-400 hover:text-white transition-colors text-sm">Log in to Skywards</a></li>
-              <li><a href="https://emiratesgrouproblox.link/network/skywards" class="text-gray-400 hover:text-white transition-colors text-sm">About Emirates Skywards</a></li>
+              <li><a href="https://myportal.emiratesgrouproblox.link/login/" class="text-gray-600 hover:text-[#D71A21] transition-colors text-sm">Log in to Skywards</a></li>
+              <li><a href="https://emiratesgrouproblox.link/network/skywards" class="text-gray-600 hover:text-[#D71A21] transition-colors text-sm">About Emirates Skywards</a></li>
             </ul>
           </div>
         </div>
         
         <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium">
           <div class="flex flex-wrap justify-center gap-6 mb-6 md:mb-0">
-              <a href="https://emiratesgrouproblox.link/help" class="hover:text-white transition-colors">Accessibility statement</a>
-              <a href="https://emiratesgrouproblox.link/help" class="hover:text-white transition-colors">Contact us</a>
-              <a href="https://emiratesgrouproblox.link/help" class="hover:text-white transition-colors">Terms and conditions</a>
+              <a href="https://emiratesgrouproblox.link/help" class="hover:text-[#D71A21] transition-colors">Accessibility statement</a>
+              <a href="https://emiratesgrouproblox.link/help" class="hover:text-[#D71A21] transition-colors">Contact us</a>
+              <a href="https://emiratesgrouproblox.link/help" class="hover:text-[#D71A21] transition-colors">Terms and conditions</a>
           </div>
           <div class="flex items-center gap-4">
               <p>&copy; 2026 Emirates Airline (Roblox). All Rights Reserved.</p>
-              <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-6 hidden md:block opacity-40 mix-blend-screen" alt="Emirates">
+              <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-6 hidden md:block grayscale opacity-50" alt="Emirates">
           </div>
         </div>
       </footer>
@@ -396,6 +415,16 @@
         }, 800); 
     });
     document.body.style.overflow = 'hidden';
+
+    // --- MOBILE MENU TOGGLE ---
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        if (menu.classList.contains('open')) {
+            menu.classList.remove('open');
+        } else {
+            menu.classList.add('open');
+        }
+    }
 
     document.addEventListener("DOMContentLoaded", function() {
         const reveals = document.querySelectorAll(".reveal");
