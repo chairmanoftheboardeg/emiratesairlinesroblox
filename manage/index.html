@@ -386,15 +386,17 @@
     let activeBooking = null;
     let activeFlight = null;
 
-    // --- PRELOADER, NAV & ANIMATIONS ---
-    window.addEventListener('load', () => {
+    // --- BULLETPROOF PRELOADER ---
+    document.addEventListener("DOMContentLoaded", () => {
         const pageLoader = document.getElementById('page-loader');
         setTimeout(() => {
-            pageLoader.style.opacity = '0';
-            pageLoader.style.visibility = 'hidden';
+            if(pageLoader) {
+                pageLoader.style.opacity = '0';
+                setTimeout(() => pageLoader.style.display = 'none', 600);
+            }
             document.body.style.overflow = 'auto';
             initApp();
-        }, 800); 
+        }, 800);
     });
 
     function toggleMobileMenu() {
@@ -406,6 +408,7 @@
         }
     }
 
+    // Scroll Animations
     document.addEventListener("DOMContentLoaded", function() {
         const reveals = document.querySelectorAll(".reveal");
         const revealOnScroll = () => {
@@ -424,7 +427,7 @@
 
     async function initApp() {
         if (!window.supabase) {
-            alert("Database connection failed.");
+            alert("Database connection failed. Please ensure your network allows unpkg.com scripts.");
             return;
         }
         window.sb = window.supabase.createClient(
@@ -466,8 +469,14 @@
             }
         }
 
-        const { data: { session } } = await window.sb.auth.getSession();
-        handleSession(session);
+        try {
+            const { data: { session } } = await window.sb.auth.getSession();
+            handleSession(session);
+        } catch (e) {
+            console.error("Session error:", e);
+            handleSession(null);
+        }
+        
         window.sb.auth.onAuthStateChange((_e, s) => handleSession(s));
     }
 
@@ -665,4 +674,20 @@
         // Live Gate Pull
         document.getElementById('bp-gate').innerText = activeFlight.gate || 'TBD';
         document.getElementById('bp-zone').innerText = activeBooking.boarding_group || 'C';
-        document.getElementById
+        document.getElementById('bp-seat').innerText = activeBooking.seat_number || 'TBD';
+        
+        document.getElementById('bp-barcode').innerText = activeBooking.pnr_reference + Math.floor(Math.random() * 9000);
+    }
+
+    window.logout = function() {
+        activeBooking = null;
+        activeFlight = null;
+        document.getElementById('dashboard-view').classList.add('hidden');
+        document.getElementById('bp-view').classList.add('hidden');
+        document.getElementById('checkin-view').classList.add('hidden');
+        document.getElementById('gate-view').classList.remove('hidden');
+        document.getElementById('manage-login-form').reset();
+    }
+  </script>
+</body>
+</html>
