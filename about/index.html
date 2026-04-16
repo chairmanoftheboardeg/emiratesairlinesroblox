@@ -30,10 +30,14 @@
     .ek-nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #D71A21; transition: width 0.3s ease; }
     .ek-nav-link:hover::after, .ek-nav-link.active::after { width: 100%; }
 
+    /* Mobile Menu */
+    #mobile-menu { transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; max-height: 0; opacity: 0; overflow: hidden; }
+    #mobile-menu.open { max-height: 400px; opacity: 1; }
+
     /* Custom Corporate Buttons */
-    .ek-btn-primary { display: inline-block; background-color: #D71A21; color: #ffffff; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 1rem 2rem; border-radius: 2px; transition: all 0.3s ease; border: 1px solid #D71A21; cursor: pointer; }
+    .ek-btn-primary { display: inline-block; background-color: #D71A21; color: #ffffff; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 1rem 2rem; border-radius: 2px; transition: all 0.3s ease; border: 1px solid #D71A21; cursor: pointer; text-align: center; }
     .ek-btn-primary:hover { background-color: #991b1b; border-color: #991b1b; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(215, 26, 33, 0.3); }
-    .ek-btn-outline { display: inline-block; background-color: transparent; color: #111827; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 1rem 2rem; border-radius: 2px; transition: all 0.3s ease; border: 1px solid #111827; cursor: pointer; }
+    .ek-btn-outline { display: inline-block; background-color: transparent; color: #111827; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 1rem 2rem; border-radius: 2px; transition: all 0.3s ease; border: 1px solid #111827; cursor: pointer; text-align: center; }
     .ek-btn-outline:hover { background-color: #111827; color: #ffffff; transform: translateY(-2px); }
 
     /* Scroll Animations */
@@ -44,8 +48,12 @@
     .red-accent { width: 40px; height: 3px; background-color: #D71A21; margin-top: 1rem; margin-bottom: 1.5rem; }
     .center-accent { margin-left: auto; margin-right: auto; }
     
-    /* Text layout */
+    /* Text layout for CEO */
     .ceo-text p { margin-bottom: 1.25rem; line-height: 1.8; color: #374151; font-size: 0.95rem; }
+    
+    @media (max-width: 768px) {
+        .ceo-text p { font-size: 0.9rem; line-height: 1.6; }
+    }
 
     /* NGO Card Image Override */
     .ngo-logo { height: 60px; object-fit: contain; margin-bottom: 1rem; }
@@ -60,11 +68,12 @@
       </div>
   </div>
 
-  <header class="ek-nav w-full py-4 px-6 md:px-12 shadow-sm">
+  <header class="ek-nav w-full py-4 px-6 md:px-12 shadow-sm relative z-50">
       <div class="max-w-[1400px] mx-auto flex items-center justify-between">
           <a href="/" class="flex-shrink-0">
               <img src="https://i.ibb.co/84g34ff6/Emirates-banner-logo.jpg" class="h-8 md:h-10 object-contain" alt="Emirates Airline">
           </a>
+          
           <nav class="hidden lg:flex items-center space-x-8">
               <a href="/book/" class="ek-nav-link">Book</a>
               <a href="/manage/" class="ek-nav-link">Manage</a>
@@ -72,9 +81,24 @@
               <a href="https://emiratesgrouproblox.link/network/skywards" class="ek-nav-link">Loyalty</a>
               <a href="https://emiratesgrouproblox.link/help" class="ek-nav-link">Help</a>
           </nav>
-          <div class="hidden md:flex items-center space-x-6">
-              <a href="#" class="font-heading text-xs font-bold text-gray-500 hover:text-[#D71A21] transition-colors uppercase tracking-widest"><i class="fa-solid fa-globe mr-1"></i> Global</a>
+          
+          <div class="hidden lg:flex items-center space-x-6">
               <a href="https://myportal.emiratesgrouproblox.link/login/" class="ek-btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.7rem;">Portal Login</a>
+          </div>
+
+          <button onclick="toggleMobileMenu()" class="lg:hidden text-2xl text-[#111827] focus:outline-none">
+              <i class="fa-solid fa-bars"></i>
+          </button>
+      </div>
+
+      <div id="mobile-menu" class="lg:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-100 flex flex-col items-center">
+          <a href="/book/" class="w-full text-center py-4 border-b border-gray-100 font-heading font-bold text-sm text-[#111827] uppercase tracking-widest hover:bg-gray-50">Book</a>
+          <a href="/manage/" class="w-full text-center py-4 border-b border-gray-100 font-heading font-bold text-sm text-[#111827] uppercase tracking-widest hover:bg-gray-50">Manage</a>
+          <a href="/about/" class="w-full text-center py-4 border-b border-gray-100 font-heading font-bold text-sm text-[#D71A21] uppercase tracking-widest bg-red-50">About Us</a>
+          <a href="https://emiratesgrouproblox.link/network/skywards" class="w-full text-center py-4 border-b border-gray-100 font-heading font-bold text-sm text-[#111827] uppercase tracking-widest hover:bg-gray-50">Loyalty</a>
+          <a href="https://emiratesgrouproblox.link/help" class="w-full text-center py-4 border-b border-gray-100 font-heading font-bold text-sm text-[#111827] uppercase tracking-widest hover:bg-gray-50">Help</a>
+          <div class="py-4 w-full px-6 flex justify-center">
+              <a href="https://myportal.emiratesgrouproblox.link/login/" class="ek-btn-primary w-full max-w-xs py-3">Portal Login</a>
           </div>
       </div>
   </header>
@@ -82,7 +106,7 @@
   <main class="flex-grow w-full">
 
       <section class="relative h-[65vh] min-h-[500px] flex items-center justify-center px-6">
-          <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://i.ibb.co/s9yqDDsy/herobanner.webp');"></div>
+          <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://i.ibb.co/SXZXGxx3/Screenshot-2026-02-28-194535.png');"></div>
           <div class="absolute inset-0 bg-gradient-to-b from-[#111827]/80 via-[#111827]/50 to-[#111827]/90 z-10"></div>
           
           <div class="relative z-20 text-center max-w-4xl mx-auto mt-10 reveal">
@@ -97,7 +121,7 @@
           </div>
       </section>
 
-      <section class="py-24 px-6 md:px-12 bg-white">
+      <section class="py-20 md:py-24 px-6 md:px-12 bg-white">
           <div class="max-w-[1000px] mx-auto text-center reveal">
               <h2 class="text-3xl md:text-4xl font-heading font-bold text-[#111827] mb-4">The Virtual Aviation Standard</h2>
               <div class="red-accent center-accent"></div>
@@ -116,14 +140,14 @@
           </div>
       </section>
 
-      <section class="py-24 px-6 md:px-12 bg-gray-50 border-t border-b border-gray-200">
+      <section class="py-20 md:py-24 px-6 md:px-12 bg-gray-50 border-t border-b border-gray-200">
           <div class="max-w-[1200px] mx-auto">
               <div class="text-center mb-16 reveal">
                   <h2 class="text-3xl md:text-4xl font-heading font-bold text-[#111827] mb-4">Our Core Pillars</h2>
                   <div class="red-accent center-accent"></div>
               </div>
               
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 reveal" style="transition-delay: 0.2s;">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 reveal" style="transition-delay: 0.2s;">
                   <div class="bg-white p-8 border-t-4 border-[#D71A21] shadow-sm hover:shadow-md transition-shadow">
                       <i class="fa-solid fa-shield-halved text-3xl text-gray-300 mb-6"></i>
                       <h3 class="text-lg font-heading font-bold text-[#111827] mb-3">Integrity</h3>
@@ -148,12 +172,12 @@
           </div>
       </section>
 
-      <section class="py-24 px-6 md:px-12 bg-white">
-          <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-start gap-16 reveal">
+      <section class="py-20 md:py-24 px-6 md:px-12 bg-white">
+          <div class="max-w-[1200px] mx-auto flex flex-col lg:flex-row items-start gap-12 lg:gap-16 reveal">
               
-              <div class="w-full md:w-1/3 flex flex-col items-center sticky top-24">
-                  <div class="bg-gray-50 rounded-xl p-6 pt-12 w-full flex justify-center border border-gray-100">
-                      <img src="https://i.ibb.co/zYr6PN6/8b873db86015742d0580a163e3c601efed4eb434-2-312x375-removebg-preview.png" alt="Daniel Thompson, CEO" class="h-[400px] object-contain drop-shadow-xl">
+              <div class="w-full lg:w-1/3 flex flex-col items-center lg:sticky lg:top-28 mb-4 lg:mb-0">
+                  <div class="bg-gray-50 rounded-xl p-6 pt-12 w-full flex justify-center border border-gray-100 relative">
+                      <img src="https://i.ibb.co/zYr6PN6/8b873db86015742d0580a163e3c601efed4eb434-2-312x375-removebg-preview.png" alt="Daniel Thompson, CEO" class="h-[300px] md:h-[400px] object-contain drop-shadow-xl">
                   </div>
                   <div class="mt-6 text-center w-full">
                       <h4 class="font-heading font-bold text-[#111827] text-xl">Daniel Thompson</h4>
@@ -166,9 +190,9 @@
                   </div>
               </div>
 
-              <div class="w-full md:w-2/3 ceo-text">
-                  <h2 class="text-3xl md:text-4xl font-heading font-bold text-[#111827] mb-2">Message from the Chief Executive Officer</h2>
-                  <div class="red-accent"></div>
+              <div class="w-full lg:w-2/3 ceo-text">
+                  <h2 class="text-3xl md:text-4xl font-heading font-bold text-[#111827] mb-2 text-center lg:text-left">Message from the Chief Executive Officer</h2>
+                  <div class="red-accent mx-auto lg:mx-0"></div>
                   
                   <p>At Emirates Airlines, excellence is not simply a standard we strive toward, it is the foundation upon which our entire organization is built. As the flagship airline of Emirates Group Roblox, we carry a profound responsibility to lead with distinction, deliver with consistency, and represent the very highest standards of aviation, professionalism, and guest experience across the platform.</p>
                   
@@ -182,7 +206,7 @@
                   
                   <p>The future of Emirates Airlines is one of continued advancement, elevated standards, and bold ambition. We will continue to innovate. We will continue to raise expectations. And above all, we will continue to serve with pride, professionalism, and purpose.</p>
                   
-                  <p class="font-bold text-[#111827] mt-8 text-lg">Thank you for being part of this journey.</p>
+                  <p class="font-bold text-[#111827] mt-8 text-lg text-center lg:text-left">Thank you for being part of this journey.</p>
               </div>
           </div>
       </section>
@@ -195,7 +219,7 @@
           </div>
       </section>
 
-      <section class="py-24 px-6 bg-white">
+      <section class="py-20 md:py-24 px-6 bg-white">
           <div class="max-w-[1200px] mx-auto reveal">
               
               <div class="text-center mb-12">
@@ -220,7 +244,7 @@
                   </a>
               </div>
 
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                   
                   <a href="https://www.icrc.org/" target="_blank" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center text-center border border-gray-100">
                       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_the_Red_Cross.svg/3840px-Flag_of_the_Red_Cross.svg.png" class="ngo-logo" alt="ICRC">
@@ -339,6 +363,16 @@
             pageLoader.style.visibility = 'hidden';
         }, 600);
     });
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        if (menu.classList.contains('open')) {
+            menu.classList.remove('open');
+        } else {
+            menu.classList.add('open');
+        }
+    }
 
     // Scroll Reveal Animation Logic
     document.addEventListener("DOMContentLoaded", function() {
